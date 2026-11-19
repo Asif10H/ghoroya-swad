@@ -91,7 +91,7 @@ export function Hero({
             {/* Real-time status badge */}
             <div className="mt-3.5 sm:mt-4 flex justify-center md:justify-start min-h-[28px]">
               {isReady && statusBadgeText ? (
-                <div className="inline-flex items-center gap-2 rounded-full bg-[var(--light-16)] border border-[var(--light-16)] px-3.5 py-1 text-[11px] sm:text-xs font-mono text-[var(--light-100)] backdrop-blur-[16px]">
+                <div className="inline-flex items-center gap-2 rounded-lg bg-[var(--light-16)] border border-[var(--light-16)] px-3.5 py-1 text-[11px] sm:text-xs font-mono text-[var(--light-100)] backdrop-blur-[16px]">
                   <span
                     className={`h-2 w-2 rounded-full ${
                       isOpen ? 'bg-[var(--light-100)]' : 'border border-[var(--light-48)]'
