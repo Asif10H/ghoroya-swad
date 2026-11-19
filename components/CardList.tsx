@@ -105,17 +105,18 @@ export default function CardList({
         </button>
 
         {quantity === 0 ? (
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              addItem(item);
-            }}
-            className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 text-xs font-medium rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] hover:opacity-90 active:scale-95 transition-colors cursor-pointer"
-          >
-            <PiPlusLight className="text-xs" />
-            <span>যোগ</span>
-          </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                addItem(item);
+              }}
+              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 text-xs font-medium rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] hover:opacity-90 active:scale-95 transition-colors cursor-pointer"
+              aria-label={`${item.name} অর্ডার করুন`}
+            >
+              <PiPlusLight className="text-xs" />
+              <span>অর্ডার</span>
+            </button>
         ) : (
           <div
             onClick={(e) => e.stopPropagation()}

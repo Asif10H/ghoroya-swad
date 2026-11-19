@@ -391,12 +391,12 @@ export default function ItemModal({
                   type="button"
                   onClick={() => {
                     addItem(item);
-                    onShowToast('অর্ডার ট্রে-তে যোগ হয়েছে');
+                    onShowToast('অর্ডার ট্রে-তে যুক্ত হয়েছে');
                   }}
                   className="w-full h-11 text-xs sm:text-sm inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] hover:opacity-90 active:scale-95 transition-colors font-medium cursor-pointer"
                 >
                   <PiShoppingBagLight className="text-base" aria-hidden="true" />
-                  <span>অর্ডার ট্রে-তে যোগ করুন ({toBn(item.price)} ৳)</span>
+                  <span>অর্ডার করুন ({toBn(item.price)} ৳)</span>
                 </button>
               ) : (
                 <div className="w-full h-11 flex items-center justify-between px-3 rounded-lg border border-[var(--tone-strong)] bg-[var(--tone-faint)]">

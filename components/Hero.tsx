@@ -87,12 +87,9 @@ export function Hero({
             </p>
 
             {/* Main Title & Subtitle */}
-            <h1 className="h2 font-heading font-medium text-3xl sm:text-5xl lg:text-6xl mt-2 text-[var(--tone-strong)] tracking-tight leading-tight">
-              ঘরোয়া স্বাদ
+            <h1 className="h2 font-heading font-medium text-2xl xs:text-3xl sm:text-4xl lg:text-5xl mt-2 text-[var(--tone-strong)] tracking-tight leading-tight">
+              ঘরোয়া স্বাদ রেস্টুরেন্ট
             </h1>
-            <p className="font-heading font-normal text-lg sm:text-2xl text-[var(--tone-medium)] mt-0.5 sm:mt-1">
-              রেস্টুরেন্ট
-            </p>
             <p className="mt-2 text-[var(--text-muted)] text-xs sm:text-sm max-w-lg mx-auto md:mx-0">
               স্ন্যাকস · জুস · পাস্তা · ডিনার
             </p>
@@ -115,7 +112,7 @@ export function Hero({
             {/* Primary & Secondary CTAs */}
             <div className="mt-5 sm:mt-6 flex flex-row justify-center md:justify-start items-center gap-2.5 sm:gap-3">
               <a
-                href="#menuTop"
+                href="#menu"
                 onClick={() => handleSelectCategory('all')}
                 className="inline-flex items-center justify-center gap-2 h-10 px-5 sm:px-6 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] font-mono text-xs font-medium hover:opacity-90 active:scale-95 transition-opacity cursor-pointer"
               >
@@ -141,7 +138,7 @@ export function Hero({
             >
               {/* 36 Total Items */}
               <a
-                href="#menuTop"
+                href="#menu"
                 onClick={() => handleSelectCategory('all')}
                 className="group flex flex-col md:flex-row md:items-center md:justify-between py-2 md:py-2.5 px-1.5 md:px-3.5 rounded-lg text-center md:text-left hover:bg-[var(--bg-lift)] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
                 title="সব মেনু আইটেম দেখুন"
@@ -167,7 +164,7 @@ export function Hero({
 
               {/* 19 Snacks */}
               <a
-                href="#menuTop"
+                href="#menu"
                 onClick={() => handleSelectCategory('snacks')}
                 className="group flex flex-col md:flex-row md:items-center md:justify-between py-2 md:py-2.5 px-1.5 md:px-3.5 rounded-lg text-center md:text-left hover:bg-[var(--bg-lift)] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
                 title="স্ন্যাকস মেনু দেখুন"
@@ -193,7 +190,7 @@ export function Hero({
 
               {/* 13 Drinks & Juice */}
               <a
-                href="#menuTop"
+                href="#menu"
                 onClick={() => handleSelectCategory('drinks')}
                 className="group flex flex-col md:flex-row md:items-center md:justify-between py-2 md:py-2.5 px-1.5 md:px-3.5 rounded-lg text-center md:text-left hover:bg-[var(--bg-lift)] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
                 title="ড্রিংকস ও জুস মেনু দেখুন"
@@ -219,7 +216,7 @@ export function Hero({
 
               {/* 4 Tea & Coffee */}
               <a
-                href="#menuTop"
+                href="#menu"
                 onClick={() => handleSelectCategory('tea_coffee')}
                 className="group flex flex-col md:flex-row md:items-center md:justify-between py-2 md:py-2.5 px-1.5 md:px-3.5 rounded-lg text-center md:text-left hover:bg-[var(--bg-lift)] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
                 title="চা ও কফি মেনু দেখুন"

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-const STATEMENT_TEXT = 'তাজা উপকরণে পরম যত্নে তৈরি-প্রতিটি কামড়েই পাবেন ঘরের রান্নার খাঁটি স্বাদ ও তৃপ্তি।';
+const STATEMENT_TEXT = 'বিশুদ্ধ উপকরণ, আন্তরিক প্রস্তুতি আর প্রতিটি পরিবেশনায় অনন্য স্বাদের প্রতিশ্রুতি।';
 
 export function Statement() {
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -60,7 +60,7 @@ export function Statement() {
       aria-label="ব্র্যান্ড স্টেটমেন্ট"
     >
       <div className="max-w-6xl mx-auto px-4">
-        <p ref={textRef} className="h0 statement__text max-w-4xl font-heading font-medium text-xl sm:text-4xl text-[var(--tone-strong)] leading-snug" data-words>তাজা উপকরণে পরম যত্নে তৈরি-প্রতিটি কামড়েই পাবেন ঘরের রান্নার খাঁটি স্বাদ ও তৃপ্তি।</p>
+        <p ref={textRef} className="h0 statement__text max-w-4xl font-heading font-medium text-xl sm:text-4xl text-[var(--tone-strong)] leading-snug" data-words>বিশুদ্ধ উপকরণ, আন্তরিক প্রস্তুতি আর প্রতিটি পরিবেশনায় অনন্য স্বাদের প্রতিশ্রুতি।</p>
       </div>
     </section>
   );

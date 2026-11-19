@@ -26,7 +26,7 @@ export function BottomNav({
 }: BottomNavProps) {
   const handleTap = (cat: CategoryFilter) => {
     onSelectCategory(cat);
-    const top = document.getElementById('menuTop');
+    const top = document.getElementById('menu');
     if (top) {
       top.scrollIntoView({ behavior: 'smooth' });
     }

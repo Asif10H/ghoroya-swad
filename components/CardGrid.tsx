@@ -130,9 +130,10 @@ export default function CardGrid({
                 addItem(item);
               }}
               className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] hover:opacity-90 active:scale-95 transition-colors cursor-pointer"
+              aria-label={`${item.name} অর্ডার করুন`}
             >
               <PiPlusLight className="text-xs" />
-              <span>যোগ</span>
+              <span>অর্ডার</span>
             </button>
           ) : (
             <div

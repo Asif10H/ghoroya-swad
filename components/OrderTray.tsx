@@ -6,6 +6,7 @@ import { useOrderTray } from '@/hooks/useOrderTray';
 import { toBn, fallbackSvg } from '@/data/menuData';
 import {
   PiShoppingBagLight,
+  PiShoppingBagOpenLight,
   PiXLight,
   PiPlusLight,
   PiMinusLight,
@@ -126,7 +127,7 @@ export default function OrderTray() {
         <div className="w-full max-w-lg pointer-events-auto bg-[var(--bg-base)]/95 backdrop-blur-[16px] border border-[var(--border-subtle)] rounded-2xl p-3 flex items-center justify-between transition-colors">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] flex items-center justify-center font-medium text-sm relative">
-              <PiShoppingBagLight className="text-xl" />
+              <PiShoppingBagOpenLight className="text-xl" />
               <span className="absolute -top-1.5 -right-1.5 bg-[var(--tone-strong)] text-[var(--bg-base)] text-[10px] min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center font-mono font-medium border-2 border-[var(--bg-base)] tabular-nums">
                 {toBn(totalCount)}
               </span>
@@ -163,8 +164,8 @@ export default function OrderTray() {
             {/* Header */}
             <div className="p-4 border-b border-[var(--border-subtle)] flex items-center justify-between bg-[var(--neutral-white)] text-[var(--tone-strong)]">
               <div className="flex items-center gap-2.5">
-                <div className="h-9 w-9 rounded-lg bg-[var(--tone-faint)] text-[var(--tone-strong)] flex items-center justify-center text-lg border border-[var(--border-subtle)]">
-                  <PiShoppingBagLight aria-hidden="true" />
+                <div className="w-10 h-10 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] flex items-center justify-center text-xl shrink-0 border border-[var(--border-subtle)]">
+                  <PiShoppingBagOpenLight aria-hidden="true" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">

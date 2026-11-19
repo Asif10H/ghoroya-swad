@@ -258,7 +258,7 @@ export function MenuExplorer() {
   return (
     <>
       {/* Sticky Controls Bar */}
-      <div id="menuTop" />
+      <div id="menu" />
       <div className="sticky top-0 z-30 bg-[var(--bg-base)]/95 backdrop-blur-[16px] border-b border-[var(--border-subtle)] transition-colors">
         <div className="max-w-6xl mx-auto px-3 sm:px-4 py-2 sm:py-2.5 space-y-2">
           {/* Row 1: Search + Sort Dropdown + Grid/List View Mode Toggle */}
