@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { MenuItem } from '@/types/menu';
-import { toBn, TAGS, fallbackSvg } from '@/data/menuData';
+import { toBn, fallbackSvg } from '@/data/menuData';
 import { useOrderTray } from '@/hooks/useOrderTray';
 import {
   PiHeartFill,
@@ -80,20 +80,7 @@ export default function CardList({
         <p className="text-[11px] sm:text-xs text-[var(--text-muted)] mt-0.5 truncate">
           {item.note || '\u00A0'}
         </p>
-        {item.tags && item.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-1 sm:mt-1.5">
-            {item.tags.map((t) =>
-              TAGS[t] ? (
-                <span
-                  key={t}
-                  className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-wider bg-[var(--tone-faint)] text-[var(--tone-strong)] border border-[var(--border-subtle)]"
-                >
-                  {TAGS[t].label}
-                </span>
-              ) : null
-            )}
-          </div>
-        )}
+
       </div>
 
       <div className="text-right pr-0.5 sm:pr-1 shrink-0 flex flex-col items-end gap-1.5">

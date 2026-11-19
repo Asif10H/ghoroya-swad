@@ -1,9 +1,3 @@
-export type TagType = 'best' | 'new' | 'spicy' | 'veg';
-
-export interface TagInfo {
-  label: string;
-}
-
 export interface MenuItem {
   id: string;
   cat: 'snacks' | 'drinks';
@@ -12,7 +6,6 @@ export interface MenuItem {
   note: string;
   price: number;
   images: string[];
-  tags: TagType[];
   desc: string;
   ingredients: string[];
 }

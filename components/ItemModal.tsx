@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import { MenuItem } from '@/types/menu';
-import { CATEGORIES, TAGS, fallbackSvg, toBn } from '@/data/menuData';
+import { CATEGORIES, fallbackSvg, toBn } from '@/data/menuData';
 import { useOrderTray } from '@/hooks/useOrderTray';
 import {
   PiCaretLeftLight,
@@ -332,20 +332,7 @@ export default function ItemModal({
                 </div>
               </div>
 
-              {/* Tag Pills */}
-              {item.tags.length > 0 && (
-                <div id="m-tags" className="flex flex-wrap gap-1.5">
-                  {item.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-mono uppercase tracking-wider bg-[var(--tone-faint)] text-[var(--tone-strong)] border border-[var(--border-subtle)]"
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--tone-strong)]" />
-                      <span>{TAGS[tag]?.label || tag}</span>
-                    </span>
-                  ))}
-                </div>
-              )}
+
 
               {/* Description */}
               {item.desc && (

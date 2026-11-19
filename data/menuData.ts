@@ -1,4 +1,4 @@
-import { Category, MenuItem, PriceFilter, TagInfo, TagType } from '../types/menu';
+import { Category, MenuItem, PriceFilter } from '../types/menu';
 
 export const toBn = (n: number | string): string => String(n);
 
@@ -7,13 +7,6 @@ export const fallbackSvg =
   encodeURIComponent(
     `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='#f5f5f5'/><text x='50%' y='52%' font-size='96' text-anchor='middle'>🍽️</text></svg>`
   );
-
-export const TAGS: Record<TagType, TagInfo> = {
-  best: { label: 'বেস্ট সেলার' },
-  new: { label: 'নতুন' },
-  spicy: { label: 'স্পাইসি' },
-  veg: { label: 'ভেজ' },
-};
 
 export const PRICE_FILTERS: PriceFilter[] = [
   { id: 'all', label: 'সব দাম' },
@@ -192,221 +185,185 @@ export const SUB_CATEGORIES: SubCategoryDef[] = [
 
 const INFO: Record<
   string,
-  { tags: TagType[]; desc: string; ingredients: string[]; subCategory: string }
+  { desc: string; ingredients: string[]; subCategory: string }
 > = {
   'ক্রিসপি চিকেন': {
-    tags: ['best'],
     subCategory: 'chicken',
     desc: 'মচমচে কোটিংয়ে ভাজা বড় সাইজের ক্রিসপি চিকেন পিস।',
     ingredients: ['চিকেন', 'ক্রিস্পি কোটিং', 'ঘরোয়া মসলা'],
   },
   'চিকেন ফ্রাই': {
-    tags: ['best'],
     subCategory: 'chicken',
     desc: 'গরম গরম মচমচে ভাজা চিকেন, 5 পিসের প্যাকেজ।',
     ingredients: ['চিকেন', 'কোটিং', 'মসলা'],
   },
   'চিকেন মোমো': {
-    tags: ['best', 'spicy'],
     subCategory: 'chicken',
     desc: 'ভাপে সেদ্ধ নরম আবরণে মসলাদার চিকেনের পুর ও লাল ঝাল সস।',
     ingredients: ['ময়দা', 'চিকেন কিমা', 'পেঁয়াজ', 'ঝাল মসলা'],
   },
   'চিকেন ফিঙ্গার রোল': {
-    tags: [],
     subCategory: 'chicken',
     desc: 'আঙুলের মতো লম্বা, ক্রিস্পি ও মুখরোচক চিকেন ফিঙ্গার রোল।',
     ingredients: ['চিকেন', 'ময়দার আবরণ', 'মসলা'],
   },
   'চিকেন নাগেট': {
-    tags: [],
     subCategory: 'chicken',
     desc: 'ছোট ছোট সোনালি মচমচে চিকেন নাগেট, 5 পিস।',
     ingredients: ['চিকেন', 'ব্রেডক্রাম্ব', 'মসলা'],
   },
   'চিকেন সমুচা': {
-    tags: ['best'],
     subCategory: 'chicken',
     desc: 'মচমচে ত্রিভুজ সমুচা, ভেতরে রসালো মসলাদার চিকেন পুর।',
     ingredients: ['ময়দা', 'চিকেন', 'মসলা'],
   },
   'চিকেন অনথন': {
-    tags: [],
     subCategory: 'chicken',
     desc: 'ভাজা ক্রিস্পি ডাম্পলিং, ভেতরে সুস্বাদু চিকেনের পুর।',
     ingredients: ['ময়দা', 'চিকেন কিমা', 'মসলা'],
   },
   'চিকেন সফট রোল': {
-    tags: [],
     subCategory: 'chicken',
     desc: 'নরম রুটির মোড়কে চিকেন ও রকমারি সস ফিলিং।',
     ingredients: ['নরম রুটি', 'চিকেন কিমা', 'হোয়াইট সস'],
   },
   'চিকেন সসেজ': {
-    tags: [],
     subCategory: 'chicken',
     desc: 'প্যানে সেঁকা গরম গরম সুস্বাদু চিকেন সসেজ।',
     ingredients: ['চিকেন সসেজ', 'হালকা মসলা'],
   },
   'মিট বল': {
-    tags: [],
     subCategory: 'street',
     desc: 'স্টিকে গাঁথা 4 পিস ভাজা রসালো মাংসের বল।',
     ingredients: ['কিমা', 'বিশেষ মসলা'],
   },
   'চটপটি': {
-    tags: ['best', 'spicy', 'veg'],
     subCategory: 'street',
     desc: 'টক-ঝাল-মিষ্টি স্বাদের জনপ্রিয় বাংলাদেশি চটপটি, সেদ্ধ ডিম ও ধনেপাতা কুচি সহ।',
     ingredients: ['ডাবলি মটর', 'ছোলা', 'আলু', 'তেঁতুলের টক', 'ডিম', 'মসলা'],
   },
   'ফুসকা': {
-    tags: ['best', 'spicy', 'veg'],
     subCategory: 'street',
     desc: 'মুচমুচে সোনালি পুরির ভেতরে মসলাদার আলু-ছোলার পুর ও তেঁতুলের টক পানি।',
     ingredients: ['ফুসকা পুরি', 'তেঁতুলের পানি', 'আলু-ছোলা', 'মসলা'],
   },
   'ফ্রেঞ্চ ফ্রাই': {
-    tags: ['veg'],
     subCategory: 'street',
     desc: 'সোনালি মচমচে গরম আলুর ফ্রাই, হালকা লবণের স্বাদ।',
     ingredients: ['আলু', 'লবণ'],
   },
   'এগ চিকেন পাস্তা': {
-    tags: ['spicy'],
     subCategory: 'noodles',
     desc: 'ডিম ও চিকেনের টুকরোয় ভরা দেশি স্টাইলের মসলাদার পেনে পাস্তা।',
     ingredients: ['পাস্তা', 'ডিম', 'চিকেন', 'টমেটো ও চিলি মসলা'],
   },
   'এগ চিকেন নুডলস': {
-    tags: ['best', 'spicy'],
     subCategory: 'noodles',
     desc: 'ডিম ও চিকেনের সাথে তাজা সবজি মেশানো গরম ও ঝাল চাওমিন নুডলস।',
     ingredients: ['নুডলস', 'ডিম', 'চিকেন', 'সবজি', 'মসলা'],
   },
   'চিকেন স্প্রিং রোল': {
-    tags: [],
     subCategory: 'chicken',
     desc: 'মচমচে গোল্ডেন স্প্রিং রোল, ভেতরে সুস্বাদু চিকেন ও সবজির পুর।',
     ingredients: ['চিকেন', 'সবজি', 'রোল শিট'],
   },
   'ফিশ ফ্রাই': {
-    tags: [],
     subCategory: 'street',
     desc: 'স্টিকে গাঁথা 4 পিস মুচমুচে ক্রিস্পি কোটিংয়ে ভাজা মাছের ফ্রাই।',
     ingredients: ['মাছ', 'ক্রিস্পি কোটিং', 'মসলা'],
   },
   'পুডিং': {
-    tags: ['veg'],
     subCategory: 'dessert',
     desc: 'মুখে মিলিয়ে যাওয়া নরম, ক্যারামেল সিরাপে ঘেরা ডিম-দুধের মিষ্টি পুডিং।',
     ingredients: ['দুধ', 'ডিম', 'চিনি', 'ক্যারামেল'],
   },
   'দই ফুসকা': {
-    tags: ['best', 'veg'],
     subCategory: 'street',
     desc: 'ফুসকার উপর ঠান্ডা মিষ্টি দই, মসলা, ঝুরিভাজা ও টক-মিষ্টি চাটনি।',
     ingredients: ['ফুসকা পুরি', 'মিষ্টি দই', 'তেঁতুল চাটনি', 'ঝুরিভাজা', 'মসলা'],
   },
 
   'রেগুলার লাচ্ছি': {
-    tags: ['best', 'veg'],
     subCategory: 'lassi',
     desc: 'খাঁটি দই ও বরফে তৈরি ঐতিহ্যবাহী ঠান্ডা, ক্রিমি মিষ্টি লাচ্ছি।',
     ingredients: ['দই', 'চিনি', 'বরফ'],
   },
   'স্পেশাল লাচ্ছি': {
-    tags: ['best', 'veg'],
     subCategory: 'lassi',
     desc: 'মালাই ও পেস্তা বাদামের কুচিতে সমৃদ্ধ ঘন শাহী স্বাদের লাচ্ছি।',
     ingredients: ['দই', 'মালাই', 'বাদাম কুচি', 'চিনি'],
   },
   'কাজুবাদাম লাচ্ছি': {
-    tags: ['veg'],
     subCategory: 'lassi',
     desc: 'কাজুবাদামের ব্লেন্ডেড ক্রিমের বিশেষ রিচ ও পুষ্টিকর লাচ্ছি।',
     ingredients: ['দই', 'কাজুবাদাম', 'চিনি'],
   },
   'কোল্ড কফি': {
-    tags: ['best', 'veg'],
     subCategory: 'tea_coffee',
     desc: 'দুধ, এসপ্রেসো ও চকলেট ফ্রোথ সহ ঠান্ডা বরফশীতল রিফ্রেশিং কফি।',
     ingredients: ['কফি', 'দুধ', 'চকো সিরাপ', 'চিনি', 'বরফ'],
   },
   'অরেঞ্জ / মাল্টা জুস': {
-    tags: ['veg'],
     subCategory: 'juice',
     desc: 'তাজা কমলার রস ও মিষ্টি পাল্পে তৈরি ভিটামিন-সি ভরপুর সতেজ জুস।',
     ingredients: ['মাল্টা/কমলা', 'বরফ'],
   },
   'ম্যাঙ্গো জুস': {
-    tags: ['best', 'veg'],
     subCategory: 'juice',
     desc: 'পাকা মিষ্টি আমের ঘন ও শীতল রসালো জুস।',
     ingredients: ['আমের পাল্প', 'চিনি', 'বরফ'],
   },
   'ড্রাগন জুস': {
-    tags: ['new', 'veg'],
     subCategory: 'juice',
     desc: 'তাজা ড্রাগন ফলের হালকা মিষ্টি প্রাকৃতিক গোলাপি রঙের জুস।',
     ingredients: ['ড্রাগন ফল', 'চিনি', 'বরফ'],
   },
   'পেঁপে জুস': {
-    tags: ['veg'],
     subCategory: 'juice',
     desc: 'পাকা মিষ্টি পেঁপের পুষ্টিকর ও পেট ঠান্ডা করা তাজা জুস।',
     ingredients: ['পাকা পেঁপে', 'চিনি', 'বরফ'],
   },
   'তেঁতুল জুস': {
-    tags: ['spicy', 'veg'],
     subCategory: 'juice',
     desc: 'টক-ঝাল-মিষ্টি দেশীয় স্বাদের খাঁটি তেঁতুলের শরবত ও বিট লবণ।',
     ingredients: ['তেঁতুল', 'বিট লবণ', 'চিনি', 'বরফ'],
   },
   'লেমন জুস': {
-    tags: ['veg'],
     subCategory: 'juice',
     desc: 'তাজা কাগজি লেবু, সামান্য লবণ ও বরফ মিশ্রিত প্রাণবন্ত লেবুর শরবত।',
     ingredients: ['লেবু', 'চিনি', 'লবণ', 'বরফ'],
   },
   'মিন্ট লেমন জুস': {
-    tags: ['best', 'veg'],
     subCategory: 'juice',
     desc: 'তাজা পুদিনা পাতা ও লেবুর সুবাসে মন ভরানো চনমনে ঠান্ডা গ্রিন জুস।',
     ingredients: ['লেবু', 'পুদিনা পাতা', 'চিনি', 'বরফ'],
   },
   'ম্যাঙ্গো মিল্কশেক': {
-    tags: ['veg'],
     subCategory: 'shake',
     desc: 'ঘন দুধ, পাকা আম ও আইসক্রিমের স্বাদে জমকালো ফ্রুট শেক।',
     ingredients: ['আম', 'দুধ', 'আইসক্রিম', 'চিনি'],
   },
   'চকলেট মিল্কশেক': {
-    tags: ['best', 'veg'],
     subCategory: 'shake',
     desc: 'রিচ কোকো চকলেট, দুধ ও ভ্যানিলা স্কুপের ক্লাসিক ক্রিমি মিল্কশেক।',
     ingredients: ['চকলেট', 'দুধ', 'আইসক্রিম'],
   },
   'স্ট্রবেরি মিল্কশেক': {
-    tags: ['veg'],
     subCategory: 'shake',
     desc: 'স্ট্রবেরির মিষ্টি-গোলাপি সুবাসে ঘন ও ক্রিমি বরফশীতল মিল্কশেক।',
     ingredients: ['স্ট্রবেরি', 'দুধ', 'আইসক্রিম'],
   },
   'হট কফি': {
-    tags: ['veg'],
     subCategory: 'tea_coffee',
     desc: 'গরম গরম সুগন্ধি ফেনা তোলা ক্যাপুচিনো কফি।',
     ingredients: ['কফি বিন্স', 'দুধ', 'চিনি'],
   },
   'স্পেশাল লিকার টি': {
-    tags: ['veg'],
     subCategory: 'tea_coffee',
     desc: 'দুধ ছাড়া কড়া সুগন্ধি লিকার চা, এক চুমুকেই ক্লান্তি দূর।',
     ingredients: ['প্রিমিয়াম চা পাতা', 'চিনি'],
   },
   'দুধ চা': {
-    tags: ['best', 'veg'],
     subCategory: 'tea_coffee',
     desc: 'খাঁটি ঘন দুধে জ্বাল দেওয়া সুস্বাদু ক্লাসিক গরম মসলাদার দুধ চা।',
     ingredients: ['চা পাতা', 'দুধ', 'এলাচ', 'চিনি'],
@@ -477,7 +434,6 @@ export const CATEGORIES: Category[] = RAW_CATEGORIES.map((c) => ({
   icon: c.icon,
   items: c.items.map((it, i) => {
     const info = INFO[it.name] ?? {
-      tags: [],
       desc: '',
       ingredients: [],
       subCategory: 'all',
@@ -493,7 +449,6 @@ export const CATEGORIES: Category[] = RAW_CATEGORIES.map((c) => ({
       note: it.note,
       price: it.price,
       images,
-      tags: info.tags,
       desc: info.desc,
       ingredients: info.ingredients,
     };

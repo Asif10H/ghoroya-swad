@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { MenuItem } from '@/types/menu';
-import { toBn, TAGS, fallbackSvg } from '@/data/menuData';
+import { toBn, fallbackSvg } from '@/data/menuData';
 import { useOrderTray } from '@/hooks/useOrderTray';
 import {
   PiHeartFill,
@@ -83,20 +83,7 @@ export default function CardGrid({
             className="absolute inset-x-0 bottom-0 h-2/3 pointer-events-none"
             style={vignetteStyle}
           />
-          {item.tags && item.tags.length > 0 && (
-            <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 flex flex-col items-start gap-1 pointer-events-none">
-              {item.tags.map((t) =>
-                TAGS[t] ? (
-                  <span
-                    key={t}
-                    className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] sm:text-xs font-mono uppercase tracking-wider bg-white/20 text-white border border-white/25 backdrop-blur-md"
-                  >
-                    {TAGS[t].label}
-                  </span>
-                ) : null
-              )}
-            </div>
-          )}
+
           <span className="absolute bottom-2 left-2 sm:bottom-2.5 sm:left-2.5 rounded-full bg-[var(--light-16)] backdrop-blur-[16px] text-white font-mono text-[11px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 border border-[var(--light-16)] font-medium">
             {toBn(item.price)} ৳
           </span>

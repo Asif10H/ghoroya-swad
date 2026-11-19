@@ -5,14 +5,12 @@ import {
   CategoryFilter,
   MenuItem,
   SortOption,
-  TagType,
   ViewMode,
 } from '@/types/menu';
 import {
   CATEGORIES,
   ALL_ITEMS,
   PRICE_FILTERS,
-  TAGS,
   toBn,
 } from '@/data/menuData';
 import { useFavorites } from '@/hooks/useFavorites';
@@ -44,7 +42,6 @@ export function MenuExplorer() {
   const [activeCat, setActiveCat] = useState<CategoryFilter>('all');
   const [query, setQuery] = useState<string>('');
   const [priceFilter, setPriceFilter] = useState<string>('all');
-  const [tagFilter, setTagFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<SortOption>('default');
   const [isSortOpen, setIsSortOpen] = useState<boolean>(false);
   const sortDropdownRef = useRef<HTMLDivElement>(null);
@@ -138,17 +135,8 @@ export function MenuExplorer() {
     setActiveCat('all');
     setQuery('');
     setPriceFilter('all');
-    setTagFilter('all');
     setSortBy('default');
   };
-
-  // Used tags for filter pills
-  const usedTags = useMemo(() => {
-    const keys = Object.keys(TAGS) as TagType[];
-    return keys.filter((k) =>
-      ALL_ITEMS.some((i) => i.tags && i.tags.includes(k))
-    );
-  }, []);
 
   // Category navigation tabs
   const tabs = useMemo(
@@ -226,12 +214,6 @@ export function MenuExplorer() {
             return false;
           }
         }
-        // Tag filter
-        if (tagFilter !== 'all') {
-          if (!it.tags.includes(tagFilter as TagType)) {
-            return false;
-          }
-        }
         // Price filter
         if (currentPriceTest && !currentPriceTest(it.price)) {
           return false;
@@ -253,7 +235,7 @@ export function MenuExplorer() {
     });
 
     return result.filter((sec) => sec.items.length > 0);
-  }, [activeCat, query, priceFilter, tagFilter, sortBy, favs]);
+  }, [activeCat, query, priceFilter, sortBy, favs]);
 
   const totalCount = useMemo(() => {
     return visibleSections.reduce((acc, sec) => acc + sec.items.length, 0);
@@ -262,7 +244,6 @@ export function MenuExplorer() {
   const isAnyFilterActive =
     query.trim() !== '' ||
     priceFilter !== 'all' ||
-    tagFilter !== 'all' ||
     sortBy !== 'default';
 
   return (
@@ -444,32 +425,7 @@ export function MenuExplorer() {
               })}
             </div>
 
-            {/* Divider */}
-            {usedTags.length > 0 && (
-              <>
-                <span className="mx-0.5 h-4 w-px bg-[var(--border-subtle)] shrink-0 self-center" />
-                {/* Tag Filter Chips */}
-                <div className="flex gap-1.5 shrink-0">
-                  {usedTags.map((k) => {
-                    const isActive = tagFilter === k;
-                    return (
-                      <button
-                        key={k}
-                        type="button"
-                        onClick={() => setTagFilter(isActive ? 'all' : k)}
-                        className={`shrink-0 inline-flex items-center justify-center py-1 px-3 rounded-lg border text-xs font-mono font-medium transition-colors active:scale-95 cursor-pointer ${
-                          isActive
-                            ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
-                            : 'bg-[var(--neutral-white)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:bg-[var(--bg-lift)]'
-                        }`}
-                      >
-                        {TAGS[k]?.label || k}
-                      </button>
-                    );
-                  })}
-                </div>
-              </>
-            )}
+
 
             {/* Clear Filters Reset Button */}
             {isAnyFilterActive && (
