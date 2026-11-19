@@ -24,23 +24,23 @@ export function Footer() {
         <div className="flex flex-col xs:flex-row sm:flex-row flex-wrap justify-center gap-2.5 sm:gap-3 pt-2 max-w-xs sm:max-w-none mx-auto">
           <a
             href="tel:01819759868"
-            className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-lg border border-white/15 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-xs font-mono cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-lg border border-white/15 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 active:scale-95 transition-colors text-xs font-mono cursor-pointer"
           >
             <PiPhoneLight className="text-sm" aria-hidden="true" />
-            <span>০১৮১৯-৭৫৯৮৬৮</span>
+            <span>01819-759868</span>
           </a>
           <a
             href="tel:01577773404"
-            className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-lg border border-white/15 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-xs font-mono cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-lg border border-white/15 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 active:scale-95 transition-colors text-xs font-mono cursor-pointer"
           >
             <PiPhoneLight className="text-sm" aria-hidden="true" />
-            <span>০১৫৭৭-৭৭৩৪০৪</span>
+            <span>01577-773404</span>
           </a>
           <a
             href="https://www.google.com/maps/search/?api=1&query=Mohila+College+Road+Khagrachari+Sadar"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-lg border border-white/15 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-xs font-mono cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-lg border border-white/15 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 active:scale-95 transition-colors text-xs font-mono cursor-pointer"
           >
             <PiMapTrifoldLight className="text-sm" aria-hidden="true" />
             <span>ম্যাপে দেখুন</span>

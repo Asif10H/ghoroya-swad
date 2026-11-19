@@ -1,7 +1,6 @@
 import { Category, MenuItem, PriceFilter, TagInfo, TagType } from '../types/menu';
 
-export const toBn = (n: number | string): string =>
-  String(n).replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)]);
+export const toBn = (n: number | string): string => String(n);
 
 export const fallbackSvg =
   'data:image/svg+xml;utf8,' +
@@ -18,9 +17,9 @@ export const TAGS: Record<TagType, TagInfo> = {
 
 export const PRICE_FILTERS: PriceFilter[] = [
   { id: 'all', label: 'সব দাম' },
-  { id: 'u50', label: '৫০ ৳ পর্যন্ত', test: (p: number) => p <= 50 },
-  { id: 'u100', label: '৫১–১০০ ৳', test: (p: number) => p > 50 && p <= 100 },
-  { id: 'o100', label: '১০০ ৳+', test: (p: number) => p > 100 },
+  { id: 'u50', label: '50 ৳ পর্যন্ত', test: (p: number) => p <= 50 },
+  { id: 'u100', label: '51–100 ৳', test: (p: number) => p > 50 && p <= 100 },
+  { id: 'o100', label: '100 ৳+', test: (p: number) => p > 100 },
 ];
 
 /* Curated authentic food photography accurately matching each Bangladeshi dish */
@@ -204,7 +203,7 @@ const INFO: Record<
   'চিকেন ফ্রাই': {
     tags: ['best'],
     subCategory: 'chicken',
-    desc: 'গরম গরম মচমচে ভাজা চিকেন, ৫ পিসের প্যাকেজ।',
+    desc: 'গরম গরম মচমচে ভাজা চিকেন, 5 পিসের প্যাকেজ।',
     ingredients: ['চিকেন', 'কোটিং', 'মসলা'],
   },
   'চিকেন মোমো': {
@@ -222,7 +221,7 @@ const INFO: Record<
   'চিকেন নাগেট': {
     tags: [],
     subCategory: 'chicken',
-    desc: 'ছোট ছোট সোনালি মচমচে চিকেন নাগেট, ৫ পিস।',
+    desc: 'ছোট ছোট সোনালি মচমচে চিকেন নাগেট, 5 পিস।',
     ingredients: ['চিকেন', 'ব্রেডক্রাম্ব', 'মসলা'],
   },
   'চিকেন সমুচা': {
@@ -252,7 +251,7 @@ const INFO: Record<
   'মিট বল': {
     tags: [],
     subCategory: 'street',
-    desc: 'স্টিকে গাঁথা ৪ পিস ভাজা রসালো মাংসের বল।',
+    desc: 'স্টিকে গাঁথা 4 পিস ভাজা রসালো মাংসের বল।',
     ingredients: ['কিমা', 'বিশেষ মসলা'],
   },
   'চটপটি': {
@@ -294,7 +293,7 @@ const INFO: Record<
   'ফিশ ফ্রাই': {
     tags: [],
     subCategory: 'street',
-    desc: 'স্টিকে গাঁথা ৪ পিস মুচমুচে ক্রিস্পি কোটিংয়ে ভাজা মাছের ফ্রাই।',
+    desc: 'স্টিকে গাঁথা 4 পিস মুচমুচে ক্রিস্পি কোটিংয়ে ভাজা মাছের ফ্রাই।',
     ingredients: ['মাছ', 'ক্রিস্পি কোটিং', 'মসলা'],
   },
   'পুডিং': {
@@ -425,24 +424,24 @@ const RAW_CATEGORIES: {
     title: 'স্ন্যাকস মেনু',
     icon: '🍔',
     items: [
-      { name: 'ক্রিসপি চিকেন', note: '১ পিস বড়', price: 120 },
-      { name: 'চিকেন ফ্রাই', note: '৫ পিস', price: 200 },
-      { name: 'চিকেন মোমো', note: '৫ পিস', price: 100 },
-      { name: 'চিকেন ফিঙ্গার রোল', note: '৮ পিস', price: 100 },
-      { name: 'চিকেন নাগেট', note: '৫ পিস', price: 100 },
-      { name: 'চিকেন সমুচা', note: '১ পিস', price: 20 },
-      { name: 'চিকেন অনথন', note: '১ পিস', price: 20 },
-      { name: 'চিকেন সফট রোল', note: '১ পিস', price: 30 },
-      { name: 'চিকেন সসেজ', note: '১ পিস', price: 40 },
-      { name: 'মিট বল', note: '১ স্টিক ৪ পিস', price: 50 },
+      { name: 'ক্রিসপি চিকেন', note: '1 পিস বড়', price: 120 },
+      { name: 'চিকেন ফ্রাই', note: '5 পিস', price: 200 },
+      { name: 'চিকেন মোমো', note: '5 পিস', price: 100 },
+      { name: 'চিকেন ফিঙ্গার রোল', note: '8 পিস', price: 100 },
+      { name: 'চিকেন নাগেট', note: '5 পিস', price: 100 },
+      { name: 'চিকেন সমুচা', note: '1 পিস', price: 20 },
+      { name: 'চিকেন অনথন', note: '1 পিস', price: 20 },
+      { name: 'চিকেন সফট রোল', note: '1 পিস', price: 30 },
+      { name: 'চিকেন সসেজ', note: '1 পিস', price: 40 },
+      { name: 'মিট বল', note: '1 স্টিক 4 পিস', price: 50 },
       { name: 'চটপটি', note: '', price: 50 },
       { name: 'ফুসকা', note: '', price: 60 },
       { name: 'ফ্রেঞ্চ ফ্রাই', note: '', price: 80 },
-      { name: 'এগ চিকেন পাস্তা', note: '১:২', price: 100 },
-      { name: 'এগ চিকেন নুডলস', note: '১:২', price: 100 },
-      { name: 'চিকেন স্প্রিং রোল', note: '১ পিস', price: 30 },
-      { name: 'ফিশ ফ্রাই', note: '১ স্টিক ৪ পিস', price: 50 },
-      { name: 'পুডিং', note: '১ পিস', price: 50 },
+      { name: 'এগ চিকেন পাস্তা', note: '1:2', price: 100 },
+      { name: 'এগ চিকেন নুডলস', note: '1:2', price: 100 },
+      { name: 'চিকেন স্প্রিং রোল', note: '1 পিস', price: 30 },
+      { name: 'ফিশ ফ্রাই', note: '1 স্টিক 4 পিস', price: 50 },
+      { name: 'পুডিং', note: '1 পিস', price: 50 },
       { name: 'দই ফুসকা', note: '', price: 100 },
     ],
   },

@@ -16,6 +16,7 @@ import {
   PiPlusLight,
   PiMinusLight,
   PiShoppingBagLight,
+  PiCheckLight,
 } from 'react-icons/pi';
 
 export interface ItemModalProps {
@@ -162,273 +163,320 @@ export default function ItemModal({
       aria-modal="true"
       aria-labelledby="m-name"
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/75 backdrop-blur-[16px] sm:p-4"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-[16px] sm:p-4"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-[var(--neutral-white)] text-[var(--tone-strong)] w-full sm:max-w-xl rounded-t-[16px] sm:rounded-[10px] overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col border border-[var(--border-subtle)] pb-[env(safe-area-inset-bottom)]"
+        className="bg-[var(--neutral-white)] text-[var(--tone-strong)] w-full sm:max-w-3xl rounded-t-xl sm:rounded-lg overflow-hidden max-h-[92vh] sm:max-h-[88vh] flex flex-col border border-[var(--border-subtle)] pb-[env(safe-area-inset-bottom)]"
       >
-        {/* Media slider header */}
-        <div className="relative bg-[var(--neutral-200)]">
-          {/* Mobile drawer handle */}
-          <div className="sm:hidden absolute top-2 left-1/2 -translate-x-1/2 w-10 h-1 bg-white/50 rounded-full z-10 pointer-events-none" />
-
-          <div
-            ref={sliderRef}
-            onScroll={handleSliderScroll}
-            className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth"
-          >
-            {images.map((src, i) => (
-              <div
-                key={i}
-                className="min-w-full snap-center aspect-[4/3] bg-[var(--neutral-200)] relative"
-              >
-                <img
-                  src={src}
-                  alt={`${item.name} ছবি ${toBn(i + 1)}`}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = fallbackSvg;
-                  }}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-
-          <button
-            id="prev"
-            type="button"
-            onClick={handlePrev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-lg bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95 transition-colors cursor-pointer"
-            aria-label="আগের ছবি"
-          >
-            <PiCaretLeftLight className="text-lg" aria-hidden="true" />
-          </button>
-          <button
-            id="next"
-            type="button"
-            onClick={handleNext}
-            className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-lg bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95 transition-colors cursor-pointer"
-            aria-label="পরের ছবি"
-          >
-            <PiCaretRightLight className="text-lg" aria-hidden="true" />
-          </button>
-          <button
-            id="close"
-            type="button"
-            onClick={onClose}
-            className="absolute right-3 top-3 h-9 w-9 sm:h-8 sm:w-8 rounded-lg bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95 z-20 transition-colors cursor-pointer"
-            aria-label="বন্ধ করুন"
-          >
-            <PiXLight className="text-base" aria-hidden="true" />
-          </button>
-          <span
-            id="counter"
-            className="absolute left-3 top-3 rounded-full bg-black/60 text-white font-mono text-[11px] px-2.5 py-1 z-20"
-          >
-            {`${toBn(activeIdx + 1)} / ${toBn(images.length)}`}
-          </span>
+        {/* Mobile drawer handle */}
+        <div className="sm:hidden w-full pt-2.5 pb-1 flex justify-center bg-[var(--bg-base)]">
+          <div className="w-10 h-1 bg-[var(--border-subtle)] rounded-full" />
         </div>
 
-        {/* Thumbnail strip */}
-        {images.length > 1 && (
-          <div
-            id="thumbs"
-            className="flex gap-2 overflow-x-auto no-scrollbar px-4 pt-3 pb-1"
-          >
-            {images.map((src, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => handleSelectThumb(i)}
-                className={`h-14 w-18 sm:h-16 sm:w-20 shrink-0 rounded-lg overflow-hidden border-2 transition-colors cursor-pointer ${
-                  activeIdx === i
-                    ? 'border-[var(--tone-strong)] opacity-100 ring-2 ring-[var(--tone-strong)]/20'
-                    : 'border-[var(--border-subtle)] opacity-70 hover:opacity-100'
-                }`}
-                aria-label={`${item.name} থাম্বনেইল ${toBn(i + 1)}`}
+        {/* Modal content container: Grid on desktop, stack on mobile */}
+        <div className="flex-1 overflow-y-auto sm:overflow-hidden sm:grid sm:grid-cols-12">
+          {/* Left Column: Visual Media Gallery */}
+          <div className="sm:col-span-6 bg-[var(--bg-base)] flex flex-col border-b sm:border-b-0 sm:border-r border-[var(--border-subtle)]">
+            <div className="relative bg-[var(--neutral-200)] aspect-[4/3] sm:aspect-square overflow-hidden">
+              <div
+                ref={sliderRef}
+                onScroll={handleSliderScroll}
+                className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth"
               >
-                <img
-                  src={src}
-                  alt={`${item.name} থাম্বনেইল ${toBn(i + 1)}`}
-                  className="h-full w-full object-cover"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = fallbackSvg;
-                  }}
-                />
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Details body */}
-        <div className="overflow-y-auto p-4 sm:p-5 space-y-3.5 sm:space-y-4">
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <p id="m-cat" className="font-mono uppercase tracking-[0.08em] text-[11px] sm:text-xs text-[var(--text-muted)] flex items-center gap-1.5">
-                {cat?.id === 'snacks' ? (
-                  <PiHamburgerLight className="text-sm" aria-hidden="true" />
-                ) : (
-                  <PiCoffeeLight className="text-sm" aria-hidden="true" />
-                )}
-                <span>{cat ? cat.title.toUpperCase() : ''}</span>
-              </p>
-              <h3
-                id="m-name"
-                className="font-heading font-medium text-xl sm:text-2xl mt-1 text-[var(--tone-strong)]"
-              >
-                {item.name}
-              </h3>
-              {item.note ? (
-                <p id="m-note" className="text-[var(--text-muted)] mt-0.5 text-xs sm:text-sm">
-                  {item.note}
-                </p>
-              ) : null}
-            </div>
-            <span
-              id="m-price"
-              className="shrink-0 rounded-[8px] bg-[var(--tone-faint)] text-[var(--tone-strong)] font-mono font-medium px-3 sm:px-3.5 py-1 sm:py-1.5 text-base sm:text-lg border border-[var(--border-subtle)]"
-            >
-              {toBn(item.price)} ৳
-            </span>
-          </div>
-
-          {item.tags.length > 0 && (
-            <div id="m-tags" className="flex flex-wrap gap-1.5">
-              {item.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-[var(--tone-faint)] text-[var(--tone-strong)] border border-[var(--border-subtle)]"
-                >
-                  {TAGS[tag]?.label || tag}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {item.desc ? (
-            <p
-              id="m-desc"
-              className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed"
-            >
-              {item.desc}
-            </p>
-          ) : null}
-
-          {item.ingredients && item.ingredients.length > 0 && (
-            <div
-              id="m-ing-wrap"
-              className="pt-2 border-t border-[var(--border-subtle)]"
-            >
-              <h4 className="font-heading font-medium text-xs font-mono uppercase text-[var(--text-muted)] mb-2">
-                উপকরণ
-              </h4>
-              <div id="m-ing" className="flex flex-wrap gap-1.5">
-                {item.ingredients.map((ing) => (
-                  <span
-                    key={ing}
-                    className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] sm:text-xs font-mono bg-[var(--dark-4)] dark:bg-[var(--light-4)] text-[var(--tone-strong)] border border-[var(--border-subtle)]"
+                {images.map((src, i) => (
+                  <div
+                    key={i}
+                    className="min-w-full h-full snap-center bg-[var(--neutral-200)] relative"
                   >
-                    {ing}
-                  </span>
+                    <img
+                      src={src}
+                      alt={`${item.name} ছবি ${toBn(i + 1)}`}
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = fallbackSvg;
+                      }}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
                 ))}
               </div>
-            </div>
-          )}
 
-          <div className="pt-2 flex flex-col gap-2">
-            {/* Order Tray 1-Tap CTA */}
-            {quantity === 0 ? (
+              {/* Prev / Next Controls */}
+              {images.length > 1 && (
+                <>
+                  <button
+                    id="prev"
+                    type="button"
+                    onClick={handlePrev}
+                    className="absolute left-2.5 top-1/2 -translate-y-1/2 h-8 w-8 rounded-lg bg-black/60 hover:bg-black/85 text-white grid place-items-center active:scale-95 transition-colors cursor-pointer z-10"
+                    aria-label="আগের ছবি"
+                  >
+                    <PiCaretLeftLight className="text-lg" aria-hidden="true" />
+                  </button>
+                  <button
+                    id="next"
+                    type="button"
+                    onClick={handleNext}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 h-8 w-8 rounded-lg bg-black/60 hover:bg-black/85 text-white grid place-items-center active:scale-95 transition-colors cursor-pointer z-10"
+                    aria-label="পরের ছবি"
+                  >
+                    <PiCaretRightLight className="text-lg" aria-hidden="true" />
+                  </button>
+                </>
+              )}
+
+              {/* Close Button on Mobile (floating over photo) */}
               <button
                 type="button"
-                onClick={() => {
-                  addItem(item);
-                  onShowToast('অর্ডার ট্রে-তে যোগ হয়েছে');
-                }}
-                className="w-full h-11 text-xs sm:text-sm inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] hover:opacity-90 active:scale-95 transition-colors font-heading font-medium cursor-pointer"
+                onClick={onClose}
+                className="sm:hidden absolute right-2.5 top-2.5 h-8 w-8 rounded-lg bg-black/60 hover:bg-black/85 text-white grid place-items-center active:scale-95 z-20 transition-colors cursor-pointer"
+                aria-label="বন্ধ করুন"
               >
-                <PiShoppingBagLight className="text-base" />
-                <span>অর্ডার ট্রে-তে যোগ করুন ({toBn(item.price)} ৳)</span>
+                <PiXLight className="text-base" aria-hidden="true" />
               </button>
-            ) : (
-              <div className="w-full h-11 flex items-center justify-between px-3 rounded-lg border border-[var(--tone-strong)] bg-[var(--bg-lift)]">
-                <span className="text-xs sm:text-sm font-medium text-[var(--tone-strong)] flex items-center gap-1.5">
-                  <PiShoppingBagLight className="text-base" />
-                  <span>ট্রে-তে আছে ({toBn(quantity * item.price)} ৳)</span>
-                </span>
-                <div className="inline-flex items-center border border-[var(--border-subtle)] rounded-lg bg-[var(--bg-base)] overflow-hidden">
+
+              {/* Image Counter Badge */}
+              <span
+                id="counter"
+                className="absolute left-2.5 bottom-2.5 rounded-lg bg-black/70 backdrop-blur-md text-white font-mono text-[11px] px-2.5 py-1 z-10 border border-white/10"
+              >
+                {`${toBn(activeIdx + 1)} / ${toBn(images.length)}`}
+              </span>
+            </div>
+
+            {/* Thumbnail Navigation Strip */}
+            {images.length > 1 && (
+              <div
+                id="thumbs"
+                className="flex gap-2 overflow-x-auto no-scrollbar p-3 border-t border-[var(--border-subtle)] bg-[var(--bg-base)]"
+              >
+                {images.map((src, i) => (
                   <button
+                    key={i}
                     type="button"
-                    onClick={() => removeItem(item.id)}
-                    className="w-8 h-8 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-16)] dark:hover:bg-[var(--light-16)] active:scale-95 transition-colors cursor-pointer"
-                    aria-label="কমান"
+                    onClick={() => handleSelectThumb(i)}
+                    className={`h-12 w-16 shrink-0 rounded-lg overflow-hidden border-2 transition-colors cursor-pointer ${
+                      activeIdx === i
+                        ? 'border-[var(--tone-strong)] opacity-100'
+                        : 'border-[var(--border-subtle)] opacity-60 hover:opacity-100'
+                    }`}
+                    aria-label={`${item.name} থাম্বনেইল ${toBn(i + 1)}`}
                   >
-                    <PiMinusLight className="text-xs" />
+                    <img
+                      src={src}
+                      alt={`${item.name} থাম্বনেইল ${toBn(i + 1)}`}
+                      className="h-full w-full object-cover"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = fallbackSvg;
+                      }}
+                    />
                   </button>
-                  <span className="w-8 text-center text-xs font-medium text-[var(--tone-strong)]">
-                    {toBn(quantity)}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => addItem(item)}
-                    className="w-8 h-8 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-16)] dark:hover:bg-[var(--light-16)] active:scale-95 transition-colors cursor-pointer"
-                    aria-label="বাড়ান"
-                  >
-                    <PiPlusLight className="text-xs" />
-                  </button>
-                </div>
+                ))}
               </div>
             )}
-
-            <div className="flex gap-2.5 sm:gap-3">
-              <button
-                id="m-fav"
-                type="button"
-                onClick={() => onToggleFav(item.id)}
-                className={`flex-1 h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg border transition-colors font-medium cursor-pointer ${
-                  isFav
-                    ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
-                    : 'bg-[var(--bg-base)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:border-[var(--dark-32)] dark:hover:border-[var(--light-32)]'
-                }`}
-              >
-                {isFav ? (
-                  <>
-                    <PiHeartFill className="text-base text-[var(--bg-base)]" aria-hidden="true" />
-                    <span>পছন্দের তালিকায়</span>
-                  </>
-                ) : (
-                  <>
-                    <PiHeartLight className="text-base text-[var(--tone-strong)]" aria-hidden="true" />
-                    <span>পছন্দে যোগ করুন</span>
-                  </>
-                )}
-              </button>
-              <button
-                id="m-share"
-                type="button"
-                onClick={handleShare}
-                className="flex-1 h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-base)] text-[var(--tone-strong)] hover:bg-[var(--bg-lift)] active:scale-95 transition-colors font-medium cursor-pointer"
-              >
-                <PiShareNetworkLight className="text-base" aria-hidden="true" />
-                <span>শেয়ার করুন</span>
-              </button>
-            </div>
           </div>
 
-          {/* Related items */}
-          {relatedItems.length > 0 && (
-            <div className="pt-4 border-t border-[var(--border-subtle)]">
-              <h4 className="font-heading font-medium text-xs font-mono uppercase text-[var(--text-muted)] mb-2.5">
-                আরও দেখুন
-              </h4>
-              <div id="related" className="grid grid-cols-3 gap-2 sm:gap-3">
-                {relatedItems.map((r) => (
-                  <RelatedCard key={r.id} item={r} onOpen={onOpenRelated} />
-                ))}
+          {/* Right Column: Culinary Details & Actions */}
+          <div className="sm:col-span-6 flex flex-col justify-between overflow-y-auto bg-[var(--neutral-white)]">
+            <div className="p-4 sm:p-6 space-y-4">
+              {/* Category & Desktop Close Row */}
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[var(--tone-faint)] text-[var(--tone-strong)] text-xs font-mono uppercase tracking-wider border border-[var(--border-subtle)]">
+                    {cat?.id === 'snacks' ? (
+                      <PiHamburgerLight className="text-sm" aria-hidden="true" />
+                    ) : (
+                      <PiCoffeeLight className="text-sm" aria-hidden="true" />
+                    )}
+                    <span>{cat ? cat.title : ''}</span>
+                  </span>
+
+                  {item.note && (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-lg bg-[var(--tone-faint)] text-[var(--text-muted)] text-xs font-mono border border-[var(--border-subtle)]">
+                      {item.note}
+                    </span>
+                  )}
+                </div>
+
+                {/* Close Button on Desktop */}
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="hidden sm:inline-flex items-center justify-center h-8 w-8 rounded-lg border border-[var(--border-subtle)] text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
+                  aria-label="বন্ধ করুন"
+                >
+                  <PiXLight className="text-base" aria-hidden="true" />
+                </button>
+              </div>
+
+              {/* Title & Price Header */}
+              <div>
+                <h3
+                  id="m-name"
+                  className="font-heading font-medium text-2xl sm:text-3xl text-[var(--tone-strong)] leading-tight"
+                >
+                  {item.name}
+                </h3>
+
+                <div className="mt-2.5 flex items-baseline gap-2">
+                  <span
+                    id="m-price"
+                    className="font-heading font-medium text-2xl sm:text-3xl text-[var(--tone-strong)] tabular-nums"
+                  >
+                    {toBn(item.price)} ৳
+                  </span>
+                  <span className="text-xs text-[var(--text-muted)] font-mono">
+                    / পরিমাপ: {item.note || 'রেগুলার'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Tag Pills */}
+              {item.tags.length > 0 && (
+                <div id="m-tags" className="flex flex-wrap gap-1.5">
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-mono uppercase tracking-wider bg-[var(--tone-faint)] text-[var(--tone-strong)] border border-[var(--border-subtle)]"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--tone-strong)]" />
+                      <span>{TAGS[tag]?.label || tag}</span>
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Description */}
+              {item.desc && (
+                <div className="pt-1">
+                  <p
+                    id="m-desc"
+                    className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed"
+                  >
+                    {item.desc}
+                  </p>
+                </div>
+              )}
+
+              {/* Ingredients Cloud */}
+              {item.ingredients && item.ingredients.length > 0 && (
+                <div
+                  id="m-ing-wrap"
+                  className="pt-3 border-t border-[var(--border-subtle)]"
+                >
+                  <h4 className="font-heading font-medium text-xs font-mono uppercase text-[var(--text-muted)] mb-2">
+                    উপকরণ ও বৈশিষ্ট্য
+                  </h4>
+                  <div id="m-ing" className="flex flex-wrap gap-1.5">
+                    {item.ingredients.map((ing) => (
+                      <span
+                        key={ing}
+                        className="inline-flex items-center rounded-lg px-2.5 py-1 text-xs font-mono bg-[var(--tone-faint)] text-[var(--tone-strong)] border border-[var(--border-subtle)]"
+                      >
+                        {ing}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Related Items Section */}
+              {relatedItems.length > 0 && (
+                <div className="pt-3 border-t border-[var(--border-subtle)]">
+                  <h4 className="font-heading font-medium text-xs font-mono uppercase text-[var(--text-muted)] mb-2">
+                    আরও দেখুন ({cat?.title})
+                  </h4>
+                  <div id="related" className="grid grid-cols-3 gap-2">
+                    {relatedItems.map((r) => (
+                      <RelatedCard key={r.id} item={r} onOpen={onOpenRelated} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Desktop & Mobile Actions Container */}
+            <div className="p-4 sm:p-5 border-t border-[var(--border-subtle)] bg-[var(--bg-base)] space-y-2.5">
+              {/* Order Tray 1-Tap CTA */}
+              {quantity === 0 ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    addItem(item);
+                    onShowToast('অর্ডার ট্রে-তে যোগ হয়েছে');
+                  }}
+                  className="w-full h-11 text-xs sm:text-sm inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] hover:opacity-90 active:scale-95 transition-colors font-medium cursor-pointer"
+                >
+                  <PiShoppingBagLight className="text-base" aria-hidden="true" />
+                  <span>অর্ডার ট্রে-তে যোগ করুন ({toBn(item.price)} ৳)</span>
+                </button>
+              ) : (
+                <div className="w-full h-11 flex items-center justify-between px-3 rounded-lg border border-[var(--tone-strong)] bg-[var(--tone-faint)]">
+                  <span className="text-xs sm:text-sm font-medium text-[var(--tone-strong)] flex items-center gap-1.5">
+                    <PiCheckLight className="text-base" aria-hidden="true" />
+                    <span>ট্রে-তে আছে ({toBn(quantity * item.price)} ৳)</span>
+                  </span>
+                  <div className="inline-flex items-center border border-[var(--border-subtle)] rounded-lg bg-[var(--bg-base)] overflow-hidden">
+                    <button
+                      type="button"
+                      onClick={() => removeItem(item.id)}
+                      className="w-8 h-8 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-8)] active:scale-95 transition-colors cursor-pointer"
+                      aria-label="কমান"
+                    >
+                      <PiMinusLight className="text-xs" aria-hidden="true" />
+                    </button>
+                    <span className="w-8 text-center text-xs font-mono font-medium text-[var(--tone-strong)] tabular-nums">
+                      {toBn(quantity)}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => addItem(item)}
+                      className="w-8 h-8 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-8)] active:scale-95 transition-colors cursor-pointer"
+                      aria-label="বাড়ান"
+                    >
+                      <PiPlusLight className="text-xs" aria-hidden="true" />
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Secondary Favorite and Share Buttons */}
+              <div className="flex gap-2.5">
+                <button
+                  id="m-fav"
+                  type="button"
+                  onClick={() => onToggleFav(item.id)}
+                  className={`flex-1 h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 rounded-lg border transition-colors font-medium cursor-pointer ${
+                    isFav
+                      ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
+                      : 'bg-[var(--bg-base)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:bg-[var(--tone-faint)]'
+                  }`}
+                >
+                  {isFav ? (
+                    <>
+                      <PiHeartFill className="text-base text-[var(--bg-base)]" aria-hidden="true" />
+                      <span>পছন্দের তালিকায়</span>
+                    </>
+                  ) : (
+                    <>
+                      <PiHeartLight className="text-base text-[var(--tone-strong)]" aria-hidden="true" />
+                      <span>পছন্দে যোগ করুন</span>
+                    </>
+                  )}
+                </button>
+                <button
+                  id="m-share"
+                  type="button"
+                  onClick={handleShare}
+                  className="flex-1 h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-base)] text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors font-medium cursor-pointer"
+                >
+                  <PiShareNetworkLight className="text-base" aria-hidden="true" />
+                  <span>শেয়ার করুন</span>
+                </button>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
@@ -456,7 +504,7 @@ function RelatedCard({ item, onOpen }: RelatedCardProps) {
       type="button"
       data-rel={item.id}
       onClick={() => onOpen(item)}
-      className="group text-left rounded-lg overflow-hidden bg-[var(--bg-base)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] dark:hover:border-[var(--light-32)] active:scale-95 transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] cursor-pointer"
+      className="group text-left rounded-lg overflow-hidden bg-[var(--bg-base)] border border-[var(--border-subtle)] hover:border-[var(--tone-strong)] active:scale-95 transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] cursor-pointer"
     >
       <div className={`aspect-[4/3] relative overflow-hidden bg-[var(--neutral-100)] ${isLoaded ? '' : 'animate-pulse bg-neutral-200 dark:bg-neutral-800'}`}>
         <img
@@ -470,11 +518,11 @@ function RelatedCard({ item, onOpen }: RelatedCardProps) {
           className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
       </div>
-      <div className="p-2 sm:p-2.5">
-        <p className="text-xs sm:text-[13px] font-medium leading-snug truncate text-[var(--tone-strong)]">
+      <div className="p-2">
+        <p className="text-xs font-medium leading-snug truncate text-[var(--tone-strong)]">
           {item.name}
         </p>
-        <p className="text-[11px] sm:text-xs font-mono font-medium text-[var(--tone-strong)] mt-0.5">
+        <p className="text-[11px] font-mono font-medium text-[var(--tone-strong)] mt-0.5 tabular-nums">
           {toBn(item.price)} ৳
         </p>
       </div>
