@@ -190,6 +190,7 @@ html.dark {
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html.dark {
@@ -202,7 +203,12 @@ body {
   color: var(--tone-strong);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: contain;
   transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+button, a, input, select {
+  touch-action: manipulation;
 }
 
 .no-scrollbar::-webkit-scrollbar {

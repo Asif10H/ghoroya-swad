@@ -20,6 +20,8 @@ import CategorySection from './CategorySection';
 import ItemModal from './ItemModal';
 import Toast from './Toast';
 import FloatingActions from './FloatingActions';
+import BottomNav from './BottomNav';
+import InstallPrompt from './InstallPrompt';
 import {
   PiMagnifyingGlassLight,
   PiXLight,
@@ -348,7 +350,7 @@ export function MenuExplorer() {
       </div>
 
       {/* Main Menu Content */}
-      <main className="max-w-6xl mx-auto px-3 sm:px-4 py-6 sm:py-8 min-h-[60vh]">
+      <main className="max-w-6xl mx-auto px-3 sm:px-4 py-6 sm:py-8 min-h-[60vh] pb-24 sm:pb-8">
         <div className="flex items-center justify-between mb-6">
           <p id="count" className="font-mono text-xs text-[var(--text-muted)]">
             {totalCount > 0
@@ -410,6 +412,16 @@ export function MenuExplorer() {
 
       {/* Floating Actions */}
       <FloatingActions />
+
+      {/* Mobile App Bottom Navigation Bar */}
+      <BottomNav
+        activeCat={activeCat}
+        onSelectCategory={(cat) => setActiveCat(cat)}
+        favCount={favs.size}
+      />
+
+      {/* PWA Install Prompt (Add to Home Screen) */}
+      <InstallPrompt />
     </>
   );
 }

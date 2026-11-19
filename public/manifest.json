@@ -1,0 +1,29 @@
+{
+  "name": "ঘরোয়া স্বাদ রেস্টুরেন্ট",
+  "short_name": "ঘরোয়া স্বাদ",
+  "description": "মহিলা কলেজ রোড, খাগড়াছড়ি সদর। ঘরে তৈরি খাঁটি স্ন্যাকস, জুস ও ডিজিটাল মেনু।",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#151515",
+  "theme_color": "#151515",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

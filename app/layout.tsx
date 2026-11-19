@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono, Hind_Siliguri } from "next/font/google";
 import type { Metadata, Viewport } from "next";
+import PwaServiceWorker from "@/components/PwaServiceWorker";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,6 +27,16 @@ const hindSiliguri = Hind_Siliguri({
 export const metadata: Metadata = {
   title: "ঘরোয়া স্বাদ রেস্টুরেন্ট — ডিজিটাল মেনু",
   description: "মহিলা কলেজ রোড, খাগড়াছড়ি সদর। ঘরে তৈরি খাঁটি স্ন্যাকস, জুস, পাস্তা ও ডিনার ডিজিটাল মেনু।",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "ঘরোয়া স্বাদ",
+  },
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "ঘরোয়া স্বাদ রেস্টুরেন্ট — ডিজিটাল মেনু",
     description: "মহিলা কলেজ রোড, খাগড়াছড়ি সদর। ঘরে তৈরি খাঁটি স্ন্যাকস, জুস, পাস্তা ও ডিনার ডিজিটাল মেনু।",
@@ -58,8 +69,15 @@ export default function RootLayout({
     >
       <head>
         <script {...themeScriptObj} />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="ঘরোয়া স্বাদ" />
       </head>
       <body className="antialiased font-sans bg-[var(--bg-base)] text-[var(--tone-strong)]">
+        <PwaServiceWorker />
         {children}
       </body>
     </html>
