@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useOrderTray } from '@/hooks/useOrderTray';
 import { toBn, fallbackSvg } from '@/data/menuData';
@@ -26,11 +26,14 @@ export default function OrderTray() {
     totalPrice,
     addItem,
     removeItem,
+    updateQuantity,
     clearTray,
   } = useOrderTray();
   const [isOpen, setIsOpen] = useState(false);
   const [customerName, setCustomerName] = useState('');
   const [tableOrAddress, setTableOrAddress] = useState('');
+  const [nameError, setNameError] = useState(false);
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   // Restore saved customer details from localStorage
   useEffect(() => {
@@ -44,8 +47,18 @@ export default function OrderTray() {
     }
   }, []);
 
+  // Close drawer automatically if last item is deleted
+  useEffect(() => {
+    if (totalCount === 0 && isOpen) {
+      setIsOpen(false);
+    }
+  }, [totalCount, isOpen]);
+
   const handleNameChange = (val: string) => {
     setCustomerName(val);
+    if (nameError && val.trim()) {
+      setNameError(false);
+    }
     try {
       localStorage.setItem('gs-customer-name', val);
     } catch {
@@ -60,6 +73,20 @@ export default function OrderTray() {
     } catch {
       // ignore
     }
+  };
+
+  const handleWhatsAppOrder = () => {
+    if (!customerName.trim()) {
+      setNameError(true);
+      if (nameInputRef.current) {
+        nameInputRef.current.focus();
+        nameInputRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+    setNameError(false);
+    const url = `https://wa.me/${WHATSAPP_PHONE}?text=${buildWhatsAppMessage()}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   if (totalCount === 0) return null;
@@ -91,8 +118,6 @@ export default function OrderTray() {
     msg += 'ধন্যবাদ!';
     return encodeURIComponent(msg);
   };
-
-  const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${buildWhatsAppMessage()}`;
 
   return (
     <>
@@ -201,24 +226,43 @@ export default function OrderTray() {
                     </div>
                   </div>
 
-                  {/* Quantity Stepper */}
-                  <div className="inline-flex items-center border border-[var(--border-subtle)] rounded-lg bg-[var(--bg-lift)] overflow-hidden">
+                  {/* Quantity Stepper & Individual Item Delete */}
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <div className="inline-flex items-center border border-[var(--border-subtle)] rounded-lg bg-[var(--bg-lift)] overflow-hidden">
+                      <button
+                        onClick={() => removeItem(item.id)}
+                        className="w-7 h-7 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
+                        aria-label={quantity === 1 ? 'আইটেম বাদ দিন' : 'কমান'}
+                        title={quantity === 1 ? 'আইটেম বাদ দিন' : 'কমান'}
+                      >
+                        {quantity === 1 ? (
+                          <PiTrashLight className="text-xs" />
+                        ) : (
+                          <PiMinusLight className="text-xs" />
+                        )}
+                      </button>
+                      <span className="w-7 text-center text-xs font-medium text-[var(--tone-strong)] font-mono tabular-nums">
+                        {toBn(quantity)}
+                      </span>
+                      <button
+                        onClick={() => addItem(item)}
+                        className="w-7 h-7 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
+                        aria-label="বাড়ান"
+                        title="বাড়ান"
+                      >
+                        <PiPlusLight className="text-xs" />
+                      </button>
+                    </div>
+
+                    {/* Dedicated Single Item Delete Button */}
                     <button
-                      onClick={() => removeItem(item.id)}
-                      className="w-7 h-7 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
-                      aria-label="কমান"
+                      type="button"
+                      onClick={() => updateQuantity(item.id, 0)}
+                      className="w-7 h-7 flex items-center justify-center rounded-lg text-[var(--text-muted)] hover:text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
+                      aria-label={`${item.name} বাদ দিন`}
+                      title="আইটেমটি বাদ দিন"
                     >
-                      <PiMinusLight className="text-xs" />
-                    </button>
-                    <span className="w-7 text-center text-xs font-medium text-[var(--tone-strong)]">
-                      {toBn(quantity)}
-                    </span>
-                    <button
-                      onClick={() => addItem(item)}
-                      className="w-7 h-7 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
-                      aria-label="বাড়ান"
-                    >
-                      <PiPlusLight className="text-xs" />
+                      <PiTrashLight className="text-sm" />
                     </button>
                   </div>
                 </div>
@@ -234,16 +278,28 @@ export default function OrderTray() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div>
                   <label htmlFor="customerName" className="block text-[11px] font-mono text-[var(--text-muted)] mb-1">
-                    আপনার নাম <span className="text-[var(--tone-strong)]">*</span>
+                    আপনার নাম <span className="text-[var(--tone-strong)] font-medium">*</span>
                   </label>
                   <input
+                    ref={nameInputRef}
                     id="customerName"
                     type="text"
                     value={customerName}
                     onChange={(e) => handleNameChange(e.target.value)}
                     placeholder="নাম লিখুন (যেমন: আসিফ)"
-                    className="w-full h-9 px-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-base)] text-xs text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] font-sans transition-colors"
+                    aria-invalid={nameError}
+                    aria-describedby={nameError ? 'name-error-msg' : undefined}
+                    className={`w-full h-9 px-3 rounded-lg border bg-[var(--bg-base)] text-xs text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none transition-colors font-sans ${
+                      nameError
+                        ? 'border-[var(--tone-strong)] ring-1 ring-[var(--tone-strong)]'
+                        : 'border-[var(--border-subtle)] focus:outline-2 focus:outline-[var(--tone-strong)]'
+                    }`}
                   />
+                  {nameError && (
+                    <p id="name-error-msg" className="mt-1 text-[11px] font-mono text-[var(--tone-strong)] font-medium">
+                      ⚠️ অর্ডার করতে অনুগ্রহ করে আপনার নাম লিখুন
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="tableOrAddress" className="block text-[11px] font-mono text-[var(--text-muted)] mb-1">
@@ -276,15 +332,14 @@ export default function OrderTray() {
 
               {/* Order Action Buttons */}
               <div className="grid grid-cols-2 gap-2 pt-1">
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={handleWhatsAppOrder}
                   className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] text-xs font-medium hover:opacity-90 active:scale-95 transition-colors cursor-pointer"
                 >
                   <PiWhatsappLogoLight className="text-base" />
                   <span>WhatsApp অর্ডার</span>
-                </a>
+                </button>
                 <a
                   href={`tel:${RESTAURANT_PHONE}`}
                   className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg border border-[var(--tone-strong)] text-[var(--tone-strong)] text-xs font-medium hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
