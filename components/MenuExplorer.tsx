@@ -122,17 +122,17 @@ export function MenuExplorer() {
     () => [
       {
         id: 'all' as CategoryFilter,
-        label: 'সব',
+        label: `সব (${toBn(ALL_ITEMS.length)})`,
         icon: <PiSquaresFourLight className="text-sm shrink-0" aria-hidden="true" />,
       },
       {
         id: 'snacks' as CategoryFilter,
-        label: 'স্ন্যাকস',
+        label: `স্ন্যাকস (${toBn(CATEGORIES.find((c) => c.id === 'snacks')?.items.length || 0)})`,
         icon: <PiHamburgerLight className="text-sm shrink-0" aria-hidden="true" />,
       },
       {
         id: 'drinks' as CategoryFilter,
-        label: 'ড্রিংকস ও জুস',
+        label: `ড্রিংকস ও জুস (${toBn(CATEGORIES.find((c) => c.id === 'drinks')?.items.length || 0)})`,
         icon: <PiCoffeeLight className="text-sm shrink-0" aria-hidden="true" />,
       },
       {
@@ -230,42 +230,99 @@ export function MenuExplorer() {
     return visibleSections.reduce((acc, sec) => acc + sec.items.length, 0);
   }, [visibleSections]);
 
+  const isAnyFilterActive =
+    query.trim() !== '' ||
+    priceFilter !== 'all' ||
+    tagFilter !== 'all' ||
+    subCat !== 'all' ||
+    sortBy !== 'default';
+
   return (
     <>
       {/* Sticky Controls Bar */}
       <div id="menuTop" />
       <div className="sticky top-0 z-30 bg-[var(--bg-base)]/95 backdrop-blur-[16px] border-b border-[var(--border-subtle)] transition-colors">
         <div className="max-w-6xl mx-auto px-3 sm:px-4 py-2 sm:py-2.5 space-y-2">
-          {/* Search input */}
-          <div className="relative">
-            <PiMagnifyingGlassLight
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-base text-[var(--text-muted)] pointer-events-none"
-              aria-hidden="true"
-            />
-            <input
-              id="search"
-              type="text"
-              inputMode="search"
-              autoComplete="off"
-              placeholder="আইটেম খুঁজুন… (যেমন: লাচ্ছি, মোমো, কফি)"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-full rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] pl-10 pr-10 py-2 sm:py-2.5 text-base sm:text-sm text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] focus:outline-offset-2 transition-colors font-sans"
-            />
-            {query ? (
-              <button
-                id="clear"
-                type="button"
-                onClick={() => setQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 h-7 w-7 rounded-lg bg-[var(--tone-faint)] text-xs text-[var(--tone-strong)] grid place-items-center active:scale-95 transition-colors cursor-pointer"
-                aria-label="মুছুন"
+          {/* Row 1: Search + Sort Dropdown + Grid/List View Mode Toggle */}
+          <div className="flex items-center gap-2">
+            {/* Search input */}
+            <div className="relative flex-1">
+              <PiMagnifyingGlassLight
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-base text-[var(--text-muted)] pointer-events-none"
+                aria-hidden="true"
+              />
+              <input
+                id="search"
+                type="text"
+                inputMode="search"
+                autoComplete="off"
+                placeholder="আইটেম খুঁজুন… (যেমন: লাচ্ছি, মোমো, কফি)"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="w-full h-10 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] pl-10 pr-9 text-xs sm:text-sm text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] transition-colors font-sans"
+              />
+              {query ? (
+                <button
+                  id="clear"
+                  type="button"
+                  onClick={() => setQuery('')}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 h-6 w-6 rounded-lg bg-[var(--tone-faint)] text-xs text-[var(--tone-strong)] grid place-items-center active:scale-95 transition-colors cursor-pointer"
+                  aria-label="মুছুন"
+                >
+                  <PiXLight className="text-xs" aria-hidden="true" />
+                </button>
+              ) : null}
+            </div>
+
+            {/* Sort Select */}
+            <div className="shrink-0">
+              <select
+                id="sort"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as SortOption)}
+                className="h-10 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-xs font-mono text-[var(--tone-strong)] px-2.5 sm:px-3 outline-none focus:outline-2 focus:outline-[var(--tone-strong)] transition-colors cursor-pointer"
+                aria-label="সর্টিং বা ক্রম নির্ধারণ"
               >
-                <PiXLight className="text-xs" aria-hidden="true" />
+                <option value="default" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">↕ ডিফল্ট ক্রম</option>
+                <option value="asc" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">দাম: কম → বেশি</option>
+                <option value="desc" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">দাম: বেশি → কম</option>
+              </select>
+            </div>
+
+            {/* Grid / List View Mode Toggle */}
+            <div className="shrink-0 flex h-10 items-center rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] p-0.5">
+              <button
+                id="vGrid"
+                type="button"
+                onClick={() => handleSetViewMode('grid')}
+                className={`h-full px-2 sm:px-2.5 rounded-lg text-xs font-mono transition-colors inline-flex items-center justify-center cursor-pointer ${
+                  viewMode === 'grid'
+                    ? 'bg-[var(--tone-strong)] text-[var(--bg-base)]'
+                    : 'text-[var(--tone-strong)] hover:bg-[var(--bg-lift)]'
+                }`}
+                aria-label="গ্রিড ভিউ"
+                title="গ্রিড ভিউ"
+              >
+                <PiGridFourLight className="text-sm sm:text-base" aria-hidden="true" />
               </button>
-            ) : null}
+              <button
+                id="vList"
+                type="button"
+                onClick={() => handleSetViewMode('list')}
+                className={`h-full px-2 sm:px-2.5 rounded-lg text-xs font-mono transition-colors inline-flex items-center justify-center cursor-pointer ${
+                  viewMode === 'list'
+                    ? 'bg-[var(--tone-strong)] text-[var(--bg-base)]'
+                    : 'text-[var(--tone-strong)] hover:bg-[var(--bg-lift)]'
+                }`}
+                aria-label="লিস্ট ভিউ"
+                title="লিস্ট ভিউ"
+              >
+                <PiListLight className="text-sm sm:text-base" aria-hidden="true" />
+              </button>
+            </div>
           </div>
 
-          {/* Primary Categories tabs (rounded-lg) */}
+          {/* Row 2: Primary Categories tabs (rounded-lg) */}
           <div
             id="tabs"
             className="flex gap-2 overflow-x-auto no-scrollbar py-0.5 -mx-3 px-3 sm:mx-0 sm:px-0"
@@ -275,7 +332,7 @@ export function MenuExplorer() {
                 key={tab.id}
                 type="button"
                 onClick={() => handleSelectCategory(tab.id)}
-                className={`shrink-0 inline-flex items-center gap-1.5 py-1.5 px-3.5 sm:px-4 rounded-lg border text-xs font-mono font-medium transition-all active:scale-95 cursor-pointer ${
+                className={`shrink-0 inline-flex items-center gap-1.5 h-9 px-3.5 sm:px-4 rounded-lg border text-xs font-mono font-medium transition-colors active:scale-95 cursor-pointer ${
                   activeCat === tab.id
                     ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
                     : 'bg-[var(--neutral-white)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:bg-[var(--bg-lift)]'
@@ -287,101 +344,78 @@ export function MenuExplorer() {
             ))}
           </div>
 
-          {/* Sub-Category Chips Bar */}
+          {/* Row 3: Sub-Category Chips (Contextual) */}
           <SubCategoryPills
             activeCat={activeCat}
             activeSubCat={subCat}
             onSelectSubCat={(sc) => setSubCat(sc)}
           />
 
-          {/* Secondary filters (Price & Tags) with rounded-lg buttons */}
+          {/* Row 4: Secondary Filter Chips (Price & Tags - Toggleable, no repetition) */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-0.5 -mx-3 px-3 sm:mx-0 sm:px-0">
-            {/* Price Filter Buttons */}
+            {/* Price Filter Chips */}
             <div id="prices" className="flex gap-1.5 shrink-0">
-              {PRICE_FILTERS.map((p) => (
-                <button
-                  key={p.id}
-                  type="button"
-                  onClick={() => setPriceFilter(p.id)}
-                  className={`shrink-0 inline-flex items-center justify-center py-1 px-3 rounded-lg border text-xs font-mono font-medium transition-all active:scale-95 cursor-pointer ${
-                    priceFilter === p.id
-                      ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
-                      : 'bg-[var(--neutral-white)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:bg-[var(--bg-lift)]'
-                  }`}
-                >
-                  {p.label}
-                </button>
-              ))}
+              {PRICE_FILTERS.filter((p) => p.id !== 'all').map((p) => {
+                const isActive = priceFilter === p.id;
+                return (
+                  <button
+                    key={p.id}
+                    type="button"
+                    onClick={() => setPriceFilter(isActive ? 'all' : p.id)}
+                    className={`shrink-0 inline-flex items-center justify-center py-1 px-3 rounded-lg border text-xs font-mono font-medium transition-colors active:scale-95 cursor-pointer ${
+                      isActive
+                        ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
+                        : 'bg-[var(--neutral-white)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:bg-[var(--bg-lift)]'
+                    }`}
+                  >
+                    {p.label}
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Tag Filter Buttons */}
+            {/* Divider */}
             {usedTags.length > 0 && (
               <>
-                <span className="mx-1 h-4 w-px bg-[var(--border-subtle)] shrink-0 self-center" />
+                <span className="mx-0.5 h-4 w-px bg-[var(--border-subtle)] shrink-0 self-center" />
+                {/* Tag Filter Chips */}
                 <div className="flex gap-1.5 shrink-0">
-                  {usedTags.map((k) => (
-                    <button
-                      key={k}
-                      type="button"
-                      onClick={() =>
-                        setTagFilter((prev) => (prev === k ? 'all' : k))
-                      }
-                      className={`shrink-0 inline-flex items-center justify-center py-1 px-3 rounded-lg border text-xs font-mono font-medium transition-all active:scale-95 cursor-pointer ${
-                        tagFilter === k
-                          ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
-                          : 'bg-[var(--neutral-white)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:bg-[var(--bg-lift)]'
-                      }`}
-                    >
-                      {TAGS[k]?.label || k}
-                    </button>
-                  ))}
+                  {usedTags.map((k) => {
+                    const isActive = tagFilter === k;
+                    return (
+                      <button
+                        key={k}
+                        type="button"
+                        onClick={() => setTagFilter(isActive ? 'all' : k)}
+                        className={`shrink-0 inline-flex items-center justify-center py-1 px-3 rounded-lg border text-xs font-mono font-medium transition-colors active:scale-95 cursor-pointer ${
+                          isActive
+                            ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
+                            : 'bg-[var(--neutral-white)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:bg-[var(--bg-lift)]'
+                        }`}
+                      >
+                        {TAGS[k]?.label || k}
+                      </button>
+                    );
+                  })}
                 </div>
               </>
             )}
 
-            <span className="mx-1 h-4 w-px bg-[var(--border-subtle)] shrink-0 self-center" />
-
-            {/* Sort Select */}
-            <select
-              id="sort"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="shrink-0 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-xs font-mono text-[var(--tone-strong)] px-2.5 sm:px-3 py-1 sm:py-1.5 outline-none focus:outline-2 focus:outline-[var(--tone-strong)] focus:outline-offset-2 transition-colors cursor-pointer"
-            >
-              <option value="default" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">↕ ডিফল্ট ক্রম</option>
-              <option value="asc" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">দাম: কম → বেশি</option>
-              <option value="desc" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">দাম: বেশি → কম</option>
-            </select>
-
-            {/* Grid / List View Mode Toggle */}
-            <div className="shrink-0 flex rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] p-0.5">
-              <button
-                id="vGrid"
-                type="button"
-                onClick={() => handleSetViewMode('grid')}
-                className={`rounded-lg px-2.5 py-1 text-xs font-mono transition-colors inline-flex items-center justify-center cursor-pointer ${
-                  viewMode === 'grid'
-                    ? 'bg-[var(--tone-strong)] text-[var(--bg-base)]'
-                    : 'text-[var(--tone-strong)] hover:bg-[var(--bg-lift)]'
-                }`}
-                aria-label="গ্রিড"
-              >
-                <PiGridFourLight className="text-sm" aria-hidden="true" />
-              </button>
-              <button
-                id="vList"
-                type="button"
-                onClick={() => handleSetViewMode('list')}
-                className={`rounded-lg px-2.5 py-1 text-xs font-mono transition-colors inline-flex items-center justify-center cursor-pointer ${
-                  viewMode === 'list'
-                    ? 'bg-[var(--tone-strong)] text-[var(--bg-base)]'
-                    : 'text-[var(--tone-strong)] hover:bg-[var(--bg-lift)]'
-                }`}
-                aria-label="লিস্ট"
-              >
-                <PiListLight className="text-sm" aria-hidden="true" />
-              </button>
-            </div>
+            {/* Clear Filters Reset Button */}
+            {isAnyFilterActive && (
+              <>
+                <span className="mx-0.5 h-4 w-px bg-[var(--border-subtle)] shrink-0 self-center" />
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="shrink-0 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--tone-faint)] text-[var(--tone-strong)] text-xs font-mono font-medium hover:bg-[var(--dark-8)] active:scale-95 transition-colors cursor-pointer"
+                  title="সকল ফিল্টার রিসেট করুন"
+                >
+                  <PiArrowCounterClockwiseLight className="text-xs" aria-hidden="true" />
+                  <span>রিসেট</span>
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

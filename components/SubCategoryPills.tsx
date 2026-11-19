@@ -15,29 +15,31 @@ export default function SubCategoryPills({
   activeSubCat,
   onSelectSubCat,
 }: SubCategoryPillsProps) {
-  // Filter subcategories according to the active main category
+  // Only show subcategories relevant to the current main category
+  // Exclude redundant 'all' chip since main category already represents all items
   const visibleSubCats = SUB_CATEGORIES.filter((sub) => {
-    if (sub.id === 'all') return true;
+    if (sub.id === 'all') return false;
     if (activeCat === 'snacks') return sub.catId === 'snacks';
     if (activeCat === 'drinks') return sub.catId === 'drinks';
-    return true; // if 'all' or 'fav', show all
+    return true; // Show all specific subcategories when 'all' is active
   });
 
-  if (visibleSubCats.length <= 1) return null;
+  if (visibleSubCats.length === 0 || activeCat === 'fav') return null;
 
   return (
-    <div className="w-full overflow-x-auto py-1 scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none]">
-      <div className="flex items-center gap-1.5 min-w-max px-0.5">
+    <div className="w-full overflow-x-auto py-0.5 no-scrollbar">
+      <div className="flex items-center gap-1.5 min-w-max">
         {visibleSubCats.map((sub: SubCategoryDef) => {
           const isActive = activeSubCat === sub.id;
           return (
             <button
               key={sub.id}
-              onClick={() => onSelectSubCat(sub.id)}
-              className={`inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-150 border cursor-pointer select-none active:scale-[0.98] ${
+              type="button"
+              onClick={() => onSelectSubCat(isActive ? 'all' : sub.id)}
+              className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-mono font-medium rounded-lg transition-colors border cursor-pointer select-none active:scale-[0.98] ${
                 isActive
                   ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
-                  : 'bg-[var(--bg-base)] text-[var(--tone-medium)] border-[var(--border-subtle)] hover:text-[var(--tone-strong)] hover:border-[var(--dark-32)] dark:hover:border-[var(--light-32)]'
+                  : 'bg-[var(--neutral-white)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:bg-[var(--bg-lift)]'
               }`}
             >
               <span>{sub.icon}</span>
