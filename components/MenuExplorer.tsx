@@ -443,7 +443,7 @@ export function MenuExplorer() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="shrink-0 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--tone-faint)] text-[var(--tone-strong)] text-xs font-mono font-medium hover:bg-[var(--dark-8)] active:scale-95 transition-colors cursor-pointer"
+                  className="shrink-0 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--tone-faint)] text-[var(--tone-strong)] text-xs font-mono font-medium hover:bg-[var(--bg-lift)] active:scale-95 transition-colors cursor-pointer"
                   title="সকল ফিল্টার রিসেট করুন"
                 >
                   <PiArrowCounterClockwiseLight className="text-xs" aria-hidden="true" />
@@ -487,7 +487,7 @@ export function MenuExplorer() {
               id="reset"
               type="button"
               onClick={handleReset}
-              className="mt-5 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--dark-8)] dark:bg-[var(--light-8)] text-[var(--tone-strong)] hover:bg-[var(--bg-lift)] active:scale-95 transition-all text-xs font-mono cursor-pointer"
+              className="mt-5 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--tone-faint)] text-[var(--tone-strong)] hover:bg-[var(--bg-lift)] active:scale-95 transition-colors text-xs font-mono cursor-pointer"
             >
               <PiArrowCounterClockwiseLight className="text-sm" aria-hidden="true" />
               <span>ফিল্টার রিসেট করুন</span>

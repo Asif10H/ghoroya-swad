@@ -35,13 +35,13 @@ export function BottomNav({
   return (
     <nav
       aria-label="মোবাইল অ্যাপ নেভিগেশন"
-      className="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-[var(--bg-base)]/90 dark:bg-[var(--neutral-950)]/90 backdrop-blur-[16px] border-t border-[var(--border-subtle)] pb-[env(safe-area-inset-bottom)] transition-colors"
+      className="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-[var(--bg-base)]/90 backdrop-blur-[16px] border-t border-[var(--border-subtle)] pb-[env(safe-area-inset-bottom)] transition-colors"
     >
       <div className="flex items-center justify-around h-15 px-2">
         <button
           type="button"
           onClick={() => handleTap('all')}
-          className={`flex-1 flex flex-col items-center justify-center py-1.5 transition-all active:scale-90 ${
+          className={`flex-1 flex flex-col items-center justify-center py-1.5 transition-colors active:scale-90 ${
             activeCat === 'all'
               ? 'text-[var(--tone-strong)] font-medium'
               : 'text-[var(--text-muted)] hover:text-[var(--tone-strong)]'
@@ -58,7 +58,7 @@ export function BottomNav({
         <button
           type="button"
           onClick={() => handleTap('snacks')}
-          className={`flex-1 flex flex-col items-center justify-center py-1.5 transition-all active:scale-90 ${
+          className={`flex-1 flex flex-col items-center justify-center py-1.5 transition-colors active:scale-90 ${
             activeCat === 'snacks'
               ? 'text-[var(--tone-strong)] font-medium'
               : 'text-[var(--text-muted)] hover:text-[var(--tone-strong)]'
@@ -75,7 +75,7 @@ export function BottomNav({
         <button
           type="button"
           onClick={() => handleTap('drinks')}
-          className={`flex-1 flex flex-col items-center justify-center py-1.5 transition-all active:scale-90 ${
+          className={`flex-1 flex flex-col items-center justify-center py-1.5 transition-colors active:scale-90 ${
             activeCat === 'drinks'
               ? 'text-[var(--tone-strong)] font-medium'
               : 'text-[var(--text-muted)] hover:text-[var(--tone-strong)]'
@@ -92,7 +92,7 @@ export function BottomNav({
         <button
           type="button"
           onClick={() => handleTap('tea_coffee')}
-          className={`flex-1 flex flex-col items-center justify-center py-1.5 transition-all active:scale-90 ${
+          className={`flex-1 flex flex-col items-center justify-center py-1.5 transition-colors active:scale-90 ${
             activeCat === 'tea_coffee'
               ? 'text-[var(--tone-strong)] font-medium'
               : 'text-[var(--text-muted)] hover:text-[var(--tone-strong)]'
@@ -109,7 +109,7 @@ export function BottomNav({
         <button
           type="button"
           onClick={() => handleTap('fav')}
-          className={`flex-1 flex flex-col items-center justify-center py-1.5 relative transition-all active:scale-90 ${
+          className={`flex-1 flex flex-col items-center justify-center py-1.5 relative transition-colors active:scale-90 ${
             activeCat === 'fav'
               ? 'text-[var(--tone-strong)] font-medium'
               : 'text-[var(--text-muted)] hover:text-[var(--tone-strong)]'
@@ -136,7 +136,7 @@ export function BottomNav({
 
         <a
           href="tel:01819759868"
-          className="flex-1 flex flex-col items-center justify-center py-1.5 text-[var(--text-muted)] hover:text-[var(--tone-strong)] transition-all active:scale-90"
+          className="flex-1 flex flex-col items-center justify-center py-1.5 text-[var(--text-muted)] hover:text-[var(--tone-strong)] transition-colors active:scale-90"
           aria-label="কল করুন"
         >
           <PiPhoneLight className="text-xl" aria-hidden="true" />

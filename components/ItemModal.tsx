@@ -118,7 +118,7 @@ export default function ItemModal({
   const handleShare = async () => {
     if (!item) return;
     const notePart = item.note ? ` (${item.note})` : '';
-    const text = `${item.name}${notePart} — ${toBn(item.price)} ৳ · ঘরোয়া স্বাদ রেস্টুরেন্ট, খাগড়াছড়ি`;
+    const text = `${item.name}${notePart} - ${toBn(item.price)} ৳ · ঘরোয়া স্বাদ রেস্টুরেন্ট, খাগড়াছড়ি`;
     const url = typeof window !== 'undefined' ? window.location.href : '';
 
     try {
@@ -408,7 +408,7 @@ export default function ItemModal({
                     <button
                       type="button"
                       onClick={() => removeItem(item.id)}
-                      className="w-8 h-8 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-8)] active:scale-95 transition-colors cursor-pointer"
+                      className="w-8 h-8 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
                       aria-label="কমান"
                     >
                       <PiMinusLight className="text-xs" aria-hidden="true" />
@@ -419,7 +419,7 @@ export default function ItemModal({
                     <button
                       type="button"
                       onClick={() => addItem(item)}
-                      className="w-8 h-8 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-8)] active:scale-95 transition-colors cursor-pointer"
+                      className="w-8 h-8 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
                       aria-label="বাড়ান"
                     >
                       <PiPlusLight className="text-xs" aria-hidden="true" />
@@ -493,7 +493,7 @@ function RelatedCard({ item, onOpen }: RelatedCardProps) {
       onClick={() => onOpen(item)}
       className="group text-left rounded-lg overflow-hidden bg-[var(--bg-base)] border border-[var(--border-subtle)] hover:border-[var(--tone-strong)] active:scale-95 transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] cursor-pointer"
     >
-      <div className={`aspect-[4/3] relative overflow-hidden bg-[var(--neutral-100)] ${isLoaded ? '' : 'animate-pulse bg-neutral-200 dark:bg-neutral-800'}`}>
+      <div className={`aspect-[4/3] relative overflow-hidden bg-[var(--neutral-100)] ${isLoaded ? '' : 'animate-pulse bg-[var(--bg-lift)]'}`}>
         <img
           src={src}
           alt={item.name}

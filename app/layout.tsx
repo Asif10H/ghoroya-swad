@@ -25,7 +25,7 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const metadata: Metadata = {
-  title: "ঘরোয়া স্বাদ রেস্টুরেন্ট — ডিজিটাল মেনু",
+  title: "ঘরোয়া স্বাদ রেস্টুরেন্ট - ডিজিটাল মেনু",
   description: "মহিলা কলেজ রোড, খাগড়াছড়ি সদর। ঘরে তৈরি খাঁটি স্ন্যাকস, জুস, পাস্তা ও ডিনার ডিজিটাল মেনু।",
   manifest: "/manifest.json",
   appleWebApp: {
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
-    title: "ঘরোয়া স্বাদ রেস্টুরেন্ট — ডিজিটাল মেনু",
+    title: "ঘরোয়া স্বাদ রেস্টুরেন্ট - ডিজিটাল মেনু",
     description: "মহিলা কলেজ রোড, খাগড়াছড়ি সদর। ঘরে তৈরি খাঁটি স্ন্যাকস, জুস, পাস্তা ও ডিনার ডিজিটাল মেনু।",
     type: "website",
     locale: "bn_BD",

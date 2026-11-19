@@ -98,7 +98,7 @@ export function InstallPrompt() {
 
   return (
     <div className="fixed bottom-20 sm:bottom-6 left-3 right-3 sm:left-auto sm:right-6 sm:max-w-md z-50">
-      <div className="rounded-[10px] bg-[var(--neutral-white)] border border-[var(--border-subtle)] p-3 sm:p-4 backdrop-blur-[16px] flex items-center justify-between gap-3 transition-all">
+      <div className="rounded-[10px] bg-[var(--neutral-white)] border border-[var(--border-subtle)] p-3 sm:p-4 backdrop-blur-[16px] flex items-center justify-between gap-3 transition-colors">
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="h-10 w-10 shrink-0 rounded-[8px] bg-[var(--tone-strong)] text-[var(--bg-base)] flex items-center justify-center text-lg">
             {isIos ? (
@@ -124,7 +124,7 @@ export function InstallPrompt() {
             <button
               type="button"
               onClick={handleInstallClick}
-              className="px-3 py-1.5 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] text-xs font-mono font-medium hover:opacity-90 active:scale-95 transition-all cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] text-xs font-mono font-medium hover:opacity-90 active:scale-95 transition-colors cursor-pointer"
             >
               ইনস্টল
             </button>
@@ -132,7 +132,7 @@ export function InstallPrompt() {
           <button
             type="button"
             onClick={handleDismiss}
-            className="h-8 w-8 rounded-lg text-[var(--text-muted)] hover:text-[var(--tone-strong)] hover:bg-[var(--bg-lift)] flex items-center justify-center transition-all cursor-pointer"
+            className="h-8 w-8 rounded-lg text-[var(--text-muted)] hover:text-[var(--tone-strong)] hover:bg-[var(--bg-lift)] flex items-center justify-center transition-colors cursor-pointer"
             aria-label="বন্ধ করুন"
           >
             <PiXLight className="text-sm" aria-hidden="true" />

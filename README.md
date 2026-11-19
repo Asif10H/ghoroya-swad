@@ -1,4 +1,4 @@
-# ঘরোয়া স্বাদ রেস্টুরেন্ট — ডিজিটাল মেনু (Ghoroya Swad Restaurant)
+# ঘরোয়া স্বাদ রেস্টুরেন্ট - ডিজিটাল মেনু (Ghoroya Swad Restaurant)
 
 একটি আধুনিক, মিনিমালিস্ট এবং এডিটোরিয়াল ডিজাইনের রেস্টুরেন্ট ডিজিটাল মেনু ওয়েব অ্যাপ্লিকেশন। Next.js 16 App Router, React 19, TypeScript, Tailwind CSS v4 এবং Phosphor Icons (`react-icons/pi`) দিয়ে নির্মিত।
 
@@ -48,17 +48,21 @@
 ## লোকাল ডেভেলপমেন্ট সেটআপ (Getting Started)
 
 ### ১. ডিপেন্ডেন্সি ইনস্টল করুন
+
 ```bash
 npm install
 ```
 
 ### ২. ডেভেলপমেন্ট সার্ভার চালু করুন
+
 ```bash
 npm run dev
 ```
+
 ব্রাউজারে [http://localhost:3000](http://localhost:3000) ওপেন করুন।
 
 ### ৩. প্রোডাকশন বিল্ড তৈরি করুন
+
 ```bash
 npm run build
 npm start

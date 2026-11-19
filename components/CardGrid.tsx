@@ -60,12 +60,12 @@ export default function CardGrid({
         }
       }}
       style={animStyle}
-      className="group cursor-pointer rounded-[10px] overflow-hidden bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] dark:hover:border-[var(--light-32)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2 flex flex-col justify-between"
+      className="group cursor-pointer rounded-[10px] overflow-hidden bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:border-[var(--tone-medium)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2 flex flex-col justify-between"
     >
       <div>
         <div
           className={`relative aspect-[4/3] overflow-hidden ${
-            isLoaded ? '' : 'animate-pulse bg-neutral-200 dark:bg-neutral-800'
+            isLoaded ? '' : 'animate-pulse bg-[var(--bg-lift)]'
           }`}
         >
           <img
@@ -142,7 +142,7 @@ export default function CardGrid({
               <button
                 type="button"
                 onClick={() => removeItem(item.id)}
-                className="w-6 h-6 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-16)] dark:hover:bg-[var(--light-16)] active:scale-95 transition-colors cursor-pointer"
+                className="w-6 h-6 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
                 aria-label="কমান"
               >
                 <PiMinusLight className="text-[10px]" />
@@ -153,7 +153,7 @@ export default function CardGrid({
               <button
                 type="button"
                 onClick={() => addItem(item)}
-                className="w-6 h-6 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-16)] dark:hover:bg-[var(--light-16)] active:scale-95 transition-colors cursor-pointer"
+                className="w-6 h-6 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
                 aria-label="বাড়ান"
               >
                 <PiPlusLight className="text-[10px]" />

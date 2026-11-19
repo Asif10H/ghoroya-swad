@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { PiBowlFoodLight, PiPhoneLight, PiSunLight, PiMoonLight } from 'react-icons/pi';
+import { PiBowlFoodLight, PiPhoneLight, PiSun, PiMoon } from 'react-icons/pi';
 
 export interface HeaderProps {
   className?: string;
@@ -61,17 +61,18 @@ export function Header({ className = '' }: HeaderProps) {
   }, []);
 
   const toggleTheme = () => {
-    const next = !document.documentElement.classList.contains('dark');
+    const isCurrentlyDark = document.documentElement.classList.contains('dark');
+    const next = !isCurrentlyDark;
+    if (next) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
     setIsDark(next);
     try {
       localStorage.setItem('gs-dark', String(next));
     } catch {
       // ignore storage access errors
-    }
-    if (next) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
     }
   };
 
@@ -100,13 +101,21 @@ export function Header({ className = '' }: HeaderProps) {
           <button
             type="button"
             onClick={toggleTheme}
-            className="inline-flex items-center justify-center h-9 w-9 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-[var(--tone-strong)] backdrop-blur-md hover:bg-[var(--bg-lift)] active:scale-95 transition-all cursor-pointer"
-            aria-label="থিম বদলান"
+            className="inline-flex items-center justify-center h-9 w-9 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-[var(--tone-strong)] backdrop-blur-md hover:bg-[var(--bg-lift)] active:scale-95 transition-colors cursor-pointer"
+            aria-label="থিম পরিবর্তন করুন"
+            title={mounted ? (isDark ? 'লাইট মোডে যান' : 'ডার্ক মোডে যান') : 'থিম পরিবর্তন'}
           >
-            {mounted && isDark ? (
-              <PiSunLight className="text-base" aria-hidden="true" />
+            {mounted ? (
+              isDark ? (
+                <PiSun className="text-lg text-[var(--tone-strong)]" aria-hidden="true" />
+              ) : (
+                <PiMoon className="text-lg text-[var(--tone-strong)]" aria-hidden="true" />
+              )
             ) : (
-              <PiMoonLight className="text-base" aria-hidden="true" />
+              <>
+                <PiSun className="hidden dark:block text-lg text-[var(--tone-strong)]" aria-hidden="true" />
+                <PiMoon className="block dark:hidden text-lg text-[var(--tone-strong)]" aria-hidden="true" />
+              </>
             )}
           </button>
         </div>
