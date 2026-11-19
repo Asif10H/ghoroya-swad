@@ -46,7 +46,7 @@ export default function CardList({
         }
       }}
       style={animStyle}
-      className="group cursor-pointer flex items-center gap-3 sm:gap-4 rounded-[10px] p-2.5 sm:p-3 bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:bg-[var(--bg-lift)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
+      className="group cursor-pointer flex items-center gap-3 sm:gap-4 rounded-[10px] p-2.5 sm:p-3 bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:bg-[var(--bg-lift)] hover:border-[var(--dark-32)] dark:hover:border-[var(--light-32)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
     >
       <div
         className={`relative h-18 w-18 sm:h-24 sm:w-24 shrink-0 rounded-[8px] overflow-hidden ${

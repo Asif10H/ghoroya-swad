@@ -401,7 +401,7 @@ function RelatedCard({ item, onOpen }: RelatedCardProps) {
       type="button"
       data-rel={item.id}
       onClick={() => onOpen(item)}
-      className="group text-left rounded-[8px] overflow-hidden bg-[var(--bg-base)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)]"
+      className="group text-left rounded-[8px] overflow-hidden bg-[var(--bg-base)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] dark:hover:border-[var(--light-32)] active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)]"
     >
       <div className={`aspect-[4/3] relative overflow-hidden bg-[var(--neutral-100)] ${isLoaded ? '' : 'animate-pulse bg-neutral-200 dark:bg-neutral-800'}`}>
         <img

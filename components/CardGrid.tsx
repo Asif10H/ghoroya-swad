@@ -51,7 +51,7 @@ export default function CardGrid({
         }
       }}
       style={animStyle}
-      className="group cursor-pointer rounded-[10px] overflow-hidden bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
+      className="group cursor-pointer rounded-[10px] overflow-hidden bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] dark:hover:border-[var(--light-32)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
     >
       <div
         className={`relative aspect-[4/3] overflow-hidden ${

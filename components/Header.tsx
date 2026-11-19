@@ -13,26 +13,55 @@ export function Header({ className = '' }: HeaderProps) {
 
   useEffect(() => {
     setMounted(true);
-    try {
-      const saved = localStorage.getItem('gs-dark');
-      const prefersDark =
-        typeof window !== 'undefined' &&
-        window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const dark = saved !== null ? saved === 'true' : Boolean(prefersDark);
-      setIsDark(dark);
-      if (dark) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
+    const hasDark = document.documentElement.classList.contains('dark');
+    setIsDark(hasDark);
+
+    // Sync across tabs
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'gs-dark' && e.newValue !== null) {
+        const dark = e.newValue === 'true';
+        setIsDark(dark);
+        if (dark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
       }
-    } catch {
-      // ignore storage access errors
+    };
+
+    // Sync with OS preference if user hasn't explicitly set a preference
+    const mq = typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      try {
+        const saved = localStorage.getItem('gs-dark');
+        if (saved === null) {
+          setIsDark(e.matches);
+          if (e.matches) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        }
+      } catch {
+        // ignore storage errors
+      }
+    };
+
+    window.addEventListener('storage', handleStorage);
+    if (mq && mq.addEventListener) {
+      mq.addEventListener('change', handleMediaChange);
     }
+
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      if (mq && mq.removeEventListener) {
+        mq.removeEventListener('change', handleMediaChange);
+      }
+    };
   }, []);
 
   const toggleTheme = () => {
-    const next = !isDark;
+    const next = !document.documentElement.classList.contains('dark');
     setIsDark(next);
     try {
       localStorage.setItem('gs-dark', String(next));

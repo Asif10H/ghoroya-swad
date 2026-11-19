@@ -206,7 +206,7 @@ export function MenuExplorer() {
     <>
       {/* Sticky Controls Bar */}
       <div id="menuTop" />
-      <div className="sticky top-0 z-30 bg-[var(--bg-base)]/95 backdrop-blur-[16px] border-b border-[var(--border-subtle)]">
+      <div className="sticky top-0 z-30 bg-[var(--bg-base)]/95 backdrop-blur-[16px] border-b border-[var(--border-subtle)] transition-colors">
         <div className="max-w-6xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3 space-y-2.5 sm:space-y-3">
           {/* Search input */}
           <div className="relative">
@@ -222,14 +222,14 @@ export function MenuExplorer() {
               placeholder="আইটেম খুঁজুন… (যেমন: লাচ্ছি, মোমো, কফি)"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full rounded-[8px] border border-[var(--border-subtle)] bg-[var(--neutral-white)] pl-10 pr-10 py-2 sm:py-2.5 text-base sm:text-sm text-[var(--tone-strong)] placeholder-[var(--neutral-400)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] focus:outline-offset-2 transition-colors"
+              className="w-full rounded-[8px] border border-[var(--border-subtle)] bg-[var(--neutral-white)] pl-10 pr-10 py-2 sm:py-2.5 text-base sm:text-sm text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] focus:outline-offset-2 transition-colors"
             />
             {query ? (
               <button
                 id="clear"
                 type="button"
                 onClick={() => setQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 h-7 w-7 rounded-[8px] bg-[var(--tone-faint)] text-xs text-[var(--tone-strong)] grid place-items-center active:scale-95"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 h-7 w-7 rounded-[8px] bg-[var(--tone-faint)] text-xs text-[var(--tone-strong)] grid place-items-center active:scale-95 transition-colors"
                 aria-label="মুছুন"
               >
                 <PiXLight className="text-xs" aria-hidden="true" />
@@ -308,11 +308,11 @@ export function MenuExplorer() {
               id="sort"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="shrink-0 rounded-[8px] border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-xs font-mono text-[var(--tone-strong)] px-2.5 sm:px-3 py-1 sm:py-1.5 outline-none focus:outline-2 focus:outline-[var(--tone-strong)] focus:outline-offset-2"
+              className="shrink-0 rounded-[8px] border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-xs font-mono text-[var(--tone-strong)] px-2.5 sm:px-3 py-1 sm:py-1.5 outline-none focus:outline-2 focus:outline-[var(--tone-strong)] focus:outline-offset-2 transition-colors cursor-pointer"
             >
-              <option value="default">↕ ডিফল্ট ক্রম</option>
-              <option value="asc">দাম: কম → বেশি</option>
-              <option value="desc">দাম: বেশি → কম</option>
+              <option value="default" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">↕ ডিফল্ট ক্রম</option>
+              <option value="asc" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">দাম: কম → বেশি</option>
+              <option value="desc" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">দাম: বেশি → কম</option>
             </select>
 
             <div className="shrink-0 flex rounded-[8px] border border-[var(--border-subtle)] bg-[var(--neutral-white)] p-0.5">

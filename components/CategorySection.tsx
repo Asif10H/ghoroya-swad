@@ -44,7 +44,7 @@ export default function CategorySection({
       id={`sec-${category.id}`}
       className={`scroll-mt-48 ${className}`.trim()}
     >
-      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-[var(--border-subtle)]">
+      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-[var(--border-subtle)] transition-colors">
         {category.id === 'snacks' ? (
           <PiHamburgerLight className="text-xl text-[var(--tone-strong)] shrink-0" aria-hidden="true" />
         ) : category.id === 'drinks' ? (

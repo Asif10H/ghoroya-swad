@@ -14,7 +14,7 @@ export function HighlightStats({
 }: HighlightStatsProps) {
   return (
     <section
-      className="border-b border-[var(--border-subtle)] bg-[var(--neutral-white)] py-6 sm:py-10"
+      className="border-b border-[var(--border-subtle)] bg-[var(--neutral-white)] py-6 sm:py-10 transition-colors"
       aria-label="রেস্টুরেন্ট পরিসংখ্যান"
     >
       <div className="max-w-6xl mx-auto px-3 sm:px-4 grid grid-cols-3 gap-2 sm:gap-4 text-center">

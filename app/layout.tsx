@@ -42,7 +42,7 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const themeInitScript = `(function(){try{var s=localStorage.getItem('gs-dark');var p=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='true'||(s===null&&p)){document.documentElement.classList.add('dark');}}catch(e){}})();`;
+const themeInitScript = `(function(){try{var s=localStorage.getItem('gs-dark');var p=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='true'||(s===null&&p)){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`;
 const themeScriptObj = { dangerouslySetInnerHTML: { __html: themeInitScript } };
 
 export default function RootLayout({
