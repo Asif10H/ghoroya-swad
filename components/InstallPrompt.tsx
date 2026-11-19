@@ -124,7 +124,7 @@ export function InstallPrompt() {
             <button
               type="button"
               onClick={handleInstallClick}
-              className="px-3 py-1.5 rounded-[8px] bg-[var(--tone-strong)] text-[var(--bg-base)] text-xs font-mono font-medium hover:opacity-90 active:scale-95 transition-all cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] text-xs font-mono font-medium hover:opacity-90 active:scale-95 transition-all cursor-pointer"
             >
               ইনস্টল
             </button>
@@ -132,7 +132,7 @@ export function InstallPrompt() {
           <button
             type="button"
             onClick={handleDismiss}
-            className="h-8 w-8 rounded-[8px] text-[var(--text-muted)] hover:text-[var(--tone-strong)] hover:bg-[var(--bg-lift)] flex items-center justify-center transition-all cursor-pointer"
+            className="h-8 w-8 rounded-lg text-[var(--text-muted)] hover:text-[var(--tone-strong)] hover:bg-[var(--bg-lift)] flex items-center justify-center transition-all cursor-pointer"
             aria-label="বন্ধ করুন"
           >
             <PiXLight className="text-sm" aria-hidden="true" />

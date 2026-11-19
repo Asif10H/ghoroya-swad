@@ -71,14 +71,14 @@ export function Hero({ hideHeader = true }: HeroProps) {
           <div className="mt-5 sm:mt-6 flex flex-row justify-center items-center gap-2.5 sm:gap-3 max-w-xs sm:max-w-none mx-auto">
             <a
               href="#menuTop"
-              className="inline-flex items-center justify-center gap-2 h-10 px-5 sm:px-6 rounded-full bg-white text-[#151515] font-mono text-xs font-medium hover:bg-neutral-200 active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 h-10 px-5 sm:px-6 rounded-lg bg-white text-[#151515] font-mono text-xs font-medium hover:bg-neutral-200 active:scale-95 transition-all cursor-pointer"
             >
               <span>মেনু দেখুন</span>
               <PiArrowDownLight className="text-sm" aria-hidden="true" />
             </a>
             <a
               href="tel:01819759868"
-              className="inline-flex items-center justify-center gap-2 h-10 px-5 sm:px-6 rounded-full bg-white/10 border border-white/15 text-white backdrop-blur-[16px] hover:bg-white/20 active:scale-95 transition-all text-xs font-mono cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 h-10 px-5 sm:px-6 rounded-lg bg-white/10 border border-white/15 text-white backdrop-blur-[16px] hover:bg-white/20 active:scale-95 transition-all text-xs font-mono cursor-pointer"
             >
               <PiPhoneLight className="text-base" aria-hidden="true" />
               <span>কল করুন</span>

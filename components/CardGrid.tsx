@@ -111,7 +111,7 @@ export default function CardGrid({
               e.stopPropagation();
               onToggleFav(item.id, e);
             }}
-            className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 h-8 w-8 sm:h-8 sm:w-8 rounded-[8px] bg-black/40 hover:bg-black/60 active:scale-90 backdrop-blur-[16px] text-white grid place-items-center border border-[var(--light-16)] transition-colors"
+            className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 h-8 w-8 sm:h-8 sm:w-8 rounded-lg bg-black/40 hover:bg-black/60 active:scale-90 backdrop-blur-[16px] text-white grid place-items-center border border-[var(--light-16)] transition-colors"
           >
             {isFav ? (
               <PiHeartFill className="text-base text-white" aria-hidden="true" />

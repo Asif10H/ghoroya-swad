@@ -346,7 +346,7 @@ export function MenuExplorer() {
                 id="vGrid"
                 type="button"
                 onClick={() => handleSetViewMode('grid')}
-                className={`rounded-md px-2.5 py-1 text-xs font-mono transition-colors inline-flex items-center justify-center cursor-pointer ${
+                className={`rounded-lg px-2.5 py-1 text-xs font-mono transition-colors inline-flex items-center justify-center cursor-pointer ${
                   viewMode === 'grid'
                     ? 'bg-[var(--tone-strong)] text-[var(--bg-base)]'
                     : 'text-[var(--tone-strong)] hover:bg-[var(--bg-lift)]'
@@ -359,7 +359,7 @@ export function MenuExplorer() {
                 id="vList"
                 type="button"
                 onClick={() => handleSetViewMode('list')}
-                className={`rounded-md px-2.5 py-1 text-xs font-mono transition-colors inline-flex items-center justify-center cursor-pointer ${
+                className={`rounded-lg px-2.5 py-1 text-xs font-mono transition-colors inline-flex items-center justify-center cursor-pointer ${
                   viewMode === 'list'
                     ? 'bg-[var(--tone-strong)] text-[var(--bg-base)]'
                     : 'text-[var(--tone-strong)] hover:bg-[var(--bg-lift)]'

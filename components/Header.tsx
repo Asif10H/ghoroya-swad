@@ -90,7 +90,7 @@ export function Header({ className = '' }: HeaderProps) {
         <div className="flex items-center gap-2 sm:gap-3">
           <a
             href="tel:01819759868"
-            className="inline-flex items-center justify-center gap-1.5 h-9 px-2.5 sm:px-3 rounded-[8px] border border-white/15 bg-white/10 text-neutral-100 backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-xs font-mono cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 h-9 px-2.5 sm:px-3 rounded-lg border border-white/15 bg-white/10 text-neutral-100 backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-xs font-mono cursor-pointer"
             aria-label="ফোন করুন"
           >
             <PiPhoneLight className="text-base sm:text-sm" aria-hidden="true" />
@@ -100,7 +100,7 @@ export function Header({ className = '' }: HeaderProps) {
           <button
             type="button"
             onClick={toggleTheme}
-            className="inline-flex items-center justify-center h-9 w-9 rounded-[8px] border border-white/15 bg-white/10 text-neutral-100 backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center justify-center h-9 w-9 rounded-lg border border-white/15 bg-white/10 text-neutral-100 backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all cursor-pointer"
             aria-label="থিম বদলান"
           >
             {mounted && isDark ? (

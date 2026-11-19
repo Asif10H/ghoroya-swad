@@ -200,7 +200,7 @@ export default function ItemModal({
             id="prev"
             type="button"
             onClick={handlePrev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95"
+            className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-lg bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95 transition-colors cursor-pointer"
             aria-label="আগের ছবি"
           >
             <PiCaretLeftLight className="text-lg" aria-hidden="true" />
@@ -209,7 +209,7 @@ export default function ItemModal({
             id="next"
             type="button"
             onClick={handleNext}
-            className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95"
+            className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-lg bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95 transition-colors cursor-pointer"
             aria-label="পরের ছবি"
           >
             <PiCaretRightLight className="text-lg" aria-hidden="true" />
@@ -218,7 +218,7 @@ export default function ItemModal({
             id="close"
             type="button"
             onClick={onClose}
-            className="absolute right-3 top-3 h-9 w-9 sm:h-8 sm:w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95 z-20"
+            className="absolute right-3 top-3 h-9 w-9 sm:h-8 sm:w-8 rounded-lg bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95 z-20 transition-colors cursor-pointer"
             aria-label="বন্ধ করুন"
           >
             <PiXLight className="text-base" aria-hidden="true" />
@@ -242,7 +242,7 @@ export default function ItemModal({
                 key={i}
                 type="button"
                 onClick={() => handleSelectThumb(i)}
-                className={`h-14 w-18 sm:h-16 sm:w-20 shrink-0 rounded-[8px] overflow-hidden border-2 transition-all ${
+                className={`h-14 w-18 sm:h-16 sm:w-20 shrink-0 rounded-lg overflow-hidden border-2 transition-colors cursor-pointer ${
                   activeIdx === i
                     ? 'border-[var(--tone-strong)] opacity-100 ring-2 ring-[var(--tone-strong)]/20'
                     : 'border-[var(--border-subtle)] opacity-70 hover:opacity-100'
@@ -456,7 +456,7 @@ function RelatedCard({ item, onOpen }: RelatedCardProps) {
       type="button"
       data-rel={item.id}
       onClick={() => onOpen(item)}
-      className="group text-left rounded-[8px] overflow-hidden bg-[var(--bg-base)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] dark:hover:border-[var(--light-32)] active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)]"
+      className="group text-left rounded-lg overflow-hidden bg-[var(--bg-base)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] dark:hover:border-[var(--light-32)] active:scale-95 transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] cursor-pointer"
     >
       <div className={`aspect-[4/3] relative overflow-hidden bg-[var(--neutral-100)] ${isLoaded ? '' : 'animate-pulse bg-neutral-200 dark:bg-neutral-800'}`}>
         <img
