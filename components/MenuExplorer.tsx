@@ -277,7 +277,7 @@ export function MenuExplorer() {
                 placeholder="আইটেম খুঁজুন… (যেমন: লাচ্ছি, মোমো, কফি)"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="w-full h-10 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] pl-10 pr-9 text-xs sm:text-sm text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] transition-colors font-sans"
+                className="w-full h-10 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] pl-10 pr-9 text-[16px] sm:text-sm text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] transition-colors font-sans"
               />
               {query ? (
                 <button

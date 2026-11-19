@@ -295,7 +295,7 @@ export default function OrderTray() {
                     placeholder="নাম লিখুন (যেমন: আসিফ)"
                     aria-invalid={nameError}
                     aria-describedby={nameError ? 'name-error-msg' : undefined}
-                    className={`w-full h-9 px-3 rounded-lg border bg-[var(--bg-base)] text-xs text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none transition-colors font-sans ${
+                    className={`w-full h-10 px-3 rounded-lg border bg-[var(--bg-base)] text-[16px] sm:text-xs text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none transition-colors font-sans ${
                       nameError
                         ? 'border-[var(--tone-strong)] ring-1 ring-[var(--tone-strong)]'
                         : 'border-[var(--border-subtle)] focus:outline-2 focus:outline-[var(--tone-strong)]'
@@ -317,7 +317,7 @@ export default function OrderTray() {
                     value={tableOrAddress}
                     onChange={(e) => handleTableChange(e.target.value)}
                     placeholder="টেবিল নং / বাসা (ঐচ্ছিক)"
-                    className="w-full h-9 px-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-base)] text-xs text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] font-sans transition-colors"
+                    className="w-full h-10 px-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-base)] text-[16px] sm:text-xs text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] font-sans transition-colors"
                   />
                 </div>
               </div>
