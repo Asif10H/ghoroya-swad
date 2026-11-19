@@ -38,8 +38,8 @@ export function Hero({ hideHeader = true }: HeroProps) {
         {!hideHeader && <Header />}
 
         {/* Hero Content */}
-        <div className="text-center mt-4 sm:mt-10 max-w-3xl mx-auto pop">
-          <p className="eyebrow text-[var(--neutral-400)] tracking-widest text-[11px] sm:text-xs">
+        <div className="text-center mt-4 sm:mt-10 max-w-3xl mx-auto">
+          <p className="font-mono uppercase tracking-[0.08em] text-[var(--neutral-400)] text-[11px] sm:text-xs">
             ঘরের স্বাদ · মনের মতো
           </p>
           <h1 className="h2 font-heading font-medium text-3xl sm:text-5xl mt-2.5 sm:mt-3 text-white tracking-tight leading-tight">
@@ -69,11 +69,17 @@ export function Hero({ hideHeader = true }: HeroProps) {
 
           {/* Primary & Secondary CTAs */}
           <div className="mt-6 sm:mt-8 flex flex-col xs:flex-row sm:flex-row justify-center items-stretch sm:items-center gap-2.5 sm:gap-3 max-w-xs sm:max-w-none mx-auto">
-            <a href="#menuTop" className="btn btn--primary btn--pill h-11 sm:h-10 inline-flex items-center justify-center gap-2">
+            <a
+              href="#menuTop"
+              className="inline-flex items-center justify-center gap-2 h-11 sm:h-10 px-6 rounded-full bg-white text-[#151515] font-mono text-xs font-medium hover:bg-neutral-200 active:scale-95 transition-all cursor-pointer"
+            >
               <span>মেনু দেখুন</span>
               <PiArrowDownLight className="text-sm" aria-hidden="true" />
             </a>
-            <a href="tel:01819759868" className="btn btn--glass btn--pill h-11 sm:h-10 inline-flex items-center justify-center gap-2">
+            <a
+              href="tel:01819759868"
+              className="inline-flex items-center justify-center gap-2 h-11 sm:h-10 px-6 rounded-full bg-white/10 border border-white/15 text-white backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-xs font-mono cursor-pointer"
+            >
               <PiPhoneLight className="text-base" aria-hidden="true" />
               <span>কল করুন</span>
             </a>

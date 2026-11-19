@@ -9,10 +9,10 @@ export function Footer() {
   return (
     <footer className="bg-[#151515] text-[var(--light-100)] border-t border-[var(--border-subtle)] pb-[env(safe-area-inset-bottom)]">
       <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16 text-center space-y-4 sm:space-y-5">
-        <h2 className="h4 font-heading font-medium text-xl sm:text-2xl text-[var(--light-100)]">
+        <h2 className="font-heading font-medium text-xl sm:text-2xl text-[var(--light-100)]">
           ঘরোয়া স্বাদ রেস্টুরেন্ট
         </h2>
-        <p className="body-md text-xs sm:text-sm text-[var(--neutral-400)] max-w-md mx-auto flex items-center justify-center gap-1.5">
+        <p className="text-xs sm:text-sm text-[var(--neutral-400)] max-w-md mx-auto flex items-center justify-center gap-1.5">
           <PiMapPinLight className="text-base shrink-0" aria-hidden="true" />
           <span>মহিলা কলেজ রোড, পাসপোর্ট অফিস সংলগ্ন, খাগড়াছড়ি সদর</span>
         </p>
@@ -22,11 +22,17 @@ export function Footer() {
           </p>
         ) : null}
         <div className="flex flex-col xs:flex-row sm:flex-row flex-wrap justify-center gap-2.5 sm:gap-3 pt-2 max-w-xs sm:max-w-none mx-auto">
-          <a href="tel:01819759868" className="btn btn--glass btn--sm h-10 inline-flex items-center justify-center gap-1.5 active:scale-95">
+          <a
+            href="tel:01819759868"
+            className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-[8px] border border-white/15 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-xs font-mono cursor-pointer"
+          >
             <PiPhoneLight className="text-sm" aria-hidden="true" />
             <span>০১৮১৯-৭৫৯৮৬৮</span>
           </a>
-          <a href="tel:01577773404" className="btn btn--glass btn--sm h-10 inline-flex items-center justify-center gap-1.5 active:scale-95">
+          <a
+            href="tel:01577773404"
+            className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-[8px] border border-white/15 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-xs font-mono cursor-pointer"
+          >
             <PiPhoneLight className="text-sm" aria-hidden="true" />
             <span>০১৫৭৭-৭৭৩৪০৪</span>
           </a>
@@ -34,7 +40,7 @@ export function Footer() {
             href="https://www.google.com/maps/search/?api=1&query=Mohila+College+Road+Khagrachari+Sadar"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn--glass btn--sm h-10 inline-flex items-center justify-center gap-1.5 active:scale-95"
+            className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-[8px] border border-white/15 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-xs font-mono cursor-pointer"
           >
             <PiMapTrifoldLight className="text-sm" aria-hidden="true" />
             <span>ম্যাপে দেখুন</span>

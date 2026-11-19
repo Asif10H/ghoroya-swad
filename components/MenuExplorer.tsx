@@ -247,8 +247,10 @@ export function MenuExplorer() {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveCat(tab.id)}
-                className={`pill-btn shrink-0 inline-flex items-center gap-1.5 py-1.5 px-3.5 sm:px-4 text-xs font-mono active:scale-95 transition-transform ${
-                  activeCat === tab.id ? 'active' : ''
+                className={`shrink-0 inline-flex items-center gap-1.5 py-1.5 px-3.5 sm:px-4 rounded-full border text-xs font-mono font-medium transition-all active:scale-95 cursor-pointer ${
+                  activeCat === tab.id
+                    ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
+                    : 'bg-[var(--neutral-white)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:bg-[var(--bg-lift)]'
                 }`}
               >
                 {tab.icon}
@@ -265,7 +267,11 @@ export function MenuExplorer() {
                   key={p.id}
                   type="button"
                   onClick={() => setPriceFilter(p.id)}
-                  className={`pill-btn py-1 px-3 text-xs font-mono active:scale-95 transition-transform ${priceFilter === p.id ? 'active' : ''}`}
+                  className={`shrink-0 inline-flex items-center justify-center py-1 px-3 rounded-full border text-xs font-mono font-medium transition-all active:scale-95 cursor-pointer ${
+                    priceFilter === p.id
+                      ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
+                      : 'bg-[var(--neutral-white)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:bg-[var(--bg-lift)]'
+                  }`}
                 >
                   {p.label}
                 </button>
@@ -283,7 +289,11 @@ export function MenuExplorer() {
                       onClick={() =>
                         setTagFilter((prev) => (prev === k ? 'all' : k))
                       }
-                      className={`pill-btn py-1 px-3 text-xs font-mono active:scale-95 transition-transform ${tagFilter === k ? 'active' : ''}`}
+                      className={`shrink-0 inline-flex items-center justify-center py-1 px-3 rounded-full border text-xs font-mono font-medium transition-all active:scale-95 cursor-pointer ${
+                        tagFilter === k
+                          ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
+                          : 'bg-[var(--neutral-white)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:bg-[var(--bg-lift)]'
+                      }`}
                     >
                       {TAGS[k]?.label || k}
                     </button>
@@ -364,10 +374,10 @@ export function MenuExplorer() {
         ) : (
           <div id="empty" className="text-center py-24">
             <PiBowlFoodLight className="text-5xl mx-auto opacity-30 text-[var(--tone-strong)]" aria-hidden="true" />
-            <h3 className="h4 font-heading font-medium mt-4 text-[var(--tone-strong)]">
+            <h3 className="font-heading font-medium text-xl mt-4 text-[var(--tone-strong)]">
               কোনো আইটেম পাওয়া যায়নি
             </h3>
-            <p id="emptyMsg" className="mt-1 body-md text-[var(--text-muted)]">
+            <p id="emptyMsg" className="mt-1 text-sm text-[var(--text-muted)]">
               {activeCat === 'fav'
                 ? 'এখনো কোনো পছন্দের আইটেম নেই। কার্ডের হার্ট আইকন চাপুন।'
                 : 'অন্য কোনো নাম বা ফিল্টার দিয়ে চেষ্টা করুন'}
@@ -376,7 +386,7 @@ export function MenuExplorer() {
               id="reset"
               type="button"
               onClick={handleReset}
-              className="btn btn--secondary mt-5 inline-flex items-center gap-1.5"
+              className="mt-5 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-[8px] border border-[var(--border-subtle)] bg-[var(--dark-8)] dark:bg-[var(--light-8)] text-[var(--tone-strong)] hover:bg-[var(--bg-lift)] active:scale-95 transition-all text-xs font-mono cursor-pointer"
             >
               <PiArrowCounterClockwiseLight className="text-sm" aria-hidden="true" />
               <span>ফিল্টার রিসেট করুন</span>

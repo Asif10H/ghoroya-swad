@@ -51,11 +51,11 @@ export default function CardGrid({
         }
       }}
       style={animStyle}
-      className="pop group cursor-pointer rounded-[10px] overflow-hidden bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
+      className="group cursor-pointer rounded-[10px] overflow-hidden bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
     >
       <div
         className={`relative aspect-[4/3] overflow-hidden ${
-          isLoaded ? '' : 'shimmer'
+          isLoaded ? '' : 'animate-pulse bg-neutral-200 dark:bg-neutral-800'
         }`}
       >
         <img
@@ -77,7 +77,10 @@ export default function CardGrid({
           <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 flex flex-col items-start gap-1 pointer-events-none">
             {item.tags.map((t) =>
               TAGS[t] ? (
-                <span key={t} className="tag tag--glass text-[9px] sm:text-xs py-0.5 px-1.5 sm:px-2">
+                <span
+                  key={t}
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] sm:text-xs font-mono uppercase tracking-wider bg-white/20 text-white border border-white/25 backdrop-blur-md"
+                >
                   {TAGS[t].label}
                 </span>
               ) : null

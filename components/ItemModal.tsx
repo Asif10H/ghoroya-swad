@@ -160,7 +160,7 @@ export default function ItemModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="pop bg-[var(--neutral-white)] text-[var(--tone-strong)] w-full sm:max-w-xl rounded-t-[16px] sm:rounded-[10px] overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col border border-[var(--border-subtle)] pb-[env(safe-area-inset-bottom)]"
+        className="bg-[var(--neutral-white)] text-[var(--tone-strong)] w-full sm:max-w-xl rounded-t-[16px] sm:rounded-[10px] overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col border border-[var(--border-subtle)] pb-[env(safe-area-inset-bottom)]"
       >
         {/* Media slider header */}
         <div className="relative bg-[var(--neutral-200)]">
@@ -175,17 +175,13 @@ export default function ItemModal({
             {images.map((src, i) => (
               <div
                 key={i}
-                className="min-w-full snap-center aspect-[4/3] shimmer relative"
+                className="min-w-full snap-center aspect-[4/3] bg-[var(--neutral-200)] relative"
               >
                 <img
                   src={src}
                   alt={`${item.name} ছবি ${toBn(i + 1)}`}
                   loading={i === 0 ? 'eager' : 'lazy'}
-                  onLoad={(e) =>
-                    e.currentTarget.parentElement?.classList.remove('shimmer')
-                  }
                   onError={(e) => {
-                    e.currentTarget.parentElement?.classList.remove('shimmer');
                     (e.currentTarget as HTMLImageElement).src = fallbackSvg;
                   }}
                   className="h-full w-full object-cover"
@@ -264,7 +260,7 @@ export default function ItemModal({
         <div className="overflow-y-auto p-4 sm:p-5 space-y-3.5 sm:space-y-4">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p id="m-cat" className="eyebrow text-[11px] sm:text-xs text-[var(--text-muted)] flex items-center gap-1.5">
+              <p id="m-cat" className="font-mono uppercase tracking-[0.08em] text-[11px] sm:text-xs text-[var(--text-muted)] flex items-center gap-1.5">
                 {cat?.id === 'snacks' ? (
                   <PiHamburgerLight className="text-sm" aria-hidden="true" />
                 ) : (
@@ -274,12 +270,12 @@ export default function ItemModal({
               </p>
               <h3
                 id="m-name"
-                className="h4 font-heading font-medium text-xl sm:text-2xl mt-1 text-[var(--tone-strong)]"
+                className="font-heading font-medium text-xl sm:text-2xl mt-1 text-[var(--tone-strong)]"
               >
                 {item.name}
               </h3>
               {item.note ? (
-                <p id="m-note" className="body-sm text-[var(--text-muted)] mt-0.5 text-xs sm:text-sm">
+                <p id="m-note" className="text-[var(--text-muted)] mt-0.5 text-xs sm:text-sm">
                   {item.note}
                 </p>
               ) : null}
@@ -295,7 +291,10 @@ export default function ItemModal({
           {item.tags.length > 0 && (
             <div id="m-tags" className="flex flex-wrap gap-1.5">
               {item.tags.map((tag) => (
-                <span key={tag} className="tag tag--glass text-[10px] sm:text-xs">
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-[var(--tone-faint)] text-[var(--tone-strong)] border border-[var(--border-subtle)]"
+                >
                   {TAGS[tag]?.label || tag}
                 </span>
               ))}
@@ -305,7 +304,7 @@ export default function ItemModal({
           {item.desc ? (
             <p
               id="m-desc"
-              className="body-md text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed"
+              className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed"
             >
               {item.desc}
             </p>
@@ -321,7 +320,10 @@ export default function ItemModal({
               </h4>
               <div id="m-ing" className="flex flex-wrap gap-1.5">
                 {item.ingredients.map((ing) => (
-                  <span key={ing} className="tag text-[10px] sm:text-xs">
+                  <span
+                    key={ing}
+                    className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] sm:text-xs font-mono bg-[var(--dark-4)] dark:bg-[var(--light-4)] text-[var(--tone-strong)] border border-[var(--border-subtle)]"
+                  >
                     {ing}
                   </span>
                 ))}
@@ -334,7 +336,7 @@ export default function ItemModal({
               id="m-fav"
               type="button"
               onClick={() => onToggleFav(item.id)}
-              className="btn btn--secondary flex-1 h-11 sm:h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 active:scale-95"
+              className="flex-1 h-11 sm:h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-[8px] border border-[var(--border-subtle)] bg-[var(--dark-8)] dark:bg-[var(--light-8)] text-[var(--tone-strong)] hover:bg-[var(--bg-lift)] active:scale-95 transition-all font-mono font-medium cursor-pointer"
             >
               {isFav ? (
                 <>
@@ -352,7 +354,7 @@ export default function ItemModal({
               id="m-share"
               type="button"
               onClick={handleShare}
-              className="btn btn--primary flex-1 h-11 sm:h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 active:scale-95"
+              className="flex-1 h-11 sm:h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-[8px] bg-[var(--tone-strong)] text-[var(--bg-base)] hover:opacity-90 active:scale-95 transition-all font-mono font-medium cursor-pointer"
             >
               <PiShareNetworkLight className="text-base" aria-hidden="true" />
               <span>শেয়ার করুন</span>
@@ -401,7 +403,7 @@ function RelatedCard({ item, onOpen }: RelatedCardProps) {
       onClick={() => onOpen(item)}
       className="group text-left rounded-[8px] overflow-hidden bg-[var(--bg-base)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)]"
     >
-      <div className={`aspect-[4/3] relative overflow-hidden bg-[var(--neutral-100)] ${isLoaded ? '' : 'shimmer'}`}>
+      <div className={`aspect-[4/3] relative overflow-hidden bg-[var(--neutral-100)] ${isLoaded ? '' : 'animate-pulse bg-neutral-200 dark:bg-neutral-800'}`}>
         <img
           src={src}
           alt={item.name}

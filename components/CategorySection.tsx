@@ -54,7 +54,7 @@ export default function CategorySection({
         ) : (
           <PiBowlFoodLight className="text-xl text-[var(--tone-strong)] shrink-0" aria-hidden="true" />
         )}
-        <h2 className="h3 font-heading font-medium text-xl sm:text-2xl text-[var(--tone-strong)]">
+        <h2 className="font-heading font-medium text-xl sm:text-2xl text-[var(--tone-strong)]">
           {category.title}
         </h2>
         <span className="ml-auto font-mono text-xs text-[var(--text-muted)]">

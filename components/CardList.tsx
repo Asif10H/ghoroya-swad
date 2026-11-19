@@ -46,11 +46,11 @@ export default function CardList({
         }
       }}
       style={animStyle}
-      className="pop group cursor-pointer flex items-center gap-3 sm:gap-4 rounded-[10px] p-2.5 sm:p-3 bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:bg-[var(--bg-lift)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
+      className="group cursor-pointer flex items-center gap-3 sm:gap-4 rounded-[10px] p-2.5 sm:p-3 bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:bg-[var(--bg-lift)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
     >
       <div
         className={`relative h-18 w-18 sm:h-24 sm:w-24 shrink-0 rounded-[8px] overflow-hidden ${
-          isLoaded ? '' : 'shimmer'
+          isLoaded ? '' : 'animate-pulse bg-neutral-200 dark:bg-neutral-800'
         }`}
       >
         <img
@@ -76,7 +76,10 @@ export default function CardList({
           <div className="flex flex-wrap gap-1 mt-1 sm:mt-1.5">
             {item.tags.map((t) =>
               TAGS[t] ? (
-                <span key={t} className="tag tag--glass text-[9px] sm:text-[10px] py-0.5 px-1.5 sm:px-2">
+                <span
+                  key={t}
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-wider bg-[var(--tone-faint)] text-[var(--tone-strong)] border border-[var(--border-subtle)]"
+                >
                   {TAGS[t].label}
                 </span>
               ) : null
