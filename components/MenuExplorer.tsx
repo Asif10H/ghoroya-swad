@@ -22,7 +22,6 @@ import Toast from './Toast';
 import FloatingActions from './FloatingActions';
 import BottomNav from './BottomNav';
 import InstallPrompt from './InstallPrompt';
-import SubCategoryPills from './SubCategoryPills';
 import OrderTray from './OrderTray';
 import {
   PiMagnifyingGlassLight,
@@ -40,7 +39,6 @@ import {
 
 export function MenuExplorer() {
   const [activeCat, setActiveCat] = useState<CategoryFilter>('all');
-  const [subCat, setSubCat] = useState<string>('all');
   const [query, setQuery] = useState<string>('');
   const [priceFilter, setPriceFilter] = useState<string>('all');
   const [tagFilter, setTagFilter] = useState<string>('all');
@@ -69,7 +67,6 @@ export function MenuExplorer() {
       const customEvent = e as CustomEvent<CategoryFilter>;
       if (customEvent.detail && ['all', 'snacks', 'drinks', 'favs'].includes(customEvent.detail)) {
         setActiveCat(customEvent.detail);
-        setSubCat('all');
       }
     };
     window.addEventListener('gs-select-cat', handleCatChange);
@@ -97,12 +94,10 @@ export function MenuExplorer() {
 
   const handleSelectCategory = (cat: CategoryFilter) => {
     setActiveCat(cat);
-    setSubCat('all');
   };
 
   const handleReset = () => {
     setActiveCat('all');
-    setSubCat('all');
     setQuery('');
     setPriceFilter('all');
     setTagFilter('all');
@@ -186,10 +181,6 @@ export function MenuExplorer() {
 
     const result = sections.map((sec) => {
       let items = sec.items.filter((it) => {
-        // Sub-category filter
-        if (subCat !== 'all' && it.subCategory !== subCat) {
-          return false;
-        }
         // Query search
         if (trimmedQuery) {
           const haystack = `${it.name} ${it.note} ${it.desc} ${it.ingredients.join(' ')}`.toLowerCase();
@@ -224,7 +215,7 @@ export function MenuExplorer() {
     });
 
     return result.filter((sec) => sec.items.length > 0);
-  }, [activeCat, subCat, query, priceFilter, tagFilter, sortBy, favs]);
+  }, [activeCat, query, priceFilter, tagFilter, sortBy, favs]);
 
   const totalCount = useMemo(() => {
     return visibleSections.reduce((acc, sec) => acc + sec.items.length, 0);
@@ -234,7 +225,6 @@ export function MenuExplorer() {
     query.trim() !== '' ||
     priceFilter !== 'all' ||
     tagFilter !== 'all' ||
-    subCat !== 'all' ||
     sortBy !== 'default';
 
   return (
@@ -344,14 +334,7 @@ export function MenuExplorer() {
             ))}
           </div>
 
-          {/* Row 3: Sub-Category Chips (Contextual) */}
-          <SubCategoryPills
-            activeCat={activeCat}
-            activeSubCat={subCat}
-            onSelectSubCat={(sc) => setSubCat(sc)}
-          />
-
-          {/* Row 4: Secondary Filter Chips (Price & Tags - Toggleable, no repetition) */}
+          {/* Row 3: Secondary Filter Chips (Price & Tags - Toggleable, no repetition) */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-0.5 -mx-3 px-3 sm:mx-0 sm:px-0">
             {/* Price Filter Chips */}
             <div id="prices" className="flex gap-1.5 shrink-0">
