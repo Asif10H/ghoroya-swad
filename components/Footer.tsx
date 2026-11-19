@@ -48,7 +48,17 @@ export function Footer() {
         </div>
         <div className="pt-6 sm:pt-8 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-3 font-mono text-[11px] sm:text-xs text-[var(--text-muted)]">
           <span>© ঘরোয়া স্বাদ রেস্টুরেন্ট</span>
-          <span>ডিজিটাল মেনু · সব দাম টাকায়</span>
+          <span>
+            Developed by{' '}
+            <a
+              href="https://facebook.com/asif10h"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--tone-strong)] hover:underline underline-offset-2 transition-colors"
+            >
+              Habibullah Asif
+            </a>
+          </span>
         </div>
       </div>
     </footer>
