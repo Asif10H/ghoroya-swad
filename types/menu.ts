@@ -7,6 +7,7 @@ export interface TagInfo {
 export interface MenuItem {
   id: string;
   cat: 'snacks' | 'drinks';
+  subCategory?: string;
   name: string;
   note: string;
   price: number;

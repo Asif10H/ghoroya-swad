@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import { MenuItem } from '@/types/menu';
 import { CATEGORIES, TAGS, fallbackSvg, toBn } from '@/data/menuData';
+import { useOrderTray } from '@/hooks/useOrderTray';
 import {
   PiCaretLeftLight,
   PiCaretRightLight,
@@ -12,6 +13,9 @@ import {
   PiShareNetworkLight,
   PiHamburgerLight,
   PiCoffeeLight,
+  PiPlusLight,
+  PiMinusLight,
+  PiShoppingBagLight,
 } from 'react-icons/pi';
 
 export interface ItemModalProps {
@@ -33,6 +37,8 @@ export default function ItemModal({
 }: ItemModalProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState<number>(0);
+  const { getItemQuantity, addItem, removeItem } = useOrderTray();
+  const quantity = item ? getItemQuantity(item.id) : 0;
 
   const images = useMemo(() => {
     return item?.images && item.images.length > 0 ? item.images : [fallbackSvg];
@@ -331,34 +337,83 @@ export default function ItemModal({
             </div>
           )}
 
-          <div className="pt-2 flex gap-2.5 sm:gap-3">
-            <button
-              id="m-fav"
-              type="button"
-              onClick={() => onToggleFav(item.id)}
-              className="flex-1 h-11 sm:h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-[8px] border border-[var(--border-subtle)] bg-[var(--dark-8)] dark:bg-[var(--light-8)] text-[var(--tone-strong)] hover:bg-[var(--bg-lift)] active:scale-95 transition-all font-mono font-medium cursor-pointer"
-            >
-              {isFav ? (
-                <>
-                  <PiHeartFill className="text-base text-[var(--tone-strong)]" aria-hidden="true" />
-                  <span>পছন্দের তালিকায়</span>
-                </>
-              ) : (
-                <>
-                  <PiHeartLight className="text-base text-[var(--tone-strong)]" aria-hidden="true" />
-                  <span>পছন্দে যোগ করুন</span>
-                </>
-              )}
-            </button>
-            <button
-              id="m-share"
-              type="button"
-              onClick={handleShare}
-              className="flex-1 h-11 sm:h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-[8px] bg-[var(--tone-strong)] text-[var(--bg-base)] hover:opacity-90 active:scale-95 transition-all font-mono font-medium cursor-pointer"
-            >
-              <PiShareNetworkLight className="text-base" aria-hidden="true" />
-              <span>শেয়ার করুন</span>
-            </button>
+          <div className="pt-2 flex flex-col gap-2">
+            {/* Order Tray 1-Tap CTA */}
+            {quantity === 0 ? (
+              <button
+                type="button"
+                onClick={() => {
+                  addItem(item);
+                  onShowToast('অর্ডার ট্রে-তে যোগ হয়েছে');
+                }}
+                className="w-full h-11 text-xs sm:text-sm inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] hover:opacity-90 active:scale-95 transition-colors font-heading font-medium cursor-pointer"
+              >
+                <PiShoppingBagLight className="text-base" />
+                <span>অর্ডার ট্রে-তে যোগ করুন ({toBn(item.price)} ৳)</span>
+              </button>
+            ) : (
+              <div className="w-full h-11 flex items-center justify-between px-3 rounded-lg border border-[var(--tone-strong)] bg-[var(--bg-lift)]">
+                <span className="text-xs sm:text-sm font-medium text-[var(--tone-strong)] flex items-center gap-1.5">
+                  <PiShoppingBagLight className="text-base" />
+                  <span>ট্রে-তে আছে ({toBn(quantity * item.price)} ৳)</span>
+                </span>
+                <div className="inline-flex items-center border border-[var(--border-subtle)] rounded-lg bg-[var(--bg-base)] overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => removeItem(item.id)}
+                    className="w-8 h-8 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-16)] dark:hover:bg-[var(--light-16)] active:scale-95 transition-colors cursor-pointer"
+                    aria-label="কমান"
+                  >
+                    <PiMinusLight className="text-xs" />
+                  </button>
+                  <span className="w-8 text-center text-xs font-medium text-[var(--tone-strong)]">
+                    {toBn(quantity)}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => addItem(item)}
+                    className="w-8 h-8 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-16)] dark:hover:bg-[var(--light-16)] active:scale-95 transition-colors cursor-pointer"
+                    aria-label="বাড়ান"
+                  >
+                    <PiPlusLight className="text-xs" />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <div className="flex gap-2.5 sm:gap-3">
+              <button
+                id="m-fav"
+                type="button"
+                onClick={() => onToggleFav(item.id)}
+                className={`flex-1 h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg border transition-colors font-medium cursor-pointer ${
+                  isFav
+                    ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] border-[var(--tone-strong)]'
+                    : 'bg-[var(--bg-base)] text-[var(--tone-strong)] border-[var(--border-subtle)] hover:border-[var(--dark-32)] dark:hover:border-[var(--light-32)]'
+                }`}
+              >
+                {isFav ? (
+                  <>
+                    <PiHeartFill className="text-base text-[var(--bg-base)]" aria-hidden="true" />
+                    <span>পছন্দের তালিকায়</span>
+                  </>
+                ) : (
+                  <>
+                    <PiHeartLight className="text-base text-[var(--tone-strong)]" aria-hidden="true" />
+                    <span>পছন্দে যোগ করুন</span>
+                  </>
+                )}
+              </button>
+              <button
+                id="m-share"
+                type="button"
+                onClick={handleShare}
+                className="flex-1 h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-base)] text-[var(--tone-strong)] hover:bg-[var(--bg-lift)] active:scale-95 transition-colors font-medium cursor-pointer"
+              >
+                <PiShareNetworkLight className="text-base" aria-hidden="true" />
+                <span>শেয়ার করুন</span>
+              </button>
+            </div>
           </div>
 
           {/* Related items */}
