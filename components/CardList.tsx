@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { MenuItem } from '@/types/menu';
 import { toBn, TAGS, fallbackSvg } from '@/data/menuData';
+import { PiHeartFill, PiHeartLight } from 'react-icons/pi';
 
 export interface CardListProps {
   item: MenuItem;
@@ -94,9 +95,13 @@ export default function CardList({
             e.stopPropagation();
             onToggleFav(item.id, e);
           }}
-          className="mt-1 p-1 inline-flex items-center justify-center text-base hover:opacity-80 transition-opacity"
+          className="mt-1 p-1 inline-flex items-center justify-center text-lg hover:opacity-80 transition-opacity"
         >
-          {isFav ? '❤️' : '🤍'}
+          {isFav ? (
+            <PiHeartFill className="text-[var(--tone-strong)]" aria-hidden="true" />
+          ) : (
+            <PiHeartLight className="text-[var(--text-muted)] hover:text-[var(--tone-strong)]" aria-hidden="true" />
+          )}
         </button>
       </div>
     </article>

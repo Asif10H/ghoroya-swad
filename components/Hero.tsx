@@ -2,6 +2,7 @@
 
 import Header from './Header';
 import { useOpeningHours } from '@/hooks/useOpeningHours';
+import { PiArrowDownLight, PiPhoneLight } from 'react-icons/pi';
 
 export interface HeroProps {
   hideHeader?: boolean;
@@ -66,11 +67,13 @@ export function Hero({ hideHeader = true }: HeroProps) {
 
           {/* Primary & Secondary CTAs */}
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="#menuTop" className="btn btn--primary btn--pill">
-              মেনু দেখুন ↓
+            <a href="#menuTop" className="btn btn--primary btn--pill inline-flex items-center gap-2">
+              <span>মেনু দেখুন</span>
+              <PiArrowDownLight className="text-sm" aria-hidden="true" />
             </a>
-            <a href="tel:01819759868" className="btn btn--glass btn--pill">
-              📞 কল করুন
+            <a href="tel:01819759868" className="btn btn--glass btn--pill inline-flex items-center gap-2">
+              <PiPhoneLight className="text-base" aria-hidden="true" />
+              <span>কল করুন</span>
             </a>
           </div>
         </div>

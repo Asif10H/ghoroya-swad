@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { PiBowlFoodLight, PiPhoneLight, PiSunLight, PiMoonLight } from 'react-icons/pi';
 
 export interface HeaderProps {
   className?: string;
@@ -52,9 +53,7 @@ export function Header({ className = '' }: HeaderProps) {
         aria-label="প্রধান নেভিগেশন"
       >
         <div className="flex items-center gap-2">
-          <span className="text-xl" aria-hidden="true">
-            🍽️
-          </span>
+          <PiBowlFoodLight className="text-xl text-[var(--light-88)]" aria-hidden="true" />
           <span className="font-heading font-medium tracking-tight text-lg text-white">
             ঘরোয়া স্বাদ
           </span>
@@ -62,18 +61,23 @@ export function Header({ className = '' }: HeaderProps) {
         <div className="flex items-center gap-3">
           <a
             href="tel:01819759868"
-            className="btn btn--glass btn--sm hidden sm:inline-flex"
+            className="btn btn--glass btn--sm hidden sm:inline-flex items-center gap-1.5"
             aria-label="ফোন করুন"
           >
-            ০১৮১৯-৭৫৯৮৬৮
+            <PiPhoneLight className="text-sm" aria-hidden="true" />
+            <span>০১৮১৯-৭৫৯৮৬৮</span>
           </a>
           <button
             type="button"
             onClick={toggleTheme}
-            className="btn btn--glass btn--sm h-8 w-8 !p-0"
+            className="btn btn--glass btn--sm h-8 w-8 !p-0 inline-flex items-center justify-center"
             aria-label="থিম বদলান"
           >
-            <span aria-hidden="true">{mounted && isDark ? '☀️' : '🌙'}</span>
+            {mounted && isDark ? (
+              <PiSunLight className="text-base" aria-hidden="true" />
+            ) : (
+              <PiMoonLight className="text-base" aria-hidden="true" />
+            )}
           </button>
         </div>
       </nav>

@@ -5,6 +5,12 @@ import { MenuItem, ViewMode } from '@/types/menu';
 import { toBn } from '@/data/menuData';
 import CardGrid from './CardGrid';
 import CardList from './CardList';
+import {
+  PiHamburgerLight,
+  PiCoffeeLight,
+  PiHeartFill,
+  PiBowlFoodLight,
+} from 'react-icons/pi';
 
 export interface CategorySectionProps {
   category: {
@@ -39,7 +45,15 @@ export default function CategorySection({
       className={`scroll-mt-48 ${className}`.trim()}
     >
       <div className="flex items-center gap-3 mb-5 pb-3 border-b border-[var(--border-subtle)]">
-        <span className="text-xl">{category.icon}</span>
+        {category.id === 'snacks' ? (
+          <PiHamburgerLight className="text-xl text-[var(--tone-strong)] shrink-0" aria-hidden="true" />
+        ) : category.id === 'drinks' ? (
+          <PiCoffeeLight className="text-xl text-[var(--tone-strong)] shrink-0" aria-hidden="true" />
+        ) : category.id === 'fav' ? (
+          <PiHeartFill className="text-xl text-[var(--tone-strong)] shrink-0" aria-hidden="true" />
+        ) : (
+          <PiBowlFoodLight className="text-xl text-[var(--tone-strong)] shrink-0" aria-hidden="true" />
+        )}
         <h2 className="h3 font-heading font-medium text-xl sm:text-2xl text-[var(--tone-strong)]">
           {category.title}
         </h2>

@@ -3,6 +3,16 @@
 import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import { MenuItem } from '@/types/menu';
 import { CATEGORIES, TAGS, fallbackSvg, toBn } from '@/data/menuData';
+import {
+  PiCaretLeftLight,
+  PiCaretRightLight,
+  PiXLight,
+  PiHeartFill,
+  PiHeartLight,
+  PiShareNetworkLight,
+  PiHamburgerLight,
+  PiCoffeeLight,
+} from 'react-icons/pi';
 
 export interface ItemModalProps {
   item: MenuItem | null;
@@ -185,28 +195,28 @@ export default function ItemModal({
             id="prev"
             type="button"
             onClick={handlePrev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white text-base grid place-items-center"
+            className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center"
             aria-label="আগের ছবি"
           >
-            ‹
+            <PiCaretLeftLight className="text-lg" aria-hidden="true" />
           </button>
           <button
             id="next"
             type="button"
             onClick={handleNext}
-            className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white text-base grid place-items-center"
+            className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center"
             aria-label="পরের ছবি"
           >
-            ›
+            <PiCaretRightLight className="text-lg" aria-hidden="true" />
           </button>
           <button
             id="close"
             type="button"
             onClick={onClose}
-            className="absolute right-3 top-3 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white text-sm grid place-items-center"
+            className="absolute right-3 top-3 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center"
             aria-label="বন্ধ করুন"
           >
-            ✕
+            <PiXLight className="text-base" aria-hidden="true" />
           </button>
           <span
             id="counter"
@@ -249,8 +259,13 @@ export default function ItemModal({
         <div className="overflow-y-auto p-5 space-y-4">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p id="m-cat" className="eyebrow text-xs text-[var(--text-muted)]">
-                {cat ? `${cat.icon} ${cat.title}`.toUpperCase() : ''}
+              <p id="m-cat" className="eyebrow text-xs text-[var(--text-muted)] flex items-center gap-1.5">
+                {cat?.id === 'snacks' ? (
+                  <PiHamburgerLight className="text-sm" aria-hidden="true" />
+                ) : (
+                  <PiCoffeeLight className="text-sm" aria-hidden="true" />
+                )}
+                <span>{cat ? cat.title.toUpperCase() : ''}</span>
               </p>
               <h3
                 id="m-name"
@@ -314,17 +329,28 @@ export default function ItemModal({
               id="m-fav"
               type="button"
               onClick={() => onToggleFav(item.id)}
-              className="btn btn--secondary flex-1"
+              className="btn btn--secondary flex-1 inline-flex items-center justify-center gap-2"
             >
-              {isFav ? '❤️ পছন্দের তালিকায় আছে' : '🤍 পছন্দে যোগ করুন'}
+              {isFav ? (
+                <>
+                  <PiHeartFill className="text-base text-[var(--tone-strong)]" aria-hidden="true" />
+                  <span>পছন্দের তালিকায় আছে</span>
+                </>
+              ) : (
+                <>
+                  <PiHeartLight className="text-base text-[var(--tone-strong)]" aria-hidden="true" />
+                  <span>পছন্দে যোগ করুন</span>
+                </>
+              )}
             </button>
             <button
               id="m-share"
               type="button"
               onClick={handleShare}
-              className="btn btn--primary flex-1"
+              className="btn btn--primary flex-1 inline-flex items-center justify-center gap-2"
             >
-              🔗 শেয়ার করুন
+              <PiShareNetworkLight className="text-base" aria-hidden="true" />
+              <span>শেয়ার করুন</span>
             </button>
           </div>
 

@@ -20,6 +20,19 @@ import CategorySection from './CategorySection';
 import ItemModal from './ItemModal';
 import Toast from './Toast';
 import FloatingActions from './FloatingActions';
+import {
+  PiMagnifyingGlassLight,
+  PiXLight,
+  PiSquaresFourLight,
+  PiHamburgerLight,
+  PiCoffeeLight,
+  PiHeartLight,
+  PiHeartFill,
+  PiGridFourLight,
+  PiListLight,
+  PiBowlFoodLight,
+  PiArrowCounterClockwiseLight,
+} from 'react-icons/pi';
 
 export function MenuExplorer() {
   const [activeCat, setActiveCat] = useState<CategoryFilter>('all');
@@ -83,14 +96,29 @@ export function MenuExplorer() {
   // Category navigation tabs
   const tabs = useMemo(
     () => [
-      { id: 'all' as CategoryFilter, label: '🍴 সব' },
-      ...CATEGORIES.map((c) => ({
-        id: c.id as CategoryFilter,
-        label: `${c.icon} ${c.title.replace(' মেনু', '')}`,
-      })),
+      {
+        id: 'all' as CategoryFilter,
+        label: 'সব',
+        icon: <PiSquaresFourLight className="text-sm shrink-0" aria-hidden="true" />,
+      },
+      {
+        id: 'snacks' as CategoryFilter,
+        label: 'স্ন্যাকস',
+        icon: <PiHamburgerLight className="text-sm shrink-0" aria-hidden="true" />,
+      },
+      {
+        id: 'drinks' as CategoryFilter,
+        label: 'ড্রিংকস ও জুস',
+        icon: <PiCoffeeLight className="text-sm shrink-0" aria-hidden="true" />,
+      },
       {
         id: 'fav' as CategoryFilter,
-        label: `❤️ পছন্দ${favs.size ? ` (${toBn(favs.size)})` : ''}`,
+        label: `পছন্দ${favs.size ? ` (${toBn(favs.size)})` : ''}`,
+        icon: favs.size ? (
+          <PiHeartFill className="text-sm shrink-0" aria-hidden="true" />
+        ) : (
+          <PiHeartLight className="text-sm shrink-0" aria-hidden="true" />
+        ),
       },
     ],
     [favs.size]
@@ -182,9 +210,10 @@ export function MenuExplorer() {
         <div className="max-w-6xl mx-auto px-4 py-3 space-y-3">
           {/* Search input */}
           <div className="relative">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-[var(--text-muted)] pointer-events-none">
-              🔍
-            </span>
+            <PiMagnifyingGlassLight
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-base text-[var(--text-muted)] pointer-events-none"
+              aria-hidden="true"
+            />
             <input
               id="search"
               type="text"
@@ -203,7 +232,7 @@ export function MenuExplorer() {
                 className="absolute right-3 top-1/2 -translate-y-1/2 h-6 w-6 rounded-[8px] bg-[var(--tone-faint)] text-xs text-[var(--tone-strong)] grid place-items-center"
                 aria-label="মুছুন"
               >
-                ✕
+                <PiXLight className="text-xs" aria-hidden="true" />
               </button>
             ) : null}
           </div>
@@ -218,9 +247,12 @@ export function MenuExplorer() {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveCat(tab.id)}
-                className={`pill-btn ${activeCat === tab.id ? 'active' : ''}`}
+                className={`pill-btn inline-flex items-center gap-1.5 ${
+                  activeCat === tab.id ? 'active' : ''
+                }`}
               >
-                {tab.label}
+                {tab.icon}
+                <span>{tab.label}</span>
               </button>
             ))}
           </div>
@@ -278,27 +310,27 @@ export function MenuExplorer() {
                 id="vGrid"
                 type="button"
                 onClick={() => handleSetViewMode('grid')}
-                className={`rounded-[8px] px-2.5 py-1 text-xs font-mono transition-colors ${
+                className={`rounded-[8px] px-2.5 py-1 text-xs font-mono transition-colors inline-flex items-center justify-center ${
                   viewMode === 'grid'
                     ? 'bg-[var(--tone-strong)] text-[var(--bg-base)]'
                     : 'text-[var(--tone-strong)] hover:bg-[var(--bg-lift)]'
                 }`}
                 aria-label="গ্রিড"
               >
-                ▦
+                <PiGridFourLight className="text-sm" aria-hidden="true" />
               </button>
               <button
                 id="vList"
                 type="button"
                 onClick={() => handleSetViewMode('list')}
-                className={`rounded-[8px] px-2.5 py-1 text-xs font-mono transition-colors ${
+                className={`rounded-[8px] px-2.5 py-1 text-xs font-mono transition-colors inline-flex items-center justify-center ${
                   viewMode === 'list'
                     ? 'bg-[var(--tone-strong)] text-[var(--bg-base)]'
                     : 'text-[var(--tone-strong)] hover:bg-[var(--bg-lift)]'
                 }`}
                 aria-label="লিস্ট"
               >
-                ☰
+                <PiListLight className="text-sm" aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -331,22 +363,23 @@ export function MenuExplorer() {
           </div>
         ) : (
           <div id="empty" className="text-center py-24">
-            <div className="text-5xl opacity-40">🍽️</div>
+            <PiBowlFoodLight className="text-5xl mx-auto opacity-30 text-[var(--tone-strong)]" aria-hidden="true" />
             <h3 className="h4 font-heading font-medium mt-4 text-[var(--tone-strong)]">
               কোনো আইটেম পাওয়া যায়নি
             </h3>
             <p id="emptyMsg" className="mt-1 body-md text-[var(--text-muted)]">
               {activeCat === 'fav'
-                ? 'এখনো কোনো পছন্দের আইটেম নেই। কার্ডের 🤍 চাপুন।'
+                ? 'এখনো কোনো পছন্দের আইটেম নেই। কার্ডের হার্ট আইকন চাপুন।'
                 : 'অন্য কোনো নাম বা ফিল্টার দিয়ে চেষ্টা করুন'}
             </p>
             <button
               id="reset"
               type="button"
               onClick={handleReset}
-              className="btn btn--secondary mt-5"
+              className="btn btn--secondary mt-5 inline-flex items-center gap-1.5"
             >
-              ফিল্টার রিসেট করুন
+              <PiArrowCounterClockwiseLight className="text-sm" aria-hidden="true" />
+              <span>ফিল্টার রিসেট করুন</span>
             </button>
           </div>
         )}

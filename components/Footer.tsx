@@ -1,6 +1,7 @@
 'use client';
 
 import { useOpeningHours } from '@/hooks/useOpeningHours';
+import { PiMapPinLight, PiPhoneLight, PiMapTrifoldLight } from 'react-icons/pi';
 
 export function Footer() {
   const { hoursText, isReady } = useOpeningHours();
@@ -11,8 +12,9 @@ export function Footer() {
         <h2 className="h4 font-heading font-medium text-2xl text-[var(--light-100)]">
           ঘরোয়া স্বাদ রেস্টুরেন্ট
         </h2>
-        <p className="body-md text-[var(--neutral-400)] max-w-md mx-auto">
-          📍 মহিলা কলেজ রোড, পাসপোর্ট অফিস সংলগ্ন, খাগড়াছড়ি সদর
+        <p className="body-md text-[var(--neutral-400)] max-w-md mx-auto flex items-center justify-center gap-1.5">
+          <PiMapPinLight className="text-base shrink-0" aria-hidden="true" />
+          <span>মহিলা কলেজ রোড, পাসপোর্ট অফিস সংলগ্ন, খাগড়াছড়ি সদর</span>
         </p>
         {isReady && hoursText ? (
           <p className="font-mono text-xs text-[var(--neutral-400)]">
@@ -20,19 +22,22 @@ export function Footer() {
           </p>
         ) : null}
         <div className="flex flex-wrap justify-center gap-3 pt-2">
-          <a href="tel:01819759868" className="btn btn--glass btn--sm">
-            📞 ০১৮১৯-৭৫৯৮৬৮
+          <a href="tel:01819759868" className="btn btn--glass btn--sm inline-flex items-center gap-1.5">
+            <PiPhoneLight className="text-sm" aria-hidden="true" />
+            <span>০১৮১৯-৭৫৯৮৬৮</span>
           </a>
-          <a href="tel:01577773404" className="btn btn--glass btn--sm">
-            📞 ০১৫৭৭-৭৭৩৪০৪
+          <a href="tel:01577773404" className="btn btn--glass btn--sm inline-flex items-center gap-1.5">
+            <PiPhoneLight className="text-sm" aria-hidden="true" />
+            <span>০১৫৭৭-৭৭৩৪০৪</span>
           </a>
           <a
             href="https://www.google.com/maps/search/?api=1&query=Mohila+College+Road+Khagrachari+Sadar"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn--glass btn--sm"
+            className="btn btn--glass btn--sm inline-flex items-center gap-1.5"
           >
-            🗺️ ম্যাপে দেখুন
+            <PiMapTrifoldLight className="text-sm" aria-hidden="true" />
+            <span>ম্যাপে দেখুন</span>
           </a>
         </div>
         <div className="pt-8 border-t border-[var(--neutral-800)] flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-xs text-[var(--neutral-500)]">

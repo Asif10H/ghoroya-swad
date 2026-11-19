@@ -1,4 +1,5 @@
 import { toBn } from '@/data/menuData';
+import { PiBowlFoodLight, PiHamburgerLight, PiCoffeeLight } from 'react-icons/pi';
 
 export interface HighlightStatsProps {
   totalCount: number;
@@ -21,24 +22,27 @@ export function HighlightStats({
           <div className="h1 font-heading font-medium text-[var(--tone-strong)] tabular-nums">
             {toBn(totalCount)}
           </div>
-          <div className="body-sm text-[var(--text-muted)] mt-1 font-mono uppercase text-xs">
-            মোট আইটেম
+          <div className="body-sm text-[var(--text-muted)] mt-1 font-mono uppercase text-xs flex items-center justify-center gap-1.5">
+            <PiBowlFoodLight className="text-sm" aria-hidden="true" />
+            <span>মোট আইটেম</span>
           </div>
         </div>
         <div className="py-2 border-x border-[var(--border-subtle)]">
           <div className="h1 font-heading font-medium text-[var(--tone-strong)] tabular-nums">
             {toBn(snacksCount)}
           </div>
-          <div className="body-sm text-[var(--text-muted)] mt-1 font-mono uppercase text-xs">
-            স্ন্যাকস
+          <div className="body-sm text-[var(--text-muted)] mt-1 font-mono uppercase text-xs flex items-center justify-center gap-1.5">
+            <PiHamburgerLight className="text-sm" aria-hidden="true" />
+            <span>স্ন্যাকস</span>
           </div>
         </div>
         <div className="py-2">
           <div className="h1 font-heading font-medium text-[var(--tone-strong)] tabular-nums">
             {toBn(drinksCount)}
           </div>
-          <div className="body-sm text-[var(--text-muted)] mt-1 font-mono uppercase text-xs">
-            ড্রিংকস
+          <div className="body-sm text-[var(--text-muted)] mt-1 font-mono uppercase text-xs flex items-center justify-center gap-1.5">
+            <PiCoffeeLight className="text-sm" aria-hidden="true" />
+            <span>ড্রিংকস</span>
           </div>
         </div>
       </div>

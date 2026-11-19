@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { PiArrowUpLight, PiPhoneLight } from 'react-icons/pi';
 
 export default function FloatingActions() {
   const [showTop, setShowTop] = useState<boolean>(false);
@@ -30,14 +31,14 @@ export default function FloatingActions() {
         } h-10 w-10 place-items-center rounded-[8px] bg-[var(--neutral-white)] text-[var(--tone-strong)] border border-[var(--border-subtle)] hover:bg-[var(--bg-lift)] transition-colors`}
         aria-label="উপরে যান"
       >
-        ↑
+        <PiArrowUpLight className="text-lg" aria-hidden="true" />
       </button>
       <a
         href="tel:01819759868"
         className="h-12 w-12 rounded-full bg-[var(--tone-strong)] text-[var(--bg-base)] grid place-items-center text-xl border border-[var(--border-subtle)] hover:bg-[var(--bg-lift)] hover:text-[var(--tone-strong)] transition-colors"
         aria-label="কল করুন"
       >
-        📞
+        <PiPhoneLight className="text-xl" aria-hidden="true" />
       </a>
     </div>
   );

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { MenuItem } from '@/types/menu';
 import { toBn, TAGS, fallbackSvg } from '@/data/menuData';
+import { PiHeartFill, PiHeartLight, PiCameraLight } from 'react-icons/pi';
 
 export interface CardGridProps {
   item: MenuItem;
@@ -86,8 +87,9 @@ export default function CardGrid({
         <span className="absolute bottom-2.5 left-2.5 rounded-full bg-[var(--light-16)] backdrop-blur-[16px] text-white font-mono text-xs px-3 py-1 border border-[var(--light-16)]">
           {toBn(item.price)} ৳
         </span>
-        <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/60 text-[var(--light-100)] font-mono text-[10px] px-2 py-0.5">
-          📷 {toBn(item.images ? item.images.length : 0)}
+        <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/60 text-[var(--light-100)] font-mono text-[10px] px-2 py-0.5 inline-flex items-center gap-1">
+          <PiCameraLight className="text-xs" aria-hidden="true" />
+          <span>{toBn(item.images ? item.images.length : 0)}</span>
         </span>
         <button
           type="button"
@@ -96,9 +98,13 @@ export default function CardGrid({
             e.stopPropagation();
             onToggleFav(item.id, e);
           }}
-          className="absolute top-2.5 right-2.5 h-8 w-8 rounded-[8px] bg-black/40 hover:bg-black/60 backdrop-blur-[16px] text-white grid place-items-center text-sm border border-[var(--light-16)] transition-colors"
+          className="absolute top-2.5 right-2.5 h-8 w-8 rounded-[8px] bg-black/40 hover:bg-black/60 backdrop-blur-[16px] text-white grid place-items-center border border-[var(--light-16)] transition-colors"
         >
-          {isFav ? '❤️' : '🤍'}
+          {isFav ? (
+            <PiHeartFill className="text-base text-white" aria-hidden="true" />
+          ) : (
+            <PiHeartLight className="text-base text-white/90" aria-hidden="true" />
+          )}
         </button>
       </div>
       <div className="p-3.5 flex items-start justify-between gap-2">
