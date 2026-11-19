@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 const hindSiliguri = Hind_Siliguri({
   variable: "--font-bengali",
   subsets: ["bengali"],
-  weight: ["400", "500"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 

@@ -29,8 +29,8 @@
   --font-heading-geist: "Geist", system-ui, sans-serif;
   --font-ui-geist: "Geist Mono", monospace;
   --font-bengali: "Hind Siliguri", system-ui, sans-serif;
-  --font-heading: var(--font-heading-geist), var(--font-bengali), system-ui, sans-serif;
-  --font-body: var(--font-heading-geist), var(--font-bengali), system-ui, sans-serif;
+  --font-heading: var(--font-bengali), var(--font-heading-geist), system-ui, sans-serif;
+  --font-body: var(--font-bengali), var(--font-heading-geist), system-ui, sans-serif;
   --font-ui: var(--font-ui-geist), var(--font-bengali), monospace;
 
   /* Neutral scale */
