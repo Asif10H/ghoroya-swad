@@ -10,7 +10,7 @@ import {
   PiCoffeeLight,
   PiHeartFill,
   PiHeartLight,
-  PiPhoneLight,
+  PiPhoneCallLight,
 } from 'react-icons/pi';
 
 export interface BottomNavProps {
@@ -136,11 +136,14 @@ export function BottomNav({
 
         <a
           href="tel:01819759868"
-          className="flex-1 flex flex-col items-center justify-center py-1.5 text-[var(--text-muted)] hover:text-[var(--tone-strong)] transition-colors active:scale-90"
-          aria-label="কল করুন"
+          className="flex-1 flex flex-col items-center justify-center py-1.5 text-[var(--tone-strong)] transition-colors active:scale-90"
+          aria-label="সরাসরি কল করুন: 01819-759868"
+          title="সরাসরি কল: 01819-759868"
         >
-          <PiPhoneLight className="text-xl" aria-hidden="true" />
-          <span className="text-[10px] font-mono mt-0.5">কল</span>
+          <div className="relative">
+            <PiPhoneCallLight className="text-xl text-[var(--tone-strong)]" aria-hidden="true" />
+          </div>
+          <span className="text-[10px] font-mono mt-0.5 font-medium text-[var(--tone-strong)]">কল</span>
         </a>
       </div>
     </nav>

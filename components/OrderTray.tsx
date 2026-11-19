@@ -159,23 +159,23 @@ export default function OrderTray() {
           />
 
           {/* Drawer Content */}
-          <div className="relative w-full md:max-w-md max-h-[85vh] md:max-h-[90vh] bg-[var(--bg-base)] border-t md:border border-[var(--border-subtle)] rounded-t-2xl md:rounded-2xl flex flex-col overflow-hidden z-10 transition-transform">
+          <div className="relative w-full md:max-w-md max-h-[85vh] md:max-h-[90vh] bg-[var(--neutral-white)] text-[var(--tone-strong)] border-t md:border border-[var(--border-subtle)] rounded-t-2xl md:rounded-2xl flex flex-col overflow-hidden z-10 transition-transform">
             {/* Header */}
-            <div className="p-4 border-b border-[var(--border-subtle)] flex items-center justify-between bg-[var(--bg-base)]">
+            <div className="p-4 border-b border-[var(--border-subtle)] flex items-center justify-between bg-[var(--neutral-white)] text-[var(--tone-strong)]">
               <div className="flex items-center gap-2.5">
                 <div className="h-9 w-9 rounded-lg bg-[var(--tone-faint)] text-[var(--tone-strong)] flex items-center justify-center text-lg border border-[var(--border-subtle)]">
                   <PiShoppingBagLight aria-hidden="true" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="font-heading font-medium text-base text-[var(--tone-strong)]">
+                    <h3 className="font-heading font-medium text-[16px] text-[var(--tone-strong)] leading-snug">
                       আপনার অর্ডার ট্রে
                     </h3>
-                    <span className="inline-flex items-center justify-center min-w-[22px] h-[22px] px-1.5 rounded-full bg-[var(--tone-strong)] text-[var(--bg-base)] font-mono text-xs font-medium tabular-nums">
+                    <span className="inline-flex items-center justify-center min-w-[22px] h-[22px] px-1.5 rounded-full bg-[var(--tone-strong)] text-[var(--bg-base)] font-mono text-xs font-medium tabular-nums border border-[var(--border-subtle)]">
                       {toBn(totalCount)}
                     </span>
                   </div>
-                  <p className="text-[11px] text-[var(--text-muted)] font-mono">
+                  <p className="text-[12px] text-[var(--tone-medium)] font-mono mt-0.5">
                     নির্বাচিত খাবারের তালিকা
                   </p>
                 </div>
@@ -328,7 +328,7 @@ export default function OrderTray() {
                 <span className="text-[var(--tone-medium)]">মোট আইটেম:</span>
                 <span className="font-medium text-[var(--tone-strong)]">{toBn(totalCount)}টি</span>
               </div>
-              <div className="flex items-center justify-between text-base border-t border-[var(--border-subtle)] pt-2">
+              <div className="flex items-center justify-between text-[15px] border-t border-[var(--border-subtle)] pt-2 text-[var(--tone-strong)]">
                 <span className="font-heading font-medium text-[var(--tone-strong)]">সর্বমোট মূল্য:</span>
                 <span className="font-heading font-medium text-lg text-[var(--tone-strong)]">
                   {toBn(totalPrice)} ৳
@@ -349,7 +349,7 @@ export default function OrderTray() {
                   href={`tel:${RESTAURANT_PHONE}`}
                   className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg border border-[var(--tone-strong)] text-[var(--tone-strong)] text-xs font-medium hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
                 >
-                  <PiPhoneCallLight className="text-base" />
+                  <PiPhoneCallLight className="text-sm text-[var(--tone-strong)]" aria-hidden="true" />
                   <span>সরাসরি কল</span>
                 </a>
               </div>

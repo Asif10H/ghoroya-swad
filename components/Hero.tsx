@@ -5,6 +5,7 @@ import { useOpeningHours } from '@/hooks/useOpeningHours';
 import { CATEGORIES, toBn } from '@/data/menuData';
 import {
   PiArrowDownLight,
+  PiPhoneCallLight,
   PiPhoneLight,
   PiBowlFoodLight,
   PiHamburgerLight,
@@ -122,10 +123,10 @@ export function Hero({
                 <PiArrowDownLight className="text-sm" aria-hidden="true" />
               </a>
               <a
-                href="tel:01793871658"
-                className="inline-flex items-center justify-center gap-2 h-10 px-5 sm:px-6 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] dark:bg-white/10 text-[var(--tone-strong)] backdrop-blur-[16px] hover:bg-[var(--bg-lift)] active:scale-95 transition-colors text-xs font-mono cursor-pointer"
+                href="tel:01819759868"
+                className="inline-flex items-center justify-center gap-2 h-10 px-5 sm:px-6 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-[var(--tone-strong)] backdrop-blur-[16px] hover:bg-[var(--bg-lift)] active:scale-95 transition-colors text-xs font-mono cursor-pointer"
               >
-                <PiPhoneLight className="text-base" aria-hidden="true" />
+                <PiPhoneCallLight className="text-sm text-[var(--tone-strong)]" aria-hidden="true" />
                 <span>কল করুন</span>
               </a>
             </div>

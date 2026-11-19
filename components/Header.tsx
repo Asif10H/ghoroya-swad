@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { PiBowlFoodLight, PiPhoneLight, PiSun, PiMoon } from 'react-icons/pi';
+import { PiBowlFoodLight, PiPhoneCallLight, PiSun, PiMoon } from 'react-icons/pi';
 
 export interface HeaderProps {
   className?: string;
@@ -94,7 +94,7 @@ export function Header({ className = '' }: HeaderProps) {
             className="inline-flex items-center justify-center gap-1.5 h-9 px-2.5 sm:px-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-[var(--tone-strong)] backdrop-blur-md hover:bg-[var(--bg-lift)] active:scale-95 transition-colors text-xs font-mono cursor-pointer"
             aria-label="ফোন করুন"
           >
-            <PiPhoneLight className="text-base sm:text-sm" aria-hidden="true" />
+            <PiPhoneCallLight className="text-sm text-[var(--tone-strong)]" aria-hidden="true" />
             <span className="hidden sm:inline">01819-759868</span>
             <span className="inline sm:hidden text-xs">কল</span>
           </a>

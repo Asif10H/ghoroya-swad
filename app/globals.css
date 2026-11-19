@@ -6,7 +6,7 @@
   --font-heading: var(--font-heading);
   --font-sans: var(--font-body);
   --font-mono: var(--font-ui);
-  --color-base: var(--bg-base);
+  --color-surface: var(--bg-base);
   --color-lift: var(--bg-lift);
   --color-strong: var(--tone-strong);
   --color-medium: var(--tone-medium);

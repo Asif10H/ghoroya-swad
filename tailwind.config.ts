@@ -14,7 +14,7 @@ const config: Config = {
         mono: ["var(--font-ui)", "monospace"],
       },
       colors: {
-        base: "var(--bg-base)",
+        surface: "var(--bg-base)",
         lift: "var(--bg-lift)",
         strong: "var(--tone-strong)",
         medium: "var(--tone-medium)",
