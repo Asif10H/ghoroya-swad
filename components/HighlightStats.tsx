@@ -6,7 +6,7 @@ export interface HighlightStatsProps {
   drinksCount: number;
 }
 
-export default function HighlightStats({
+export function HighlightStats({
   totalCount,
   snacksCount,
   drinksCount,
@@ -45,3 +45,5 @@ export default function HighlightStats({
     </section>
   );
 }
+
+export default HighlightStats;

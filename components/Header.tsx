@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 
-interface HeaderProps {
+export interface HeaderProps {
   className?: string;
 }
 
-export default function Header({ className = '' }: HeaderProps) {
+export function Header({ className = '' }: HeaderProps) {
   const [isDark, setIsDark] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
 
@@ -46,35 +46,39 @@ export default function Header({ className = '' }: HeaderProps) {
   };
 
   return (
-    <nav
-      className={`flex items-center justify-between pb-10 border-b border-[var(--light-16)] ${className}`.trim()}
-      aria-label="প্রধান নেভিগেশন"
-    >
-      <div className="flex items-center gap-2">
-        <span className="text-xl" aria-hidden="true">
-          🍽️
-        </span>
-        <span className="font-heading font-medium tracking-tight text-lg text-white">
-          ঘরোয়া স্বাদ
-        </span>
-      </div>
-      <div className="flex items-center gap-3">
-        <a
-          href="tel:01819759868"
-          className="btn btn--glass btn--sm hidden sm:inline-flex"
-          aria-label="ফোন করুন"
-        >
-          ০১৮১৯-৭৫৯৮৬৮
-        </a>
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="btn btn--glass btn--sm h-8 w-8 !p-0"
-          aria-label="থিম বদলান"
-        >
-          <span aria-hidden="true">{mounted && isDark ? '☀️' : '🌙'}</span>
-        </button>
-      </div>
-    </nav>
+    <header className="bg-[#151515] text-[var(--light-100)] border-b border-[var(--light-16)]">
+      <nav
+        className={`max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between ${className}`.trim()}
+        aria-label="প্রধান নেভিগেশন"
+      >
+        <div className="flex items-center gap-2">
+          <span className="text-xl" aria-hidden="true">
+            🍽️
+          </span>
+          <span className="font-heading font-medium tracking-tight text-lg text-white">
+            ঘরোয়া স্বাদ
+          </span>
+        </div>
+        <div className="flex items-center gap-3">
+          <a
+            href="tel:01819759868"
+            className="btn btn--glass btn--sm hidden sm:inline-flex"
+            aria-label="ফোন করুন"
+          >
+            ০১৮১৯-৭৫৯৮৬৮
+          </a>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="btn btn--glass btn--sm h-8 w-8 !p-0"
+            aria-label="থিম বদলান"
+          >
+            <span aria-hidden="true">{mounted && isDark ? '☀️' : '🌙'}</span>
+          </button>
+        </div>
+      </nav>
+    </header>
   );
 }
+
+export default Header;

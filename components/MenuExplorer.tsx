@@ -21,7 +21,7 @@ import ItemModal from './ItemModal';
 import Toast from './Toast';
 import FloatingActions from './FloatingActions';
 
-export default function MenuExplorer() {
+export function MenuExplorer() {
   const [activeCat, setActiveCat] = useState<CategoryFilter>('all');
   const [query, setQuery] = useState<string>('');
   const [priceFilter, setPriceFilter] = useState<string>('all');
@@ -370,3 +370,5 @@ export default function MenuExplorer() {
     </>
   );
 }
+
+export default MenuExplorer;

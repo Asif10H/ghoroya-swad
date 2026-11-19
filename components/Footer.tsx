@@ -2,7 +2,7 @@
 
 import { useOpeningHours } from '@/hooks/useOpeningHours';
 
-export default function Footer() {
+export function Footer() {
   const { hoursText, isReady } = useOpeningHours();
 
   return (
@@ -43,3 +43,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer;

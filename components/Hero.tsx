@@ -3,15 +3,15 @@
 import Header from './Header';
 import { useOpeningHours } from '@/hooks/useOpeningHours';
 
-interface HeroProps {
+export interface HeroProps {
   hideHeader?: boolean;
 }
 
-export default function Hero({ hideHeader = false }: HeroProps) {
+export function Hero({ hideHeader = true }: HeroProps) {
   const { statusBadgeText, isOpen, isReady } = useOpeningHours();
 
   return (
-    <header className="relative overflow-hidden bg-[#151515] text-[var(--light-100)] pt-6 pb-20 sm:pb-24">
+    <section className="relative overflow-hidden bg-[#151515] text-[var(--light-100)] pt-10 sm:pt-14 pb-20 sm:pb-24">
       {/* Photo vignettes */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -26,7 +26,7 @@ export default function Hero({ hideHeader = false }: HeroProps) {
         {!hideHeader && <Header />}
 
         {/* Hero Content */}
-        <div className="text-center mt-12 sm:mt-16 max-w-3xl mx-auto pop">
+        <div className="text-center mt-6 sm:mt-10 max-w-3xl mx-auto pop">
           <p className="eyebrow text-[var(--neutral-400)] tracking-widest text-xs">
             ঘরের স্বাদ · মনের মতো
           </p>
@@ -64,6 +64,8 @@ export default function Hero({ hideHeader = false }: HeroProps) {
           </div>
         </div>
       </div>
-    </header>
+    </section>
   );
 }
+
+export default Hero;

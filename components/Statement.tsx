@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 
 const STATEMENT_TEXT = 'ঘরের সতেজ স্বাদ আর খাঁটি ভালোবাসায় তৈরি প্রতিটি খাবার।';
 
-export default function Statement() {
+export function Statement() {
   const textRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -65,3 +65,5 @@ export default function Statement() {
     </section>
   );
 }
+
+export default Statement;
