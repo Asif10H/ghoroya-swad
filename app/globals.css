@@ -211,6 +211,13 @@ button, a, input, select {
   touch-action: manipulation;
 }
 
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

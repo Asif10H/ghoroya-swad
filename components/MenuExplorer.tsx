@@ -35,6 +35,7 @@ import {
   PiListLight,
   PiBowlFoodLight,
   PiArrowCounterClockwiseLight,
+  PiCaretDownLight,
 } from 'react-icons/pi';
 
 export function MenuExplorer() {
@@ -265,18 +266,22 @@ export function MenuExplorer() {
             </div>
 
             {/* Sort Select */}
-            <div className="shrink-0">
+            <div className="relative shrink-0">
               <select
                 id="sort"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="h-10 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-xs font-mono text-[var(--tone-strong)] px-2.5 sm:px-3 outline-none focus:outline-2 focus:outline-[var(--tone-strong)] transition-colors cursor-pointer"
+                className="appearance-none h-10 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-xs font-mono text-[var(--tone-strong)] pl-3 pr-8 outline-none focus:outline-2 focus:outline-[var(--tone-strong)] transition-colors cursor-pointer"
                 aria-label="সর্টিং বা ক্রম নির্ধারণ"
               >
-                <option value="default" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">↕ ডিফল্ট ক্রম</option>
+                <option value="default" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">ডিফল্ট ক্রম</option>
                 <option value="asc" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">দাম: কম → বেশি</option>
                 <option value="desc" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">দাম: বেশি → কম</option>
               </select>
+              <PiCaretDownLight
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-[var(--text-muted)] pointer-events-none"
+                aria-hidden="true"
+              />
             </div>
 
             {/* Grid / List View Mode Toggle */}
