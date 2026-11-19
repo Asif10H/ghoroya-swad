@@ -84,10 +84,10 @@ export default function CardGrid({
             style={vignetteStyle}
           />
 
-          <span className="absolute bottom-2 left-2 sm:bottom-2.5 sm:left-2.5 rounded-full bg-[var(--light-16)] backdrop-blur-[16px] text-white font-mono text-[11px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 border border-[var(--light-16)] font-medium">
+          <span className="absolute bottom-2 left-2 sm:bottom-2.5 sm:left-2.5 rounded-lg bg-[var(--light-16)] backdrop-blur-[16px] text-white font-mono text-[11px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 border border-[var(--light-16)] font-medium">
             {toBn(item.price)} ৳
           </span>
-          <span className="hidden xs:inline-flex sm:inline-flex absolute bottom-2.5 right-2.5 rounded-full bg-black/60 text-[var(--light-100)] font-mono text-[10px] px-2 py-0.5 items-center gap-1">
+          <span className="hidden xs:inline-flex sm:inline-flex absolute bottom-2.5 right-2.5 rounded-lg bg-black/60 text-[var(--light-100)] font-mono text-[10px] px-2 py-0.5 items-center gap-1">
             <PiCameraLight className="text-xs" aria-hidden="true" />
             <span>{toBn(item.images ? item.images.length : 0)}</span>
           </span>
@@ -107,61 +107,60 @@ export default function CardGrid({
             )}
           </button>
         </div>
+      </div>
 
-        <div className="p-3 sm:p-3.5 pb-1">
+      {/* Name + Note on Left, Quick Add / Stepper on Right (No duplicate price) */}
+      <div className="p-3 sm:p-3.5 flex items-center justify-between gap-2.5">
+        <div className="min-w-0 flex-1">
           <h3 className="font-heading font-medium text-sm sm:text-[15px] leading-snug truncate text-[var(--tone-strong)]">
             {item.name}
           </h3>
-          <p className="text-[11px] sm:text-xs text-[var(--text-muted)] mt-0.5 line-clamp-1 min-h-[1rem]">
+          <p className="text-[11px] sm:text-xs text-[var(--text-muted)] mt-0.5 truncate">
             {item.note || '\u00A0'}
           </p>
         </div>
-      </div>
 
-      {/* Quick Add / Stepper Area */}
-      <div className="p-3 sm:p-3.5 pt-1 flex items-center justify-between border-t border-[var(--border-subtle)]/50 mt-1">
-        <span className="text-xs font-medium text-[var(--tone-strong)] font-heading">
-          {toBn(item.price)} ৳
-        </span>
-
-        {quantity === 0 ? (
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              addItem(item);
-            }}
-            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] hover:opacity-90 active:scale-95 transition-colors cursor-pointer"
-          >
-            <PiPlusLight className="text-xs" />
-            <span>যোগ</span>
-          </button>
-        ) : (
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center border border-[var(--border-subtle)] rounded-lg bg-[var(--bg-lift)] overflow-hidden"
-          >
+        {/* Quick Add / Stepper Area */}
+        <div className="shrink-0">
+          {quantity === 0 ? (
             <button
               type="button"
-              onClick={() => removeItem(item.id)}
-              className="w-6 h-6 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-16)] dark:hover:bg-[var(--light-16)] active:scale-95 transition-colors cursor-pointer"
-              aria-label="কমান"
+              onClick={(e) => {
+                e.stopPropagation();
+                addItem(item);
+              }}
+              className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] hover:opacity-90 active:scale-95 transition-colors cursor-pointer"
             >
-              <PiMinusLight className="text-[10px]" />
+              <PiPlusLight className="text-xs" />
+              <span>যোগ</span>
             </button>
-            <span className="w-6 text-center text-xs font-medium text-[var(--tone-strong)]">
-              {toBn(quantity)}
-            </span>
-            <button
-              type="button"
-              onClick={() => addItem(item)}
-              className="w-6 h-6 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-16)] dark:hover:bg-[var(--light-16)] active:scale-95 transition-colors cursor-pointer"
-              aria-label="বাড়ান"
+          ) : (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center border border-[var(--border-subtle)] rounded-lg bg-[var(--bg-lift)] overflow-hidden"
             >
-              <PiPlusLight className="text-[10px]" />
-            </button>
-          </div>
-        )}
+              <button
+                type="button"
+                onClick={() => removeItem(item.id)}
+                className="w-6 h-6 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-16)] dark:hover:bg-[var(--light-16)] active:scale-95 transition-colors cursor-pointer"
+                aria-label="কমান"
+              >
+                <PiMinusLight className="text-[10px]" />
+              </button>
+              <span className="w-6 text-center text-xs font-medium text-[var(--tone-strong)]">
+                {toBn(quantity)}
+              </span>
+              <button
+                type="button"
+                onClick={() => addItem(item)}
+                className="w-6 h-6 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--dark-16)] dark:hover:bg-[var(--light-16)] active:scale-95 transition-colors cursor-pointer"
+                aria-label="বাড়ান"
+              >
+                <PiPlusLight className="text-[10px]" />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </article>
   );
