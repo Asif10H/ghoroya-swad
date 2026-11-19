@@ -34,104 +34,104 @@ const FOOD_PHOTOS: Record<string, string[]> = {
     'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=800&q=80',
   ],
   'চিকেন মোমো': [
+    'https://images.pexels.com/photos/7363674/pexels-photo-7363674.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80',
   ],
   'চিকেন ফিঙ্গার রোল': [
+    'https://images.pexels.com/photos/39853099/pexels-photo-39853099.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1562967914-01efa7e87832?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=80',
   ],
   'চিকেন নাগেট': [
+    'https://images.pexels.com/photos/9872916/pexels-photo-9872916.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1585325701165-351af916e581?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1562967914-01efa7e87832?auto=format&fit=crop&w=800&q=80',
   ],
   'চিকেন সমুচা': [
+    'https://images.pexels.com/photos/36905236/pexels-photo-36905236.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80',
   ],
   'চিকেন অনথন': [
+    'https://images.pexels.com/photos/5639730/pexels-photo-5639730.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=800&q=80',
   ],
   'চিকেন সফট রোল': [
+    'https://images.pexels.com/photos/12737661/pexels-photo-12737661.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=80',
   ],
   'চিকেন সসেজ': [
+    'https://images.pexels.com/photos/10794112/pexels-photo-10794112.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=800&q=80',
   ],
   'মিট বল': [
     'https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1515516969-d4008cc6241a?auto=format&fit=crop&w=800&q=80',
   ],
   'চটপটি': [
+    'https://images.pexels.com/photos/11818239/pexels-photo-11818239.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1606471191009-63994c53433b?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=800&q=80',
   ],
   'ফুসকা': [
+    'https://images.pexels.com/photos/13063312/pexels-photo-13063312.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
   ],
   'ফ্রেঞ্চ ফ্রাই': [
-    'https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=800&q=80',
+    'https://images.pexels.com/photos/5779487/pexels-photo-5779487.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=80',
   ],
   'এগ চিকেন পাস্তা': [
-    'https://images.unsplash.com/photo-1621996346565-e3d5d6281781?auto=format&fit=crop&w=800&q=80',
+    'https://images.pexels.com/photos/10966436/pexels-photo-10966436.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80',
   ],
   'এগ চিকেন নুডলস': [
+    'https://images.pexels.com/photos/4224304/pexels-photo-4224304.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=80',
   ],
   'চিকেন স্প্রিং রোল': [
-    'https://images.unsplash.com/photo-1548865175-6c7c4273c52e?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
   ],
   'ফিশ ফ্রাই': [
-    'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80',
+    'https://images.pexels.com/photos/7298033/pexels-photo-7298033.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80',
   ],
   'পুডিং': [
+    'https://images.pexels.com/photos/10918153/pexels-photo-10918153.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=80',
   ],
   'দই ফুসকা': [
-    'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
+    'https://images.pexels.com/photos/13063312/pexels-photo-13063312.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80',
   ],
 
   'রেগুলার লাচ্ছি': [
+    'https://images.pexels.com/photos/18142603/pexels-photo-18142603.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1571006687087-21a478db182c?auto=format&fit=crop&w=800&q=80',
   ],
   'স্পেশাল লাচ্ছি': [
-    'https://images.unsplash.com/photo-1571006687087-21a478db182c?auto=format&fit=crop&w=800&q=80',
+    'https://images.pexels.com/photos/4475024/pexels-photo-4475024.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80',
   ],
   'কাজুবাদাম লাচ্ছি': [
+    'https://images.pexels.com/photos/4475024/pexels-photo-4475024.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1571006687087-21a478db182c?auto=format&fit=crop&w=800&q=80',
   ],
   'কোল্ড কফি': [
+    'https://images.pexels.com/photos/35229818/pexels-photo-35229818.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80',
   ],
   'অরেঞ্জ / মাল্টা জুস': [
+    'https://images.pexels.com/photos/14510445/pexels-photo-14510445.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=800&q=80',
   ],
   'ম্যাঙ্গো জুস': [
+    'https://images.pexels.com/photos/30620864/pexels-photo-30620864.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80',
   ],
   'ড্রাগন জুস': [
+    'https://images.pexels.com/photos/12144880/pexels-photo-12144880.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?auto=format&fit=crop&w=800&q=80',
   ],
   'পেঁপে জুস': [
-    'https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?auto=format&fit=crop&w=800&q=80',
+    'https://images.pexels.com/photos/8181521/pexels-photo-8181521.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=800&q=80',
   ],
   'তেঁতুল জুস': [
@@ -139,36 +139,36 @@ const FOOD_PHOTOS: Record<string, string[]> = {
     'https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=800&q=80',
   ],
   'লেমন জুস': [
-    'https://images.unsplash.com/photo-1523677068659-3cb304e08920?auto=format&fit=crop&w=800&q=80',
+    'https://images.pexels.com/photos/27551844/pexels-photo-27551844.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80',
   ],
   'মিন্ট লেমন জুস': [
+    'https://images.pexels.com/photos/27551844/pexels-photo-27551844.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1523677068659-3cb304e08920?auto=format&fit=crop&w=800&q=80',
   ],
   'ম্যাঙ্গো মিল্কশেক': [
-    'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80',
+    'https://images.pexels.com/photos/30620864/pexels-photo-30620864.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=800&q=80',
   ],
   'চকলেট মিল্কশেক': [
+    'https://images.pexels.com/photos/4113348/pexels-photo-4113348.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&w=800&q=80',
   ],
   'স্ট্রবেরি মিল্কশেক': [
+    'https://images.pexels.com/photos/10066812/pexels-photo-10066812.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1553787499-6f9133860278?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80',
   ],
   'হট কফি': [
+    'https://images.pexels.com/photos/6747870/pexels-photo-6747870.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
   ],
   'স্পেশাল লিকার টি': [
+    'https://images.pexels.com/photos/1493080/pexels-photo-1493080.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80',
   ],
   'দুধ চা': [
+    'https://images.pexels.com/photos/34324342/pexels-photo-34324342.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80',
   ],
 };
 
