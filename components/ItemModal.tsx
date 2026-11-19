@@ -230,33 +230,35 @@ export default function ItemModal({
         </div>
 
         {/* Thumbnail strip */}
-        <div
-          id="thumbs"
-          className="flex gap-2 overflow-x-auto no-scrollbar px-4 pt-3"
-        >
-          {images.map((src, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => handleSelectThumb(i)}
-              className={`h-12 w-16 shrink-0 rounded-[8px] overflow-hidden border transition-opacity ${
-                activeIdx === i
-                  ? 'border-[var(--tone-strong)]'
-                  : 'border-[var(--border-subtle)] opacity-50'
-              }`}
-              aria-label={`${item.name} থাম্বনেইল ${toBn(i + 1)}`}
-            >
-              <img
-                src={src}
-                alt={`${item.name} থাম্বনেইল ${toBn(i + 1)}`}
-                className="h-full w-full object-cover"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = fallbackSvg;
-                }}
-              />
-            </button>
-          ))}
-        </div>
+        {images.length > 1 && (
+          <div
+            id="thumbs"
+            className="flex gap-2 overflow-x-auto no-scrollbar px-4 pt-3 pb-1"
+          >
+            {images.map((src, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => handleSelectThumb(i)}
+                className={`h-14 w-18 sm:h-16 sm:w-20 shrink-0 rounded-[8px] overflow-hidden border-2 transition-all ${
+                  activeIdx === i
+                    ? 'border-[var(--tone-strong)] opacity-100 ring-2 ring-[var(--tone-strong)]/20'
+                    : 'border-[var(--border-subtle)] opacity-70 hover:opacity-100'
+                }`}
+                aria-label={`${item.name} থাম্বনেইল ${toBn(i + 1)}`}
+              >
+                <img
+                  src={src}
+                  alt={`${item.name} থাম্বনেইল ${toBn(i + 1)}`}
+                  className="h-full w-full object-cover"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = fallbackSvg;
+                  }}
+                />
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Details body */}
         <div className="overflow-y-auto p-4 sm:p-5 space-y-3.5 sm:space-y-4">
@@ -360,51 +362,12 @@ export default function ItemModal({
           {/* Related items */}
           {relatedItems.length > 0 && (
             <div className="pt-4 border-t border-[var(--border-subtle)]">
-              <h4 className="font-heading font-medium text-xs font-mono uppercase text-[var(--text-muted)] mb-3">
+              <h4 className="font-heading font-medium text-xs font-mono uppercase text-[var(--text-muted)] mb-2.5">
                 আরও দেখুন
               </h4>
-              <div id="related" className="grid grid-cols-3 gap-2.5">
+              <div id="related" className="grid grid-cols-3 gap-2 sm:gap-3">
                 {relatedItems.map((r) => (
-                  <button
-                    key={r.id}
-                    type="button"
-                    data-rel={r.id}
-                    onClick={() => onOpenRelated(r)}
-                    className="text-left rounded-[8px] overflow-hidden bg-[var(--bg-base)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] transition-colors"
-                  >
-                    <div className="aspect-[4/3] shimmer relative">
-                      <img
-                        src={
-                          r.images && r.images.length > 0
-                            ? r.images[0]
-                            : fallbackSvg
-                        }
-                        alt={r.name}
-                        loading="lazy"
-                        onLoad={(e) =>
-                          e.currentTarget.parentElement?.classList.remove(
-                            'shimmer'
-                          )
-                        }
-                        onError={(e) => {
-                          e.currentTarget.parentElement?.classList.remove(
-                            'shimmer'
-                          );
-                          (e.currentTarget as HTMLImageElement).src =
-                            fallbackSvg;
-                        }}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div className="p-2">
-                      <p className="text-xs font-medium leading-tight truncate text-[var(--tone-strong)]">
-                        {r.name}
-                      </p>
-                      <p className="text-xs font-mono text-[var(--text-muted)]">
-                        {toBn(r.price)} ৳
-                      </p>
-                    </div>
-                  </button>
+                  <RelatedCard key={r.id} item={r} onOpen={onOpenRelated} />
                 ))}
               </div>
             </div>
@@ -412,5 +375,52 @@ export default function ItemModal({
         </div>
       </div>
     </div>
+  );
+}
+
+interface RelatedCardProps {
+  item: MenuItem;
+  onOpen: (item: MenuItem) => void;
+}
+
+function RelatedCard({ item, onOpen }: RelatedCardProps) {
+  const initialSrc =
+    item.images && item.images.length > 0 ? item.images[0] : fallbackSvg;
+  const [src, setSrc] = useState<string>(initialSrc);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    setSrc(item.images && item.images.length > 0 ? item.images[0] : fallbackSvg);
+    setIsLoaded(false);
+  }, [item]);
+
+  return (
+    <button
+      type="button"
+      data-rel={item.id}
+      onClick={() => onOpen(item)}
+      className="group text-left rounded-[8px] overflow-hidden bg-[var(--bg-base)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)]"
+    >
+      <div className={`aspect-[4/3] relative overflow-hidden bg-[var(--neutral-100)] ${isLoaded ? '' : 'shimmer'}`}>
+        <img
+          src={src}
+          alt={item.name}
+          onLoad={() => setIsLoaded(true)}
+          onError={() => {
+            setSrc(fallbackSvg);
+            setIsLoaded(true);
+          }}
+          className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+      <div className="p-2 sm:p-2.5">
+        <p className="text-xs sm:text-[13px] font-medium leading-snug truncate text-[var(--tone-strong)]">
+          {item.name}
+        </p>
+        <p className="text-[11px] sm:text-xs font-mono font-medium text-[var(--tone-strong)] mt-0.5">
+          {toBn(item.price)} ৳
+        </p>
+      </div>
+    </button>
   );
 }
