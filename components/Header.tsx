@@ -76,21 +76,21 @@ export function Header({ className = '' }: HeaderProps) {
   };
 
   return (
-    <header className="bg-[#151515] text-[var(--light-100)] border-b border-[var(--light-16)]">
+    <header className="bg-[var(--bg-base)]/80 backdrop-blur-[16px] text-[var(--tone-strong)] border-b border-[var(--border-subtle)] transition-colors">
       <nav
         className={`max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between ${className}`.trim()}
         aria-label="প্রধান নেভিগেশন"
       >
         <div className="flex items-center gap-2">
-          <PiBowlFoodLight className="text-2xl sm:text-xl text-[var(--light-88)]" aria-hidden="true" />
-          <span className="font-heading font-medium tracking-tight text-lg text-white">
+          <PiBowlFoodLight className="text-2xl sm:text-xl text-[var(--tone-strong)]" aria-hidden="true" />
+          <span className="font-heading font-medium tracking-tight text-lg text-[var(--tone-strong)]">
             ঘরোয়া স্বাদ
           </span>
         </div>
         <div className="flex items-center gap-2 sm:gap-3">
           <a
             href="tel:01819759868"
-            className="inline-flex items-center justify-center gap-1.5 h-9 px-2.5 sm:px-3 rounded-lg border border-white/15 bg-white/10 text-neutral-100 backdrop-blur-md hover:bg-white/20 active:scale-95 transition-colors text-xs font-mono cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 h-9 px-2.5 sm:px-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-[var(--tone-strong)] backdrop-blur-md hover:bg-[var(--bg-lift)] active:scale-95 transition-colors text-xs font-mono cursor-pointer"
             aria-label="ফোন করুন"
           >
             <PiPhoneLight className="text-base sm:text-sm" aria-hidden="true" />
@@ -100,7 +100,7 @@ export function Header({ className = '' }: HeaderProps) {
           <button
             type="button"
             onClick={toggleTheme}
-            className="inline-flex items-center justify-center h-9 w-9 rounded-lg border border-white/15 bg-white/10 text-neutral-100 backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center justify-center h-9 w-9 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-[var(--tone-strong)] backdrop-blur-md hover:bg-[var(--bg-lift)] active:scale-95 transition-all cursor-pointer"
             aria-label="থিম বদলান"
           >
             {mounted && isDark ? (
