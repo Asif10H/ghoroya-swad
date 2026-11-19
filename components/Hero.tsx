@@ -15,6 +15,14 @@ export function Hero({ hideHeader = true }: HeroProps) {
 
   return (
     <section className="relative overflow-hidden bg-[#151515] text-[var(--light-100)] pt-10 sm:pt-14 pb-20 sm:pb-24">
+      {/* Background culinary photography layer */}
+      <img
+        src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover opacity-20 pointer-events-none"
+      />
+
       {/* Photo vignettes */}
       <div
         className="absolute inset-0 pointer-events-none"

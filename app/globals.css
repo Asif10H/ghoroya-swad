@@ -1,6 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-heading: var(--font-heading);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-ui);
+  --color-base: var(--bg-base);
+  --color-lift: var(--bg-lift);
+  --color-strong: var(--tone-strong);
+  --color-medium: var(--tone-medium);
+  --color-faint: var(--tone-faint);
+  --color-muted: var(--text-muted);
+  --color-subtle: var(--border-subtle);
+  --color-glass: var(--light-16);
+  --radius-btn: 8px;
+  --radius-card: 10px;
+  --radius-case: 20px;
+  --backdrop-blur-glass: 16px;
+}
 
 /* =========================================================
    Editorial Taste — Design Tokens & Base Setup

@@ -40,9 +40,17 @@ export default function CardGrid({
 
   return (
     <article
+      role="button"
+      tabIndex={0}
       onClick={() => onOpen(item)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onOpen(item);
+        }
+      }}
       style={animStyle}
-      className="pop group cursor-pointer rounded-[10px] overflow-hidden bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] transition-colors"
+      className="pop group cursor-pointer rounded-[10px] overflow-hidden bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:border-[var(--dark-32)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
     >
       <div
         className={`relative aspect-[4/3] overflow-hidden ${
@@ -106,3 +114,5 @@ export default function CardGrid({
     </article>
   );
 }
+
+export { CardGrid };

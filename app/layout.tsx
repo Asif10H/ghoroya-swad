@@ -40,6 +40,9 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const themeInitScript = `(function(){try{var s=localStorage.getItem('gs-dark');var p=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='true'||(s===null&&p)){document.documentElement.classList.add('dark');}}catch(e){}})();`;
+const themeScriptObj = { dangerouslySetInnerHTML: { __html: themeInitScript } };
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -48,8 +51,12 @@ export default function RootLayout({
   return (
     <html
       lang="bn"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${hindSiliguri.variable}`}
     >
+      <head>
+        <script {...themeScriptObj} />
+      </head>
       <body className="antialiased font-sans bg-[var(--bg-base)] text-[var(--tone-strong)]">
         {children}
       </body>

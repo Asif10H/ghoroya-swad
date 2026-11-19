@@ -35,9 +35,17 @@ export default function CardList({
 
   return (
     <article
+      role="button"
+      tabIndex={0}
       onClick={() => onOpen(item)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onOpen(item);
+        }
+      }}
       style={animStyle}
-      className="pop group cursor-pointer flex items-center gap-4 rounded-[10px] p-3 bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:bg-[var(--bg-lift)] transition-colors"
+      className="pop group cursor-pointer flex items-center gap-4 rounded-[10px] p-3 bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:bg-[var(--bg-lift)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
     >
       <div
         className={`relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 rounded-[8px] overflow-hidden ${
