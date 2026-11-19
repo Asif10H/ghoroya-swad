@@ -104,8 +104,6 @@
   --dur-slow: 0.8s;
   --dur-xslow: 1.2s;
 
-  /* Signal */
-  --signal: #ff4d2e;
 
   /* Type scales (Desktop) */
   --h0-size: 72px; --h0-lh: 68px; --h0-ls: -2.5px;

@@ -7,6 +7,9 @@ export interface HeroProps {
   hideHeader?: boolean;
 }
 
+const heroGradientStyle = { background: 'linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.85) 100%)' };
+const vignetteBottomStyle = { background: 'var(--vignette-bottom)' };
+
 export function Hero({ hideHeader = true }: HeroProps) {
   const { statusBadgeText, isOpen, isReady } = useOpeningHours();
 
@@ -15,11 +18,11 @@ export function Hero({ hideHeader = true }: HeroProps) {
       {/* Photo vignettes */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.85) 100%)' }}
+        style={heroGradientStyle}
       />
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: 'var(--vignette-bottom)' }}
+        style={vignetteBottomStyle}
       />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
