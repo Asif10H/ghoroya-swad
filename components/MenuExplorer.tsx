@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   CategoryFilter,
   MenuItem,
@@ -36,6 +36,8 @@ import {
   PiBowlFoodLight,
   PiArrowCounterClockwiseLight,
   PiCaretDownLight,
+  PiArrowsDownUpLight,
+  PiCheckLight,
 } from 'react-icons/pi';
 
 export function MenuExplorer() {
@@ -44,11 +46,46 @@ export function MenuExplorer() {
   const [priceFilter, setPriceFilter] = useState<string>('all');
   const [tagFilter, setTagFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<SortOption>('default');
+  const [isSortOpen, setIsSortOpen] = useState<boolean>(false);
+  const sortDropdownRef = useRef<HTMLDivElement>(null);
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [toastMsg, setToastMsg] = useState<string | null>(null);
 
   const { favs, toggleFav, isFav } = useFavorites();
+
+  const sortOptions = useMemo(
+    () => [
+      { id: 'default' as SortOption, label: 'ডিফল্ট ক্রম' },
+      { id: 'asc' as SortOption, label: 'দাম: কম → বেশি' },
+      { id: 'desc' as SortOption, label: 'দাম: বেশি → কম' },
+    ],
+    []
+  );
+
+  // Close sort dropdown when clicking outside or pressing Escape
+  useEffect(() => {
+    if (!isSortOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        sortDropdownRef.current &&
+        !sortDropdownRef.current.contains(e.target as Node)
+      ) {
+        setIsSortOpen(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsSortOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isSortOpen]);
 
   // Load saved viewMode preference
   useEffect(() => {
@@ -265,23 +302,68 @@ export function MenuExplorer() {
               ) : null}
             </div>
 
-            {/* Sort Select */}
-            <div className="relative shrink-0">
-              <select
+            {/* Custom Sort Dropdown (Zero Native Select CSS) */}
+            <div ref={sortDropdownRef} className="relative shrink-0">
+              <button
                 id="sort"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="appearance-none h-10 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-xs font-mono text-[var(--tone-strong)] pl-3 pr-8 outline-none focus:outline-2 focus:outline-[var(--tone-strong)] transition-colors cursor-pointer"
+                type="button"
+                onClick={() => setIsSortOpen((prev) => !prev)}
+                aria-haspopup="listbox"
+                aria-expanded={isSortOpen}
+                className={`h-10 px-2.5 sm:px-3 rounded-lg border text-xs font-mono font-medium inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer transition-colors select-none ${
+                  isSortOpen
+                    ? 'border-[var(--tone-strong)] bg-[var(--tone-faint)] text-[var(--tone-strong)]'
+                    : sortBy !== 'default'
+                    ? 'border-[var(--tone-strong)] bg-[var(--tone-strong)] text-[var(--bg-base)]'
+                    : 'border-[var(--border-subtle)] bg-[var(--neutral-white)] text-[var(--tone-strong)] hover:bg-[var(--bg-lift)]'
+                }`}
                 aria-label="সর্টিং বা ক্রম নির্ধারণ"
               >
-                <option value="default" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">ডিফল্ট ক্রম</option>
-                <option value="asc" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">দাম: কম → বেশি</option>
-                <option value="desc" className="bg-[var(--neutral-white)] text-[var(--tone-strong)]">দাম: বেশি → কম</option>
-              </select>
-              <PiCaretDownLight
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-[var(--text-muted)] pointer-events-none"
-                aria-hidden="true"
-              />
+                <PiArrowsDownUpLight className="text-sm shrink-0" aria-hidden="true" />
+                <span>
+                  {sortOptions.find((o) => o.id === sortBy)?.label || 'ডিফল্ট ক্রম'}
+                </span>
+                <PiCaretDownLight
+                  className={`text-xs transition-transform duration-200 shrink-0 ${
+                    isSortOpen ? 'rotate-180' : ''
+                  }`}
+                  aria-hidden="true"
+                />
+              </button>
+
+              {/* Custom Options Popover */}
+              {isSortOpen && (
+                <div
+                  role="listbox"
+                  className="absolute right-0 sm:left-0 top-full mt-1.5 min-w-[170px] z-50 rounded-lg border border-[var(--border-subtle)] bg-[var(--neutral-white)] backdrop-blur-[16px] p-1.5 space-y-0.5"
+                >
+                  {sortOptions.map((opt) => {
+                    const isSelected = sortBy === opt.id;
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        role="option"
+                        aria-selected={isSelected}
+                        onClick={() => {
+                          setSortBy(opt.id);
+                          setIsSortOpen(false);
+                        }}
+                        className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-mono flex items-center justify-between gap-2 transition-colors cursor-pointer ${
+                          isSelected
+                            ? 'bg-[var(--tone-strong)] text-[var(--bg-base)] font-medium'
+                            : 'text-[var(--tone-strong)] hover:bg-[var(--bg-lift)]'
+                        }`}
+                      >
+                        <span>{opt.label}</span>
+                        {isSelected && (
+                          <PiCheckLight className="text-xs shrink-0" aria-hidden="true" />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* Grid / List View Mode Toggle */}
