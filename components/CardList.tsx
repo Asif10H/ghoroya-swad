@@ -46,10 +46,10 @@ export default function CardList({
         }
       }}
       style={animStyle}
-      className="pop group cursor-pointer flex items-center gap-4 rounded-[10px] p-3 bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:bg-[var(--bg-lift)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
+      className="pop group cursor-pointer flex items-center gap-3 sm:gap-4 rounded-[10px] p-2.5 sm:p-3 bg-[var(--neutral-white)] border border-[var(--border-subtle)] hover:bg-[var(--bg-lift)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--tone-strong)] focus-visible:outline-offset-2"
     >
       <div
-        className={`relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 rounded-[8px] overflow-hidden ${
+        className={`relative h-18 w-18 sm:h-24 sm:w-24 shrink-0 rounded-[8px] overflow-hidden ${
           isLoaded ? '' : 'shimmer'
         }`}
       >
@@ -66,17 +66,17 @@ export default function CardList({
         />
       </div>
       <div className="flex-1 min-w-0">
-        <h3 className="font-medium text-[15px] leading-snug truncate text-[var(--tone-strong)]">
+        <h3 className="font-medium text-sm sm:text-[15px] leading-snug truncate text-[var(--tone-strong)]">
           {item.name}
         </h3>
-        <p className="text-xs text-[var(--text-muted)] mt-0.5">
+        <p className="text-[11px] sm:text-xs text-[var(--text-muted)] mt-0.5 truncate">
           {item.note || '\u00A0'}
         </p>
         {item.tags && item.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-1.5">
+          <div className="flex flex-wrap gap-1 mt-1 sm:mt-1.5">
             {item.tags.map((t) =>
               TAGS[t] ? (
-                <span key={t} className="tag tag--glass text-[10px] py-0.5 px-2">
+                <span key={t} className="tag tag--glass text-[9px] sm:text-[10px] py-0.5 px-1.5 sm:px-2">
                   {TAGS[t].label}
                 </span>
               ) : null
@@ -84,8 +84,8 @@ export default function CardList({
           </div>
         )}
       </div>
-      <div className="text-right pr-1 shrink-0">
-        <div className="font-mono text-base font-medium text-[var(--tone-strong)] whitespace-nowrap">
+      <div className="text-right pr-0.5 sm:pr-1 shrink-0">
+        <div className="font-mono text-sm sm:text-base font-medium text-[var(--tone-strong)] whitespace-nowrap">
           {toBn(item.price)} ৳
         </div>
         <button
@@ -95,7 +95,7 @@ export default function CardList({
             e.stopPropagation();
             onToggleFav(item.id, e);
           }}
-          className="mt-1 p-1 inline-flex items-center justify-center text-lg hover:opacity-80 transition-opacity"
+          className="mt-1 p-1.5 inline-flex items-center justify-center text-lg hover:opacity-80 active:scale-90 transition-all"
         >
           {isFav ? (
             <PiHeartFill className="text-[var(--tone-strong)]" aria-hidden="true" />

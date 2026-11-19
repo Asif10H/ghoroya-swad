@@ -56,11 +56,11 @@ export function Statement() {
 
   return (
     <section
-      className="border-b border-[var(--border-subtle)] bg-[var(--bg-base)] py-16 sm:py-20"
+      className="border-b border-[var(--border-subtle)] bg-[var(--bg-base)] py-10 sm:py-20"
       aria-label="ব্র্যান্ড স্টেটমেন্ট"
     >
       <div className="max-w-6xl mx-auto px-4">
-        <p ref={textRef} className="h0 statement__text max-w-4xl font-heading font-medium text-2xl sm:text-4xl text-[var(--tone-strong)] leading-snug" data-words>ঘরের সতেজ স্বাদ আর খাঁটি ভালোবাসায় তৈরি প্রতিটি খাবার।</p>
+        <p ref={textRef} className="h0 statement__text max-w-4xl font-heading font-medium text-xl sm:text-4xl text-[var(--tone-strong)] leading-snug" data-words>ঘরের সতেজ স্বাদ আর খাঁটি ভালোবাসায় তৈরি প্রতিটি খাবার।</p>
       </div>
     </section>
   );

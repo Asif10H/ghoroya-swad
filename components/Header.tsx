@@ -53,24 +53,25 @@ export function Header({ className = '' }: HeaderProps) {
         aria-label="প্রধান নেভিগেশন"
       >
         <div className="flex items-center gap-2">
-          <PiBowlFoodLight className="text-xl text-[var(--light-88)]" aria-hidden="true" />
+          <PiBowlFoodLight className="text-2xl sm:text-xl text-[var(--light-88)]" aria-hidden="true" />
           <span className="font-heading font-medium tracking-tight text-lg text-white">
             ঘরোয়া স্বাদ
           </span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <a
             href="tel:01819759868"
-            className="btn btn--glass btn--sm hidden sm:inline-flex items-center gap-1.5"
+            className="btn btn--glass btn--sm h-9 px-2.5 sm:px-3 sm:py-1.5 inline-flex items-center justify-center gap-1.5"
             aria-label="ফোন করুন"
           >
-            <PiPhoneLight className="text-sm" aria-hidden="true" />
-            <span>০১৮১৯-৭৫৯৮৬৮</span>
+            <PiPhoneLight className="text-base sm:text-sm" aria-hidden="true" />
+            <span className="hidden sm:inline">০১৮১৯-৭৫৯৮৬৮</span>
+            <span className="inline sm:hidden text-xs">কল</span>
           </a>
           <button
             type="button"
             onClick={toggleTheme}
-            className="btn btn--glass btn--sm h-8 w-8 !p-0 inline-flex items-center justify-center"
+            className="btn btn--glass btn--sm h-9 w-9 !p-0 inline-flex items-center justify-center"
             aria-label="থিম বদলান"
           >
             {mounted && isDark ? (

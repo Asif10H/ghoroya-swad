@@ -160,10 +160,13 @@ export default function ItemModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="pop bg-[var(--neutral-white)] text-[var(--tone-strong)] w-full sm:max-w-xl rounded-t-[10px] sm:rounded-[10px] overflow-hidden max-h-[94vh] flex flex-col border border-[var(--border-subtle)]"
+        className="pop bg-[var(--neutral-white)] text-[var(--tone-strong)] w-full sm:max-w-xl rounded-t-[16px] sm:rounded-[10px] overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col border border-[var(--border-subtle)] pb-[env(safe-area-inset-bottom)]"
       >
         {/* Media slider header */}
         <div className="relative bg-[var(--neutral-200)]">
+          {/* Mobile drawer handle */}
+          <div className="sm:hidden absolute top-2 left-1/2 -translate-x-1/2 w-10 h-1 bg-white/50 rounded-full z-10 pointer-events-none" />
+
           <div
             ref={sliderRef}
             onScroll={handleSliderScroll}
@@ -195,7 +198,7 @@ export default function ItemModal({
             id="prev"
             type="button"
             onClick={handlePrev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center"
+            className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95"
             aria-label="আগের ছবি"
           >
             <PiCaretLeftLight className="text-lg" aria-hidden="true" />
@@ -204,7 +207,7 @@ export default function ItemModal({
             id="next"
             type="button"
             onClick={handleNext}
-            className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center"
+            className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95"
             aria-label="পরের ছবি"
           >
             <PiCaretRightLight className="text-lg" aria-hidden="true" />
@@ -213,14 +216,14 @@ export default function ItemModal({
             id="close"
             type="button"
             onClick={onClose}
-            className="absolute right-3 top-3 h-8 w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center"
+            className="absolute right-3 top-3 h-9 w-9 sm:h-8 sm:w-8 rounded-[8px] bg-black/60 hover:bg-black/80 text-white grid place-items-center active:scale-95 z-20"
             aria-label="বন্ধ করুন"
           >
             <PiXLight className="text-base" aria-hidden="true" />
           </button>
           <span
             id="counter"
-            className="absolute left-3 top-3 rounded-full bg-black/60 text-white font-mono text-[11px] px-2.5 py-1"
+            className="absolute left-3 top-3 rounded-full bg-black/60 text-white font-mono text-[11px] px-2.5 py-1 z-20"
           >
             {`${toBn(activeIdx + 1)} / ${toBn(images.length)}`}
           </span>
@@ -256,10 +259,10 @@ export default function ItemModal({
         </div>
 
         {/* Details body */}
-        <div className="overflow-y-auto p-5 space-y-4">
+        <div className="overflow-y-auto p-4 sm:p-5 space-y-3.5 sm:space-y-4">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p id="m-cat" className="eyebrow text-xs text-[var(--text-muted)] flex items-center gap-1.5">
+              <p id="m-cat" className="eyebrow text-[11px] sm:text-xs text-[var(--text-muted)] flex items-center gap-1.5">
                 {cat?.id === 'snacks' ? (
                   <PiHamburgerLight className="text-sm" aria-hidden="true" />
                 ) : (
@@ -269,19 +272,19 @@ export default function ItemModal({
               </p>
               <h3
                 id="m-name"
-                className="h4 font-heading font-medium text-2xl mt-1 text-[var(--tone-strong)]"
+                className="h4 font-heading font-medium text-xl sm:text-2xl mt-1 text-[var(--tone-strong)]"
               >
                 {item.name}
               </h3>
               {item.note ? (
-                <p id="m-note" className="body-sm text-[var(--text-muted)] mt-0.5">
+                <p id="m-note" className="body-sm text-[var(--text-muted)] mt-0.5 text-xs sm:text-sm">
                   {item.note}
                 </p>
               ) : null}
             </div>
             <span
               id="m-price"
-              className="shrink-0 rounded-[8px] bg-[var(--tone-faint)] text-[var(--tone-strong)] font-mono font-medium px-3.5 py-1.5 text-lg border border-[var(--border-subtle)]"
+              className="shrink-0 rounded-[8px] bg-[var(--tone-faint)] text-[var(--tone-strong)] font-mono font-medium px-3 sm:px-3.5 py-1 sm:py-1.5 text-base sm:text-lg border border-[var(--border-subtle)]"
             >
               {toBn(item.price)} ৳
             </span>
@@ -290,7 +293,7 @@ export default function ItemModal({
           {item.tags.length > 0 && (
             <div id="m-tags" className="flex flex-wrap gap-1.5">
               {item.tags.map((tag) => (
-                <span key={tag} className="tag tag--glass">
+                <span key={tag} className="tag tag--glass text-[10px] sm:text-xs">
                   {TAGS[tag]?.label || tag}
                 </span>
               ))}
@@ -300,7 +303,7 @@ export default function ItemModal({
           {item.desc ? (
             <p
               id="m-desc"
-              className="body-md text-[var(--text-muted)] leading-relaxed"
+              className="body-md text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed"
             >
               {item.desc}
             </p>
@@ -316,7 +319,7 @@ export default function ItemModal({
               </h4>
               <div id="m-ing" className="flex flex-wrap gap-1.5">
                 {item.ingredients.map((ing) => (
-                  <span key={ing} className="tag">
+                  <span key={ing} className="tag text-[10px] sm:text-xs">
                     {ing}
                   </span>
                 ))}
@@ -324,17 +327,17 @@ export default function ItemModal({
             </div>
           )}
 
-          <div className="pt-2 flex gap-3">
+          <div className="pt-2 flex gap-2.5 sm:gap-3">
             <button
               id="m-fav"
               type="button"
               onClick={() => onToggleFav(item.id)}
-              className="btn btn--secondary flex-1 inline-flex items-center justify-center gap-2"
+              className="btn btn--secondary flex-1 h-11 sm:h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 active:scale-95"
             >
               {isFav ? (
                 <>
                   <PiHeartFill className="text-base text-[var(--tone-strong)]" aria-hidden="true" />
-                  <span>পছন্দের তালিকায় আছে</span>
+                  <span>পছন্দের তালিকায়</span>
                 </>
               ) : (
                 <>
@@ -347,7 +350,7 @@ export default function ItemModal({
               id="m-share"
               type="button"
               onClick={handleShare}
-              className="btn btn--primary flex-1 inline-flex items-center justify-center gap-2"
+              className="btn btn--primary flex-1 h-11 sm:h-10 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 sm:gap-2 active:scale-95"
             >
               <PiShareNetworkLight className="text-base" aria-hidden="true" />
               <span>শেয়ার করুন</span>

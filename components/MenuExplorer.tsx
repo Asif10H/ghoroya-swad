@@ -207,7 +207,7 @@ export function MenuExplorer() {
       {/* Sticky Controls Bar */}
       <div id="menuTop" />
       <div className="sticky top-0 z-30 bg-[var(--bg-base)]/95 backdrop-blur-[16px] border-b border-[var(--border-subtle)]">
-        <div className="max-w-6xl mx-auto px-4 py-3 space-y-3">
+        <div className="max-w-6xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3 space-y-2.5 sm:space-y-3">
           {/* Search input */}
           <div className="relative">
             <PiMagnifyingGlassLight
@@ -222,14 +222,14 @@ export function MenuExplorer() {
               placeholder="আইটেম খুঁজুন… (যেমন: লাচ্ছি, মোমো, কফি)"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full rounded-[8px] border border-[var(--border-subtle)] bg-[var(--neutral-white)] pl-10 pr-10 py-2.5 text-sm text-[var(--tone-strong)] placeholder-[var(--neutral-400)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] focus:outline-offset-2 transition-colors"
+              className="w-full rounded-[8px] border border-[var(--border-subtle)] bg-[var(--neutral-white)] pl-10 pr-10 py-2 sm:py-2.5 text-base sm:text-sm text-[var(--tone-strong)] placeholder-[var(--neutral-400)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] focus:outline-offset-2 transition-colors"
             />
             {query ? (
               <button
                 id="clear"
                 type="button"
                 onClick={() => setQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 h-6 w-6 rounded-[8px] bg-[var(--tone-faint)] text-xs text-[var(--tone-strong)] grid place-items-center"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 h-7 w-7 rounded-[8px] bg-[var(--tone-faint)] text-xs text-[var(--tone-strong)] grid place-items-center active:scale-95"
                 aria-label="মুছুন"
               >
                 <PiXLight className="text-xs" aria-hidden="true" />
@@ -240,14 +240,14 @@ export function MenuExplorer() {
           {/* Categories tabs */}
           <div
             id="tabs"
-            className="flex gap-2 overflow-x-auto no-scrollbar py-0.5"
+            className="flex gap-2 overflow-x-auto no-scrollbar py-0.5 -mx-3 px-3 sm:mx-0 sm:px-0"
           >
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveCat(tab.id)}
-                className={`pill-btn inline-flex items-center gap-1.5 ${
+                className={`pill-btn shrink-0 inline-flex items-center gap-1.5 py-1.5 px-3.5 sm:px-4 text-xs font-mono active:scale-95 transition-transform ${
                   activeCat === tab.id ? 'active' : ''
                 }`}
               >
@@ -258,14 +258,14 @@ export function MenuExplorer() {
           </div>
 
           {/* Secondary filters & view toggle */}
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-0.5">
-            <div id="prices" className="flex gap-2">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-0.5 -mx-3 px-3 sm:mx-0 sm:px-0">
+            <div id="prices" className="flex gap-2 shrink-0">
               {PRICE_FILTERS.map((p) => (
                 <button
                   key={p.id}
                   type="button"
                   onClick={() => setPriceFilter(p.id)}
-                  className={`pill-btn ${priceFilter === p.id ? 'active' : ''}`}
+                  className={`pill-btn py-1 px-3 text-xs font-mono active:scale-95 transition-transform ${priceFilter === p.id ? 'active' : ''}`}
                 >
                   {p.label}
                 </button>
@@ -275,7 +275,7 @@ export function MenuExplorer() {
             {usedTags.length > 0 && (
               <>
                 <span className="mx-1 h-4 w-px bg-[var(--border-subtle)] shrink-0 self-center" />
-                <div className="flex gap-2">
+                <div className="flex gap-2 shrink-0">
                   {usedTags.map((k) => (
                     <button
                       key={k}
@@ -283,7 +283,7 @@ export function MenuExplorer() {
                       onClick={() =>
                         setTagFilter((prev) => (prev === k ? 'all' : k))
                       }
-                      className={`pill-btn ${tagFilter === k ? 'active' : ''}`}
+                      className={`pill-btn py-1 px-3 text-xs font-mono active:scale-95 transition-transform ${tagFilter === k ? 'active' : ''}`}
                     >
                       {TAGS[k]?.label || k}
                     </button>
@@ -298,7 +298,7 @@ export function MenuExplorer() {
               id="sort"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="shrink-0 rounded-[8px] border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-xs font-mono text-[var(--tone-strong)] px-3 py-1.5 outline-none focus:outline-2 focus:outline-[var(--tone-strong)] focus:outline-offset-2"
+              className="shrink-0 rounded-[8px] border border-[var(--border-subtle)] bg-[var(--neutral-white)] text-xs font-mono text-[var(--tone-strong)] px-2.5 sm:px-3 py-1 sm:py-1.5 outline-none focus:outline-2 focus:outline-[var(--tone-strong)] focus:outline-offset-2"
             >
               <option value="default">↕ ডিফল্ট ক্রম</option>
               <option value="asc">দাম: কম → বেশি</option>
@@ -338,7 +338,7 @@ export function MenuExplorer() {
       </div>
 
       {/* Main Menu Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8 min-h-[60vh]">
+      <main className="max-w-6xl mx-auto px-3 sm:px-4 py-6 sm:py-8 min-h-[60vh]">
         <div className="flex items-center justify-between mb-6">
           <p id="count" className="font-mono text-xs text-[var(--text-muted)]">
             {totalCount > 0

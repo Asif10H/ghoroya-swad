@@ -74,20 +74,20 @@ export default function CardGrid({
           style={vignetteStyle}
         />
         {item.tags && item.tags.length > 0 && (
-          <div className="absolute top-2.5 left-2.5 flex flex-col items-start gap-1 pointer-events-none">
+          <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 flex flex-col items-start gap-1 pointer-events-none">
             {item.tags.map((t) =>
               TAGS[t] ? (
-                <span key={t} className="tag tag--glass">
+                <span key={t} className="tag tag--glass text-[9px] sm:text-xs py-0.5 px-1.5 sm:px-2">
                   {TAGS[t].label}
                 </span>
               ) : null
             )}
           </div>
         )}
-        <span className="absolute bottom-2.5 left-2.5 rounded-full bg-[var(--light-16)] backdrop-blur-[16px] text-white font-mono text-xs px-3 py-1 border border-[var(--light-16)]">
+        <span className="absolute bottom-2 left-2 sm:bottom-2.5 sm:left-2.5 rounded-full bg-[var(--light-16)] backdrop-blur-[16px] text-white font-mono text-[11px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 border border-[var(--light-16)]">
           {toBn(item.price)} ৳
         </span>
-        <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/60 text-[var(--light-100)] font-mono text-[10px] px-2 py-0.5 inline-flex items-center gap-1">
+        <span className="hidden xs:inline-flex sm:inline-flex absolute bottom-2.5 right-2.5 rounded-full bg-black/60 text-[var(--light-100)] font-mono text-[10px] px-2 py-0.5 items-center gap-1">
           <PiCameraLight className="text-xs" aria-hidden="true" />
           <span>{toBn(item.images ? item.images.length : 0)}</span>
         </span>
@@ -98,7 +98,7 @@ export default function CardGrid({
             e.stopPropagation();
             onToggleFav(item.id, e);
           }}
-          className="absolute top-2.5 right-2.5 h-8 w-8 rounded-[8px] bg-black/40 hover:bg-black/60 backdrop-blur-[16px] text-white grid place-items-center border border-[var(--light-16)] transition-colors"
+          className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 h-8 w-8 sm:h-8 sm:w-8 rounded-[8px] bg-black/40 hover:bg-black/60 active:scale-90 backdrop-blur-[16px] text-white grid place-items-center border border-[var(--light-16)] transition-all"
         >
           {isFav ? (
             <PiHeartFill className="text-base text-white" aria-hidden="true" />
@@ -107,12 +107,12 @@ export default function CardGrid({
           )}
         </button>
       </div>
-      <div className="p-3.5 flex items-start justify-between gap-2">
+      <div className="p-3 sm:p-3.5 flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
-          <h3 className="font-medium text-[15px] leading-snug truncate text-[var(--tone-strong)]">
+          <h3 className="font-medium text-sm sm:text-[15px] leading-snug truncate text-[var(--tone-strong)]">
             {item.name}
           </h3>
-          <p className="text-xs text-[var(--text-muted)] mt-1 min-h-[1rem]">
+          <p className="text-[11px] sm:text-xs text-[var(--text-muted)] mt-0.5 line-clamp-1 min-h-[1rem]">
             {item.note || '\u00A0'}
           </p>
         </div>
