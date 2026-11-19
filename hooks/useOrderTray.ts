@@ -52,7 +52,9 @@ export function useOrderTray() {
     setTray(newTray);
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newTray));
-      window.dispatchEvent(new Event(CHANGE_EVENT));
+      setTimeout(() => {
+        window.dispatchEvent(new Event(CHANGE_EVENT));
+      }, 0);
     } catch {
       // Storage error
     }
@@ -65,7 +67,9 @@ export function useOrderTray() {
         const updated = { ...prev, [item.id]: currentQty + 1 };
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-          window.dispatchEvent(new Event(CHANGE_EVENT));
+          setTimeout(() => {
+            window.dispatchEvent(new Event(CHANGE_EVENT));
+          }, 0);
         } catch {
           // ignore
         }
@@ -87,7 +91,9 @@ export function useOrderTray() {
         }
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-          window.dispatchEvent(new Event(CHANGE_EVENT));
+          setTimeout(() => {
+            window.dispatchEvent(new Event(CHANGE_EVENT));
+          }, 0);
         } catch {
           // ignore
         }
@@ -108,7 +114,9 @@ export function useOrderTray() {
         }
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-          window.dispatchEvent(new Event(CHANGE_EVENT));
+          setTimeout(() => {
+            window.dispatchEvent(new Event(CHANGE_EVENT));
+          }, 0);
         } catch {
           // ignore
         }

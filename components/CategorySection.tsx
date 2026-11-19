@@ -7,6 +7,7 @@ import CardGrid from './CardGrid';
 import CardList from './CardList';
 import {
   PiHamburgerLight,
+  PiPintGlassLight,
   PiCoffeeLight,
   PiHeartFill,
   PiBowlFoodLight,
@@ -48,6 +49,8 @@ export default function CategorySection({
         {category.id === 'snacks' ? (
           <PiHamburgerLight className="text-xl text-[var(--tone-strong)] shrink-0" aria-hidden="true" />
         ) : category.id === 'drinks' ? (
+          <PiPintGlassLight className="text-xl text-[var(--tone-strong)] shrink-0" aria-hidden="true" />
+        ) : category.id === 'tea_coffee' ? (
           <PiCoffeeLight className="text-xl text-[var(--tone-strong)] shrink-0" aria-hidden="true" />
         ) : category.id === 'fav' ? (
           <PiHeartFill className="text-xl text-[var(--tone-strong)] shrink-0" aria-hidden="true" />

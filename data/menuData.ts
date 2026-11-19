@@ -371,7 +371,7 @@ const INFO: Record<
 };
 
 const RAW_CATEGORIES: {
-  id: 'snacks' | 'drinks';
+  id: 'snacks' | 'drinks' | 'tea_coffee';
   title: string;
   icon: string;
   items: { name: string; note: string; price: number }[];
@@ -410,7 +410,6 @@ const RAW_CATEGORIES: {
       { name: 'রেগুলার লাচ্ছি', note: '', price: 80 },
       { name: 'স্পেশাল লাচ্ছি', note: '', price: 100 },
       { name: 'কাজুবাদাম লাচ্ছি', note: '', price: 120 },
-      { name: 'কোল্ড কফি', note: '', price: 100 },
       { name: 'অরেঞ্জ / মাল্টা জুস', note: '', price: 100 },
       { name: 'ম্যাঙ্গো জুস', note: '', price: 80 },
       { name: 'ড্রাগন জুস', note: '', price: 80 },
@@ -421,9 +420,17 @@ const RAW_CATEGORIES: {
       { name: 'ম্যাঙ্গো মিল্কশেক', note: '', price: 100 },
       { name: 'চকলেট মিল্কশেক', note: '', price: 100 },
       { name: 'স্ট্রবেরি মিল্কশেক', note: '', price: 100 },
+    ],
+  },
+  {
+    id: 'tea_coffee',
+    title: 'চা ও কফি',
+    icon: '☕',
+    items: [
       { name: 'হট কফি', note: '', price: 50 },
-      { name: 'স্পেশাল লিকার টি', note: '', price: 20 },
+      { name: 'কোল্ড কফি', note: '', price: 100 },
       { name: 'দুধ চা', note: '', price: 20 },
+      { name: 'স্পেশাল লিকার টি', note: '', price: 20 },
     ],
   },
 ];

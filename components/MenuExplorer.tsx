@@ -26,6 +26,7 @@ import {
   PiXLight,
   PiSquaresFourLight,
   PiHamburgerLight,
+  PiPintGlassLight,
   PiCoffeeLight,
   PiHeartLight,
   PiHeartFill,
@@ -100,7 +101,10 @@ export function MenuExplorer() {
   useEffect(() => {
     const handleCatChange = (e: Event) => {
       const customEvent = e as CustomEvent<CategoryFilter>;
-      if (customEvent.detail && ['all', 'snacks', 'drinks', 'favs'].includes(customEvent.detail)) {
+      if (
+        customEvent.detail &&
+        ['all', 'snacks', 'drinks', 'tea_coffee', 'fav'].includes(customEvent.detail)
+      ) {
         setActiveCat(customEvent.detail);
       }
     };
@@ -154,6 +158,11 @@ export function MenuExplorer() {
       {
         id: 'drinks' as CategoryFilter,
         label: `ড্রিংকস ও জুস (${toBn(CATEGORIES.find((c) => c.id === 'drinks')?.items.length || 0)})`,
+        icon: <PiPintGlassLight className="text-sm shrink-0" aria-hidden="true" />,
+      },
+      {
+        id: 'tea_coffee' as CategoryFilter,
+        label: `চা ও কফি (${toBn(CATEGORIES.find((c) => c.id === 'tea_coffee')?.items.length || 0)})`,
         icon: <PiCoffeeLight className="text-sm shrink-0" aria-hidden="true" />,
       },
       {

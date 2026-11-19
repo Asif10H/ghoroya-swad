@@ -1,6 +1,6 @@
 export interface MenuItem {
   id: string;
-  cat: 'snacks' | 'drinks';
+  cat: 'snacks' | 'drinks' | 'tea_coffee';
   subCategory?: string;
   name: string;
   note: string;
@@ -11,7 +11,7 @@ export interface MenuItem {
 }
 
 export interface Category {
-  id: 'snacks' | 'drinks';
+  id: 'snacks' | 'drinks' | 'tea_coffee';
   title: string;
   icon: string;
   items: MenuItem[];
@@ -25,4 +25,4 @@ export interface PriceFilter {
 
 export type SortOption = 'default' | 'asc' | 'desc';
 export type ViewMode = 'grid' | 'list';
-export type CategoryFilter = 'all' | 'snacks' | 'drinks' | 'fav';
+export type CategoryFilter = 'all' | 'snacks' | 'drinks' | 'tea_coffee' | 'fav';

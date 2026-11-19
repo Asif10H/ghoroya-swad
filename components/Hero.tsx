@@ -9,6 +9,7 @@ import {
   PiBowlFoodLight,
   PiHamburgerLight,
   PiCoffeeLight,
+  PiPintGlassLight,
 } from 'react-icons/pi';
 
 export interface HeroProps {
@@ -16,6 +17,7 @@ export interface HeroProps {
   totalCount?: number;
   snacksCount?: number;
   drinksCount?: number;
+  teaCoffeeCount?: number;
 }
 
 const heroGradientStyle = {
@@ -28,18 +30,21 @@ export function Hero({
   totalCount,
   snacksCount,
   drinksCount,
+  teaCoffeeCount,
 }: HeroProps) {
   const { statusBadgeText, isOpen, isReady } = useOpeningHours();
 
   const defaultTotal = CATEGORIES.reduce((acc, c) => acc + c.items.length, 0);
   const defaultSnacks = CATEGORIES.find((c) => c.id === 'snacks')?.items.length || 0;
   const defaultDrinks = CATEGORIES.find((c) => c.id === 'drinks')?.items.length || 0;
+  const defaultTeaCoffee = CATEGORIES.find((c) => c.id === 'tea_coffee')?.items.length || 0;
 
   const total = totalCount ?? defaultTotal;
   const snacks = snacksCount ?? defaultSnacks;
   const drinks = drinksCount ?? defaultDrinks;
+  const teaCoffee = teaCoffeeCount ?? defaultTeaCoffee;
 
-  const handleSelectCategory = (cat: 'all' | 'snacks' | 'drinks') => {
+  const handleSelectCategory = (cat: 'all' | 'snacks' | 'drinks' | 'tea_coffee') => {
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('gs-select-cat', { detail: cat }));
     }
@@ -128,29 +133,29 @@ export function Hero({
 
           {/* Right Column: Side-by-Side Highlights & Stats Dock */}
           <div className="md:col-span-5 w-full">
-            {/* Desktop: Vertical 3-card stack; Mobile: 3-column horizontal grid */}
+            {/* Desktop: Vertical 4-card stack; Mobile: 4-column horizontal grid */}
             <div
-              className="grid grid-cols-3 md:grid-cols-1 divide-x md:divide-x-0 md:divide-y divide-[var(--border-subtle)] rounded-lg bg-[var(--neutral-white)] dark:bg-white/[0.04] border border-[var(--border-subtle)] backdrop-blur-[16px] p-2 sm:p-3"
+              className="grid grid-cols-4 md:grid-cols-1 divide-x md:divide-x-0 md:divide-y divide-[var(--border-subtle)] rounded-lg bg-[var(--neutral-white)] dark:bg-white/[0.04] border border-[var(--border-subtle)] backdrop-blur-[16px] p-2 sm:p-2.5"
               aria-label="মেনু হাইলাইটস ও পরিসংখ্যান"
             >
               {/* 36 Total Items */}
               <a
                 href="#menuTop"
                 onClick={() => handleSelectCategory('all')}
-                className="group flex flex-col md:flex-row md:items-center md:justify-between py-2 md:py-3.5 px-2 md:px-4 rounded-lg text-center md:text-left hover:bg-[var(--bg-lift)] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+                className="group flex flex-col md:flex-row md:items-center md:justify-between py-2 md:py-2.5 px-1.5 md:px-3.5 rounded-lg text-center md:text-left hover:bg-[var(--bg-lift)] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
                 title="সব মেনু আইটেম দেখুন"
               >
-                <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3.5">
-                  <span className="font-heading font-medium text-2xl sm:text-3xl text-[var(--tone-strong)] tabular-nums group-hover:scale-105 transition-transform">
+                <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+                  <span className="font-heading font-medium text-xl sm:text-2xl text-[var(--tone-strong)] tabular-nums group-hover:scale-105 transition-transform">
                     {toBn(total)}
                   </span>
                   <div className="flex flex-col">
                     <span className="text-[var(--tone-strong)] text-xs sm:text-sm font-medium hidden md:inline">
                       সকল মেনু আইটেম
                     </span>
-                    <span className="text-[var(--text-muted)] group-hover:text-[var(--tone-strong)] font-mono uppercase text-[10px] sm:text-xs flex items-center justify-center md:justify-start gap-1 sm:gap-1.5 transition-colors">
-                      <PiBowlFoodLight className="text-xs sm:text-sm text-[var(--text-muted)] group-hover:text-[var(--tone-strong)]" aria-hidden="true" />
-                      <span>মোট আইটেম</span>
+                    <span className="text-[var(--text-muted)] group-hover:text-[var(--tone-strong)] font-mono uppercase text-[9px] sm:text-xs flex items-center justify-center md:justify-start gap-1 transition-colors">
+                      <PiBowlFoodLight className="text-xs text-[var(--text-muted)] group-hover:text-[var(--tone-strong)]" aria-hidden="true" />
+                      <span>মোট</span>
                     </span>
                   </div>
                 </div>
@@ -163,19 +168,19 @@ export function Hero({
               <a
                 href="#menuTop"
                 onClick={() => handleSelectCategory('snacks')}
-                className="group flex flex-col md:flex-row md:items-center md:justify-between py-2 md:py-3.5 px-2 md:px-4 rounded-lg text-center md:text-left hover:bg-[var(--bg-lift)] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+                className="group flex flex-col md:flex-row md:items-center md:justify-between py-2 md:py-2.5 px-1.5 md:px-3.5 rounded-lg text-center md:text-left hover:bg-[var(--bg-lift)] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
                 title="স্ন্যাকস মেনু দেখুন"
               >
-                <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3.5">
-                  <span className="font-heading font-medium text-2xl sm:text-3xl text-[var(--tone-strong)] tabular-nums group-hover:scale-105 transition-transform">
+                <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+                  <span className="font-heading font-medium text-xl sm:text-2xl text-[var(--tone-strong)] tabular-nums group-hover:scale-105 transition-transform">
                     {toBn(snacks)}
                   </span>
                   <div className="flex flex-col">
                     <span className="text-[var(--tone-strong)] text-xs sm:text-sm font-medium hidden md:inline">
                       মচমচে স্ন্যাকস ও চাট
                     </span>
-                    <span className="text-[var(--text-muted)] group-hover:text-[var(--tone-strong)] font-mono uppercase text-[10px] sm:text-xs flex items-center justify-center md:justify-start gap-1 sm:gap-1.5 transition-colors">
-                      <PiHamburgerLight className="text-xs sm:text-sm text-[var(--text-muted)] group-hover:text-[var(--tone-strong)]" aria-hidden="true" />
+                    <span className="text-[var(--text-muted)] group-hover:text-[var(--tone-strong)] font-mono uppercase text-[9px] sm:text-xs flex items-center justify-center md:justify-start gap-1 transition-colors">
+                      <PiHamburgerLight className="text-xs text-[var(--text-muted)] group-hover:text-[var(--tone-strong)]" aria-hidden="true" />
                       <span>স্ন্যাকস</span>
                     </span>
                   </div>
@@ -185,24 +190,50 @@ export function Hero({
                 </span>
               </a>
 
-              {/* 17 Drinks & Juice */}
+              {/* 13 Drinks & Juice */}
               <a
                 href="#menuTop"
                 onClick={() => handleSelectCategory('drinks')}
-                className="group flex flex-col md:flex-row md:items-center md:justify-between py-2 md:py-3.5 px-2 md:px-4 rounded-lg text-center md:text-left hover:bg-[var(--bg-lift)] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+                className="group flex flex-col md:flex-row md:items-center md:justify-between py-2 md:py-2.5 px-1.5 md:px-3.5 rounded-lg text-center md:text-left hover:bg-[var(--bg-lift)] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
                 title="ড্রিংকস ও জুস মেনু দেখুন"
               >
-                <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3.5">
-                  <span className="font-heading font-medium text-2xl sm:text-3xl text-[var(--tone-strong)] tabular-nums group-hover:scale-105 transition-transform">
+                <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+                  <span className="font-heading font-medium text-xl sm:text-2xl text-[var(--tone-strong)] tabular-nums group-hover:scale-105 transition-transform">
                     {toBn(drinks)}
                   </span>
                   <div className="flex flex-col">
                     <span className="text-[var(--tone-strong)] text-xs sm:text-sm font-medium hidden md:inline">
-                      লাচ্ছি, জুস, শেক ও চা
+                      লাচ্ছি, জুস ও শেক
                     </span>
-                    <span className="text-[var(--text-muted)] group-hover:text-[var(--tone-strong)] font-mono uppercase text-[10px] sm:text-xs flex items-center justify-center md:justify-start gap-1 sm:gap-1.5 transition-colors">
-                      <PiCoffeeLight className="text-xs sm:text-sm text-[var(--text-muted)] group-hover:text-[var(--tone-strong)]" aria-hidden="true" />
+                    <span className="text-[var(--text-muted)] group-hover:text-[var(--tone-strong)] font-mono uppercase text-[9px] sm:text-xs flex items-center justify-center md:justify-start gap-1 transition-colors">
+                      <PiPintGlassLight className="text-xs text-[var(--text-muted)] group-hover:text-[var(--tone-strong)]" aria-hidden="true" />
                       <span>ড্রিংকস</span>
+                    </span>
+                  </div>
+                </div>
+                <span className="hidden md:inline-flex text-xs font-mono text-[var(--text-muted)] group-hover:text-[var(--tone-strong)] transition-colors">
+                  দেখুন →
+                </span>
+              </a>
+
+              {/* 4 Tea & Coffee */}
+              <a
+                href="#menuTop"
+                onClick={() => handleSelectCategory('tea_coffee')}
+                className="group flex flex-col md:flex-row md:items-center md:justify-between py-2 md:py-2.5 px-1.5 md:px-3.5 rounded-lg text-center md:text-left hover:bg-[var(--bg-lift)] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+                title="চা ও কফি মেনু দেখুন"
+              >
+                <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+                  <span className="font-heading font-medium text-xl sm:text-2xl text-[var(--tone-strong)] tabular-nums group-hover:scale-105 transition-transform">
+                    {toBn(teaCoffee)}
+                  </span>
+                  <div className="flex flex-col">
+                    <span className="text-[var(--tone-strong)] text-xs sm:text-sm font-medium hidden md:inline">
+                      গরম ও কোল্ড চা-কফি
+                    </span>
+                    <span className="text-[var(--text-muted)] group-hover:text-[var(--tone-strong)] font-mono uppercase text-[9px] sm:text-xs flex items-center justify-center md:justify-start gap-1 transition-colors">
+                      <PiCoffeeLight className="text-xs text-[var(--text-muted)] group-hover:text-[var(--tone-strong)]" aria-hidden="true" />
+                      <span>চা-কফি</span>
                     </span>
                   </div>
                 </div>

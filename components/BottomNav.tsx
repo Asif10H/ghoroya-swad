@@ -6,6 +6,7 @@ import { toBn } from '@/data/menuData';
 import {
   PiSquaresFourLight,
   PiHamburgerLight,
+  PiPintGlassLight,
   PiCoffeeLight,
   PiHeartFill,
   PiHeartLight,
@@ -81,9 +82,26 @@ export function BottomNav({
           }`}
           aria-label="ড্রিংকস মেনু"
         >
-          <PiCoffeeLight className="text-xl" aria-hidden="true" />
+          <PiPintGlassLight className="text-xl" aria-hidden="true" />
           <span className="text-[10px] font-mono mt-0.5">ড্রিংকস</span>
           {activeCat === 'drinks' && (
+            <span className="w-1 h-1 rounded-full bg-[var(--tone-strong)] mt-0.5" />
+          )}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => handleTap('tea_coffee')}
+          className={`flex-1 flex flex-col items-center justify-center py-1.5 transition-all active:scale-90 ${
+            activeCat === 'tea_coffee'
+              ? 'text-[var(--tone-strong)] font-medium'
+              : 'text-[var(--text-muted)] hover:text-[var(--tone-strong)]'
+          }`}
+          aria-label="চা ও কফি মেনু"
+        >
+          <PiCoffeeLight className="text-xl" aria-hidden="true" />
+          <span className="text-[10px] font-mono mt-0.5">চা-কফি</span>
+          {activeCat === 'tea_coffee' && (
             <span className="w-1 h-1 rounded-full bg-[var(--tone-strong)] mt-0.5" />
           )}
         </button>
