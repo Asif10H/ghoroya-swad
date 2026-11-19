@@ -56,7 +56,7 @@ export function Statement() {
 
   return (
     <section
-      className="border-b border-[var(--border-subtle)] bg-[var(--bg-base)] py-10 sm:py-20 transition-colors"
+      className="border-b border-[var(--border-subtle)] bg-[var(--bg-base)] py-6 sm:py-12 transition-colors"
       aria-label="ব্র্যান্ড স্টেটমেন্ট"
     >
       <div className="max-w-6xl mx-auto px-4">

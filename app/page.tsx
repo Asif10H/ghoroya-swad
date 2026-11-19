@@ -1,6 +1,5 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { HighlightStats } from "@/components/HighlightStats";
 import { Statement } from "@/components/Statement";
 import { MenuExplorer } from "@/components/MenuExplorer";
 import { Footer } from "@/components/Footer";
@@ -15,8 +14,7 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-[var(--bg-base)] text-[var(--tone-strong)] selection:bg-[var(--tone-strong)] selection:text-[var(--bg-base)]">
       <Header />
       <main className="flex-1">
-        <Hero />
-        <HighlightStats
+        <Hero
           totalCount={totalCount}
           snacksCount={snacksCount}
           drinksCount={drinksCount}

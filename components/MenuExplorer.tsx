@@ -63,6 +63,19 @@ export function MenuExplorer() {
     }
   }, []);
 
+  // Listen for category selection events from the Hero stats bar
+  useEffect(() => {
+    const handleCatChange = (e: Event) => {
+      const customEvent = e as CustomEvent<CategoryFilter>;
+      if (customEvent.detail && ['all', 'snacks', 'drinks', 'favs'].includes(customEvent.detail)) {
+        setActiveCat(customEvent.detail);
+        setSubCat('all');
+      }
+    };
+    window.addEventListener('gs-select-cat', handleCatChange);
+    return () => window.removeEventListener('gs-select-cat', handleCatChange);
+  }, []);
+
   const handleSetViewMode = (mode: ViewMode) => {
     setViewMode(mode);
     try {
