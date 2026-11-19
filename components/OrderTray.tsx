@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useOrderTray } from '@/hooks/useOrderTray';
 import { toBn, fallbackSvg } from '@/data/menuData';
@@ -13,6 +13,7 @@ import {
   PiPhoneCallLight,
   PiWhatsappLogoLight,
   PiArrowRightLight,
+  PiUserLight,
 } from 'react-icons/pi';
 
 const RESTAURANT_PHONE = '01793871658';
@@ -28,20 +29,66 @@ export default function OrderTray() {
     clearTray,
   } = useOrderTray();
   const [isOpen, setIsOpen] = useState(false);
+  const [customerName, setCustomerName] = useState('');
+  const [tableOrAddress, setTableOrAddress] = useState('');
+
+  // Restore saved customer details from localStorage
+  useEffect(() => {
+    try {
+      const savedName = localStorage.getItem('gs-customer-name');
+      const savedTable = localStorage.getItem('gs-customer-address');
+      if (savedName) setCustomerName(savedName);
+      if (savedTable) setTableOrAddress(savedTable);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const handleNameChange = (val: string) => {
+    setCustomerName(val);
+    try {
+      localStorage.setItem('gs-customer-name', val);
+    } catch {
+      // ignore
+    }
+  };
+
+  const handleTableChange = (val: string) => {
+    setTableOrAddress(val);
+    try {
+      localStorage.setItem('gs-customer-address', val);
+    } catch {
+      // ignore
+    }
+  };
 
   if (totalCount === 0) return null;
 
-  // Build formatted Bengali WhatsApp order text
+  // Build formatted Bengali WhatsApp order text with customer details
   const buildWhatsAppMessage = () => {
     let msg = 'আসসালামু আলাইকুম, ঘরোয়া স্বাদ থেকে আমি অর্ডার করতে চাই:\n\n';
+
+    const trimmedName = customerName.trim();
+    const trimmedTable = tableOrAddress.trim();
+    if (trimmedName) {
+      msg += `👤 গ্রাহকের নাম: ${trimmedName}\n`;
+    }
+    if (trimmedTable) {
+      msg += `📍 টেবিল নং / ঠিকানা: ${trimmedTable}\n`;
+    }
+    if (trimmedName || trimmedTable) {
+      msg += '\n';
+    }
+
+    msg += '📋 অর্ডারের বিবরণ:\n';
     items.forEach((entry) => {
       const portion = entry.item.note ? ` (${entry.item.note})` : '';
       const subtotal = entry.quantity * entry.item.price;
       msg += `• ${entry.item.name}${portion} x ${toBn(entry.quantity)} = ${toBn(subtotal)} ৳\n`;
     });
     msg += '\n-----------------------------\n';
-    msg += `সর্বমোট মূল্য: ${toBn(totalPrice)} ৳\n`;
-    msg += 'ডেলিভারি ঠিকানা / টেবিল নং: ';
+    msg += `💰 সর্বমোট মূল্য: ${toBn(totalPrice)} ৳\n\n`;
+    msg += 'ধন্যবাদ!';
     return encodeURIComponent(msg);
   };
 
@@ -55,14 +102,14 @@ export default function OrderTray() {
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-[var(--tone-strong)] text-[var(--bg-base)] flex items-center justify-center font-medium text-sm relative">
               <PiShoppingBagLight className="text-xl" />
-              <span className="absolute -top-1.5 -right-1.5 bg-[var(--tone-strong)] text-[var(--bg-base)] text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-medium border border-[var(--bg-base)]">
+              <span className="absolute -top-1.5 -right-1.5 bg-[var(--tone-strong)] text-[var(--bg-base)] text-[10px] min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center font-mono font-medium border-2 border-[var(--bg-base)] tabular-nums">
                 {toBn(totalCount)}
               </span>
             </div>
             <div>
-              <div className="text-xs text-[var(--text-muted)] font-medium">অর্ডার ট্রে</div>
+              <div className="text-[11px] text-[var(--text-muted)] font-mono">অর্ডার ট্রে</div>
               <div className="text-sm font-medium text-[var(--tone-strong)] font-heading">
-                {toBn(totalPrice)} ৳ <span className="text-xs font-normal text-[var(--tone-medium)]">({toBn(totalCount)}টি আইটেম)</span>
+                {toBn(totalPrice)} ৳ <span className="text-xs font-normal text-[var(--tone-medium)] font-mono">({toBn(totalCount)}টি আইটেম)</span>
               </div>
             </div>
           </div>
@@ -89,27 +136,37 @@ export default function OrderTray() {
           {/* Drawer Content */}
           <div className="relative w-full md:max-w-md max-h-[85vh] md:max-h-[90vh] bg-[var(--bg-base)] border-t md:border border-[var(--border-subtle)] rounded-t-2xl md:rounded-2xl flex flex-col overflow-hidden z-10 transition-transform">
             {/* Header */}
-            <div className="p-4 border-b border-[var(--border-subtle)] flex items-center justify-between bg-[var(--bg-lift)]/50">
-              <div className="flex items-center gap-2">
-                <PiShoppingBagLight className="text-xl text-[var(--tone-strong)]" />
-                <h3 className="font-heading font-medium text-base text-[var(--tone-strong)]">
-                  আপনার অর্ডার ট্রে
-                </h3>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--tone-strong)] text-[var(--bg-base)] font-medium">
-                  {toBn(totalCount)}
-                </span>
+            <div className="p-4 border-b border-[var(--border-subtle)] flex items-center justify-between bg-[var(--bg-base)]">
+              <div className="flex items-center gap-2.5">
+                <div className="h-9 w-9 rounded-lg bg-[var(--tone-faint)] text-[var(--tone-strong)] flex items-center justify-center text-lg border border-[var(--border-subtle)]">
+                  <PiShoppingBagLight aria-hidden="true" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-heading font-medium text-base text-[var(--tone-strong)]">
+                      আপনার অর্ডার ট্রে
+                    </h3>
+                    <span className="inline-flex items-center justify-center min-w-[22px] h-[22px] px-1.5 rounded-full bg-[var(--tone-strong)] text-[var(--bg-base)] font-mono text-xs font-medium tabular-nums">
+                      {toBn(totalCount)}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-[var(--text-muted)] font-mono">
+                    নির্বাচিত খাবারের তালিকা
+                  </p>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 <button
                   onClick={clearTray}
                   title="ট্রে খালি করুন"
-                  className="p-1.5 rounded-lg text-xs text-[var(--text-muted)] hover:text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] transition-colors cursor-pointer"
+                  className="p-2 rounded-lg text-xs text-[var(--text-muted)] hover:text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
+                  aria-label="ট্রে খালি করুন"
                 >
                   <PiTrashLight className="text-lg" />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1.5 text-[var(--tone-medium)] hover:text-[var(--tone-strong)] rounded-lg hover:bg-[var(--tone-faint)] transition-colors cursor-pointer"
+                  className="p-2 text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] rounded-lg active:scale-95 transition-colors cursor-pointer"
                   aria-label="বন্ধ করুন"
                 >
                   <PiXLight className="text-xl" />
@@ -166,6 +223,42 @@ export default function OrderTray() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Customer Information (Name & Table/Address for Restaurant Owner) */}
+            <div className="p-3.5 sm:p-4 border-t border-[var(--border-subtle)] bg-[var(--neutral-white)] space-y-2.5">
+              <div className="flex items-center gap-1.5 text-xs font-mono font-medium text-[var(--tone-strong)]">
+                <PiUserLight className="text-sm text-[var(--tone-strong)]" aria-hidden="true" />
+                <span>অর্ডারকারীর তথ্য (রেস্টুরেন্টের সুবিধার জন্য)</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div>
+                  <label htmlFor="customerName" className="block text-[11px] font-mono text-[var(--text-muted)] mb-1">
+                    আপনার নাম <span className="text-[var(--tone-strong)]">*</span>
+                  </label>
+                  <input
+                    id="customerName"
+                    type="text"
+                    value={customerName}
+                    onChange={(e) => handleNameChange(e.target.value)}
+                    placeholder="নাম লিখুন (যেমন: আসিফ)"
+                    className="w-full h-9 px-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-base)] text-xs text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] font-sans transition-colors"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="tableOrAddress" className="block text-[11px] font-mono text-[var(--text-muted)] mb-1">
+                    টেবিল নং বা ঠিকানা
+                  </label>
+                  <input
+                    id="tableOrAddress"
+                    type="text"
+                    value={tableOrAddress}
+                    onChange={(e) => handleTableChange(e.target.value)}
+                    placeholder="টেবিল নং / বাসা (ঐচ্ছিক)"
+                    className="w-full h-9 px-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-base)] text-xs text-[var(--tone-strong)] placeholder:text-[var(--text-muted)] outline-none focus:outline-2 focus:outline-[var(--tone-strong)] font-sans transition-colors"
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Footer Summary & CTAs */}
