@@ -230,16 +230,21 @@ export default function OrderTray() {
                   <div className="flex items-center gap-1.5 shrink-0">
                     <div className="inline-flex items-center border border-[var(--border-subtle)] rounded-lg bg-[var(--bg-lift)] overflow-hidden">
                       <button
-                        onClick={() => removeItem(item.id)}
-                        className="w-7 h-7 flex items-center justify-center text-[var(--tone-strong)] hover:bg-[var(--tone-faint)] active:scale-95 transition-colors cursor-pointer"
-                        aria-label={quantity === 1 ? 'আইটেম বাদ দিন' : 'কমান'}
-                        title={quantity === 1 ? 'আইটেম বাদ দিন' : 'কমান'}
+                        onClick={() => {
+                          if (quantity > 1) {
+                            removeItem(item.id);
+                          }
+                        }}
+                        disabled={quantity <= 1}
+                        className={`w-7 h-7 flex items-center justify-center text-[var(--tone-strong)] transition-colors ${
+                          quantity <= 1
+                            ? 'opacity-35 cursor-not-allowed'
+                            : 'hover:bg-[var(--tone-faint)] active:scale-95 cursor-pointer'
+                        }`}
+                        aria-label="কমান"
+                        title={quantity <= 1 ? 'সর্বনিম্ন ১টি আইটেম' : 'কমান'}
                       >
-                        {quantity === 1 ? (
-                          <PiTrashLight className="text-xs" />
-                        ) : (
-                          <PiMinusLight className="text-xs" />
-                        )}
+                        <PiMinusLight className="text-xs" />
                       </button>
                       <span className="w-7 text-center text-xs font-medium text-[var(--tone-strong)] font-mono tabular-nums">
                         {toBn(quantity)}
